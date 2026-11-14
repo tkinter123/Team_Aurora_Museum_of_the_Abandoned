@@ -1,0 +1,1158 @@
+.location-view[hidden] {
+  display: none !important;
+}
+
+.mission-image-layout {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: minmax(0, 1.8fr) minmax(130px, .8fr);
+  gap: clamp(8px, 1.2vw, 18px);
+  padding: clamp(8px, 1vw, 16px);
+}
+
+.mission-image-visual {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mission-image-source-control[hidden] {
+  display: none !important;
+}
+
+.mission-image-source-control {
+  position: fixed;
+  z-index: 50;
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #e1cb9a;
+  color: #fff1c8;
+  background: rgba(5, 12, 20, .94);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .6);
+  font: 700 10px/1.3 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .04em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mission-image-source-control svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  fill: none;
+  stroke: #8beaff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.mission-image-source-control [hidden] {
+  display: none !important;
+}
+
+.mission-image-source-control span:empty {
+  display: none;
+}
+
+.mission-image-source-control[aria-disabled="true"] {
+  cursor: default;
+}
+
+.mission-image-source-control:not([aria-disabled="true"]):hover,
+.mission-image-source-control:not([aria-disabled="true"]):focus-visible {
+  outline: 2px solid #ffe39a;
+  outline-offset: 3px;
+  background: #172433;
+  box-shadow: 0 0 16px rgba(255, 227, 154, .42);
+}
+
+.mission-image-source-control[aria-disabled="true"] svg {
+  opacity: 1;
+}
+
+.mission-image-source-control[aria-disabled="true"] span {
+  color: #f5f0e5;
+  font-size: 11px;
+}
+
+.mission-image-source-control[data-ai-generated="true"] {
+  border-color: #9dcbe0;
+  color: #e2f5ff;
+}
+
+.mission-image-source-control[data-ai-generated="true"][aria-disabled="true"] {
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  white-space: normal;
+  text-align: center;
+}
+
+.mission-image-source-control[data-ai-generated="true"]:not([aria-disabled="true"]) span {
+  display: inline;
+  color: #e2f5ff;
+  font-size: 9px;
+}
+
+.mission-image-source-control[data-ai-generated="true"]:not([aria-disabled="true"]) svg {
+  width: 18px;
+  height: 18px;
+  flex-basis: 18px;
+}
+
+.mission-image-source-control[aria-disabled="true"] {
+  max-width: calc(100vw - 16px);
+  overflow-wrap: anywhere;
+}
+
+.mission-image-source-control[aria-disabled="true"]:hover,
+.mission-image-source-control[aria-disabled="true"]:focus-visible {
+  outline: none;
+  background: rgba(5, 12, 20, .94);
+}
+
+.location-view {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vw, 36px);
+  color: #f5f0e5;
+  background: rgba(1, 4, 8, .88);
+  backdrop-filter: blur(7px);
+}
+
+.location-card {
+  display: grid;
+  width: min(100%, 980px);
+  max-height: min(92dvh, 840px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+  overflow: auto;
+  border: 1px solid rgba(200, 169, 107, .72);
+  background: #090c11;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .72);
+}
+
+.location-card-header {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(200, 169, 107, .35);
+}
+
+.location-card-header h2 {
+  margin: 0;
+  font: 500 clamp(20px, 3vw, 30px)/1.2 Georgia, "Times New Roman", serif;
+}
+
+.location-card-header p {
+  margin: 0 0 5px;
+  color: #e1cb9a;
+  font: 10px/1.3 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.location-close {
+  flex: 0 0 auto;
+  min-width: 42px;
+  min-height: 42px;
+  border: 1px solid rgba(225, 203, 154, .7);
+  color: inherit;
+  background: rgba(255, 255, 255, .06);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.location-globe-wrap {
+  display: grid;
+  min-width: 0;
+  min-height: 320px;
+  place-items: center;
+  padding: 18px 18px 10px;
+  background: radial-gradient(ellipse at center, rgba(42, 55, 67, .42), transparent 70%);
+}
+
+.location-globe-wrap {
+  align-content: center;
+  gap: 8px;
+}
+
+.location-globe {
+  display: block;
+  width: min(100%, 520px);
+  max-height: 56dvh;
+  aspect-ratio: 1;
+  touch-action: none;
+  cursor: grab;
+}
+
+.location-globe:active {
+  cursor: grabbing;
+}
+
+.location-details {
+  align-self: center;
+  min-width: 0;
+  padding: 20px clamp(18px, 3vw, 30px) 28px;
+}
+
+.location-details dl {
+  display: grid;
+  grid-template-columns: minmax(100px, .7fr) minmax(0, 1fr);
+  gap: 12px 16px;
+  margin: 0;
+}
+
+.location-details dt {
+  color: #d7c69f;
+  font: 10px/1.4 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.location-details dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font: 15px/1.45 Georgia, "Times New Roman", serif;
+}
+
+.location-coordinate-status {
+  margin: 18px 0;
+  color: #d8d0bf;
+  font: 13px/1.5 "Trebuchet MS", Arial, sans-serif;
+}
+
+.location-mission-summary {
+  margin: 18px 0 0;
+  color: #f0e8d8;
+  font: 14px/1.55 Georgia, "Times New Roman", serif;
+}
+
+.location-source-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 10px 13px;
+  border: 1px solid #e1cb9a;
+  color: #fff1c8;
+  background: rgba(200, 169, 107, .16);
+  font: 700 12px/1.3 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+
+.location-source-link[hidden] {
+  display: none !important;
+}
+
+.atlas-texture-source {
+  margin-left: 8px;
+}
+
+.location-source-link:hover,
+.location-source-link:focus-visible,
+.location-close:hover,
+.location-close:focus-visible {
+  outline: 2px solid #ffe39a;
+  outline-offset: 3px;
+  background: rgba(200, 169, 107, .3);
+}
+
+.atlas-event-detail {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(200, 169, 107, .3);
+}
+
+.atlas-event-detail > p:first-child {
+  margin: 0 0 5px;
+  color: #e1cb9a;
+  font: 11px/1.4 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-event-detail h3 {
+  margin: 0;
+  font: 500 18px/1.3 Georgia, "Times New Roman", serif;
+}
+
+.atlas-event-detail p:last-child {
+  margin: 8px 0 0;
+  color: #d8d0bf;
+  font: 13px/1.5 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-mission-source {
+  margin-left: 8px;
+}
+
+.atlas-globe-controls {
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  color: #d8d0bf;
+  font: 11px/1.4 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-globe-controls button,
+.atlas-year-controls button {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 7px 10px;
+  border: 1px solid rgba(225, 203, 154, .7);
+  color: #fff1c8;
+  background: #101923;
+  font: 700 14px/1 "Trebuchet MS", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.atlas-globe-controls button:hover,
+.atlas-globe-controls button:focus-visible,
+.atlas-year-controls button:hover,
+.atlas-year-controls button:focus-visible,
+.atlas-event-card:hover,
+.atlas-event-card:focus-visible,
+.atlas-timeline-marker:hover,
+.atlas-timeline-marker:focus-visible {
+  outline: 2px solid #8beaff;
+  outline-offset: 2px;
+}
+
+.atlas-timeline {
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding: 16px clamp(16px, 3vw, 28px) 22px;
+  border-top: 1px solid rgba(200, 169, 107, .35);
+  background: rgba(15, 20, 27, .86);
+}
+
+.atlas-timeline-heading,
+.atlas-year-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.atlas-timeline-heading > div > p {
+  margin: 0 0 3px;
+  color: #e1cb9a;
+  font: 10px/1.3 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.atlas-timeline-heading h3 {
+  margin: 0;
+  font: 500 20px/1.25 Georgia, "Times New Roman", serif;
+}
+
+.atlas-timeline-heading > span {
+  color: #fff1c8;
+  font: 700 20px/1 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-year-controls {
+  margin-top: 14px;
+}
+
+.atlas-year-controls label {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+}
+
+.atlas-year-controls input {
+  width: 100%;
+  accent-color: #8beaff;
+  cursor: pointer;
+}
+
+.atlas-timeline-rail {
+  position: relative;
+  height: 54px;
+  margin: 2px 18px 8px;
+  border-bottom: 1px solid rgba(225, 203, 154, .55);
+}
+
+.atlas-timeline-rail::before {
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  left: 0;
+  height: 5px;
+  border-radius: 4px;
+  background: rgba(225, 203, 154, .18);
+  content: "";
+}
+
+.atlas-timeline-marker {
+  position: absolute;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  border: 2px solid #090c11;
+  border-radius: 50%;
+  background: #d8d0bf;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.atlas-timeline-marker[aria-current="date"] {
+  box-shadow: 0 0 0 4px rgba(139, 234, 255, .26);
+}
+
+.atlas-event-launch { --atlas-event-color: #8beaff; }
+.atlas-event-landing { --atlas-event-color: #ffcf57; }
+.atlas-event-impact { --atlas-event-color: #ff806b; }
+.atlas-event-orbit { --atlas-event-color: #b4a0ff; }
+.atlas-event-flyby { --atlas-event-color: #88d9a6; }
+.atlas-event-deployment { --atlas-event-color: #f6a4e2; }
+.atlas-event-mission-end { --atlas-event-color: #e2e8f0; }
+.atlas-event-marker,
+.atlas-timeline-marker[class*="atlas-event-"] {
+  background: var(--atlas-event-color, #d8d0bf);
+}
+
+.atlas-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.atlas-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #d8d0bf;
+  font: 10px/1.4 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-legend li::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--atlas-event-color, #d8d0bf);
+  content: "";
+}
+
+.atlas-legend [data-event-type="launch"] { --atlas-event-color: #8beaff; }
+.atlas-legend [data-event-type="landing"] { --atlas-event-color: #ffcf57; }
+.atlas-legend [data-event-type="impact"] { --atlas-event-color: #ff806b; }
+.atlas-legend [data-event-type="orbit"] { --atlas-event-color: #b4a0ff; }
+.atlas-legend [data-event-type="flyby"] { --atlas-event-color: #88d9a6; }
+.atlas-legend [data-event-type="deployment"] { --atlas-event-color: #f6a4e2; }
+.atlas-legend [data-event-type="mission-end"] { --atlas-event-color: #e2e8f0; }
+.atlas-legend [data-event-type="visit"] { --atlas-event-color: #b8d78a; }
+.atlas-legend [data-event-type="last-contact"] { --atlas-event-color: #b8c5d6; }
+.atlas-legend [data-event-type="mission"] { --atlas-event-color: #f0ad71; }
+.atlas-legend [data-event-type="arrival"] { --atlas-event-color: #83c9e8; }
+
+.atlas-timeline h4 {
+  margin: 16px 0 8px;
+  color: #e1cb9a;
+  font: 700 11px/1.4 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.atlas-year-events {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 8px;
+}
+
+.atlas-event-card {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid rgba(225, 203, 154, .34);
+  border-left: 3px solid var(--atlas-event-color, #d8d0bf);
+  color: #f5f0e5;
+  background: rgba(255, 255, 255, .035);
+  text-align: left;
+  cursor: pointer;
+}
+
+.atlas-event-card strong {
+  font: 700 12px/1.4 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-event-card time {
+  color: #e1cb9a;
+  font: 11px/1.35 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-event-card span,
+.atlas-empty-year {
+  margin: 0;
+  color: #d8d0bf;
+  font: 12px/1.45 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-event-card[aria-current="true"] {
+  background: rgba(139, 234, 255, .1);
+  border-color: rgba(139, 234, 255, .7);
+}
+
+.atlas-event-card[data-event-type="launch"] { --atlas-event-color: #8beaff; }
+.atlas-event-card[data-event-type="landing"] { --atlas-event-color: #ffcf57; }
+.atlas-event-card[data-event-type="impact"] { --atlas-event-color: #ff806b; }
+.atlas-event-card[data-event-type="orbit"] { --atlas-event-color: #b4a0ff; }
+.atlas-event-card[data-event-type="flyby"] { --atlas-event-color: #88d9a6; }
+.atlas-event-card[data-event-type="deployment"] { --atlas-event-color: #f6a4e2; }
+.atlas-event-card[data-event-type="mission-end"] { --atlas-event-color: #e2e8f0; }
+.atlas-event-card[data-event-type="visit"] { --atlas-event-color: #b8d78a; }
+.atlas-event-card[data-event-type="last-contact"] { --atlas-event-color: #b8c5d6; }
+.atlas-event-card[data-event-type="mission"] { --atlas-event-color: #f0ad71; }
+.atlas-event-card[data-event-type="arrival"] { --atlas-event-color: #83c9e8; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 680px) {
+  .mission-image-layout {
+    position: relative;
+    display: block;
+    padding: 0;
+  }
+
+  .mission-image-visual {
+    position: absolute;
+    inset: 0;
+  }
+
+  .location-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .location-card {
+    max-height: 94dvh;
+  }
+
+  .location-card-header {
+    grid-column: auto;
+    padding: 14px 16px;
+  }
+
+  .location-globe-wrap {
+    min-height: 230px;
+    padding: 8px 12px 4px;
+  }
+
+  .location-globe {
+    width: min(100%, 360px);
+    max-height: 38dvh;
+  }
+
+  .location-details {
+    padding: 12px 18px 20px;
+  }
+
+  .location-details dl {
+    gap: 9px 12px;
+  }
+
+  .atlas-timeline {
+    padding: 14px 14px 18px;
+  }
+
+  .atlas-timeline-heading h3 {
+    font-size: 18px;
+  }
+
+  .atlas-legend {
+    gap: 6px 10px;
+  }
+
+  .atlas-timeline-marker {
+    width: 12px;
+    height: 12px;
+  }
+
+  .atlas-mission-source {
+    margin: 8px 0 0;
+  }
+
+  .atlas-texture-source {
+    margin: 8px 0 0;
+  }
+}
+
+.location-view[hidden] {
+  display: none !important;
+}
+
+.location-view {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  background-color: #03060a;
+  background-image: none;
+  color: #f3f5f6;
+  backdrop-filter: none;
+  isolation: isolate;
+}
+
+.location-view::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 50% 43%, rgba(32, 49, 62, .28), rgba(1, 3, 7, .94) 76%),
+    var(--atlas-background-image);
+  background-size: cover, var(--atlas-background-size);
+  background-position: center, var(--atlas-background-position);
+  filter: brightness(var(--atlas-background-brightness));
+  content: "";
+}
+
+.atlas-header {
+  position: absolute;
+  z-index: 5;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(18px, env(safe-area-inset-right));
+  left: max(18px, env(safe-area-inset-left));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.atlas-header > *,
+.atlas-header-actions > * {
+  pointer-events: auto;
+}
+
+.atlas-world-label {
+  color: rgba(235, 242, 244, .72);
+  font: 600 11px/1.3 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .2em;
+  text-shadow: 0 2px 9px #000;
+}
+
+.atlas-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.atlas-header-actions button {
+  min-width: 42px;
+  min-height: 42px;
+  border: 1px solid rgba(226, 236, 239, .38);
+  border-radius: 2px;
+  color: #eef4f5;
+  background: rgba(6, 12, 17, .46);
+  font: 600 11px/1 "Trebuchet MS", Arial, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.atlas-header-actions button:hover,
+.atlas-header-actions button:focus-visible {
+  outline: 2px solid rgba(145, 224, 242, .88);
+  outline-offset: 2px;
+  background: rgba(30, 55, 66, .72);
+}
+
+.atlas-header-actions .location-close {
+  font-size: 24px;
+}
+
+.atlas-map-stage {
+  position: absolute;
+  inset: 0 0 calc(max(150px, var(--atlas-timeline-height)) + var(--atlas-timeline-bottom-spacing)) 0;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+  background: transparent;
+}
+
+.atlas-map-stage canvas.location-globe {
+  display: block;
+  width: var(--atlas-globe-width);
+  height: var(--atlas-globe-height);
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1;
+  overflow: visible;
+  transform: translate(var(--atlas-globe-offset-x), var(--atlas-globe-offset-y)) scale(var(--atlas-globe-scale));
+  transform-origin: center;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .35));
+}
+
+.atlas-map-stage canvas.location-globe:active {
+  cursor: grabbing;
+}
+
+.atlas-marker-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.atlas-map-marker {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f5f7f7;
+  text-align: left;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.atlas-marker-dot {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: var(--atlas-marker-size);
+  height: var(--atlas-marker-size);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #f4c85b;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, .65), 0 0 12px rgba(255, 216, 112, .85);
+  transform: translate(-50%, -50%);
+}
+
+.atlas-map-marker[data-event-type="impact"] .atlas-marker-dot {
+  background: #ff806b;
+}
+
+.atlas-map-marker[data-event-type="deployment"] .atlas-marker-dot {
+  background: #83d8f1;
+}
+
+.atlas-marker-label {
+  position: absolute;
+  top: calc((var(--atlas-label-row, 0) - 1) * var(--atlas-marker-label-spacing));
+  left: var(--atlas-marker-label-offset);
+  display: grid;
+  width: max-content;
+  max-width: min(310px, 38vw);
+  gap: 2px;
+  padding: 2px 4px;
+  color: #fff;
+  text-shadow: 0 1px 5px #000, 0 1px 12px #000;
+  white-space: normal;
+}
+
+.atlas-map-marker[data-side="left"] .atlas-marker-label {
+  right: var(--atlas-marker-label-offset);
+  left: auto;
+  text-align: right;
+}
+
+.atlas-marker-label strong {
+  font: 700 var(--atlas-marker-label-font-size)/1.2 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-marker-label small {
+  color: #e4edf0;
+  font: 600 var(--atlas-coordinate-font-size)/1.25 "Trebuchet MS", Arial, sans-serif;
+}
+
+.atlas-map-marker:hover .atlas-marker-label,
+.atlas-map-marker:focus-visible .atlas-marker-label,
+.atlas-map-marker[aria-current="location"] .atlas-marker-label {
+  color: #fff2bd;
+}
+
+.atlas-map-marker:focus-visible {
+  outline: 0;
+}
+
+.atlas-map-marker:focus-visible .atlas-marker-dot,
+.atlas-map-marker[aria-current="location"] .atlas-marker-dot {
+  width: calc(var(--atlas-marker-size) * 1.5);
+  height: calc(var(--atlas-marker-size) * 1.5);
+}
+
+.atlas-selection-overlay {
+  position: absolute;
+  z-index: 3;
+  top: clamp(72px, 12vh, 132px);
+  left: clamp(20px, 4vw, 64px);
+  display: grid;
+  max-width: min(460px, 56vw);
+  gap: 5px;
+  color: #fff;
+  text-shadow: 0 2px 10px #000, 0 2px 20px #000;
+  pointer-events: none;
+}
+
+.atlas-selection-overlay[hidden],
+.atlas-visualization-note[hidden] {
+  display: none !important;
+}
+
+.atlas-selection-overlay strong {
+  font: 500 clamp(20px, 2.8vw, 34px)/1.1 Georgia, "Times New Roman", serif;
+}
+
+.atlas-selection-overlay span {
+  color: #e5eef0;
+  font: 600 11px/1.45 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .06em;
+}
+
+.atlas-selection-overlay button {
+  width: max-content;
+  min-height: 34px;
+  margin-top: 5px;
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(243, 220, 160, .78);
+  color: #fff0bd;
+  background: transparent;
+  font: 700 10px/1.3 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .1em;
+  text-shadow: 0 2px 8px #000;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.atlas-selection-overlay button:hover,
+.atlas-selection-overlay button:focus-visible {
+  outline: 2px solid #fff0bd;
+  outline-offset: 3px;
+}
+
+.atlas-selection-overlay button:disabled {
+  display: none;
+}
+
+.atlas-visualization-note {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  max-width: 70vw;
+  color: rgba(235, 242, 244, .74);
+  font: 600 9px/1.35 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .11em;
+  text-align: right;
+  text-shadow: 0 1px 6px #000;
+  pointer-events: none;
+}
+
+.atlas-timeline {
+  position: absolute;
+  z-index: 4;
+  bottom: calc(max(0px, env(safe-area-inset-bottom)) + var(--atlas-timeline-bottom-spacing));
+  left: 50%;
+  display: grid;
+  width: var(--atlas-timeline-width);
+  height: max(150px, var(--atlas-timeline-height));
+  max-width: 100vw;
+  grid-template-rows: auto auto minmax(12px, 20px) minmax(0, 1fr);
+  gap: 5px;
+  overflow: hidden;
+  padding: 10px clamp(14px, 3vw, 36px) 12px;
+  border-top: 1px solid rgba(220, 232, 236, .22);
+  background: linear-gradient(180deg, rgba(6, 12, 18, .7), rgba(2, 5, 9, .92));
+  transform: translate(calc(-50% + var(--atlas-timeline-offset-x)), var(--atlas-timeline-offset-y)) scale(var(--atlas-timeline-scale));
+  transform-origin: center bottom;
+  backdrop-filter: blur(8px);
+}
+
+.atlas-timeline-heading,
+.atlas-year-controls {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.atlas-timeline-heading {
+  color: #f2f4f4;
+  font: 700 12px/1.2 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .12em;
+}
+
+.atlas-timeline-heading > span:last-child {
+  color: rgba(228, 237, 239, .65);
+  font-size: 9px;
+  letter-spacing: .09em;
+}
+
+.atlas-year-controls {
+  gap: 12px;
+}
+
+.atlas-year-controls > button {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  color: #eaf1f2;
+  background: transparent;
+  font: 22px/1 "Trebuchet MS", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.atlas-year-controls > button:hover,
+.atlas-year-controls > button:focus-visible {
+  outline: 1px solid rgba(145, 224, 242, .8);
+}
+
+.atlas-year-controls label {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+}
+
+.atlas-year-controls input {
+  width: 100%;
+  height: 20px;
+  accent-color: #9ce7f5;
+  cursor: pointer;
+}
+
+.atlas-timeline-rail {
+  position: relative;
+  height: 20px;
+  margin: 0 16px;
+  border-bottom: 1px solid rgba(222, 234, 237, .42);
+}
+
+.atlas-timeline-rail::before {
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+  left: 0;
+  height: 3px;
+  border-radius: 4px;
+  background: rgba(222, 234, 237, .16);
+  content: "";
+}
+
+.atlas-timeline-marker {
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--atlas-marker-row, 0) * 4px);
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: 50%;
+  background: var(--atlas-event-color, #dce8eb);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .9);
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.atlas-timeline-marker[aria-current="date"] {
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 0 3px rgba(145, 224, 242, .3);
+}
+
+.atlas-event-launch { --atlas-event-color: #83d8f1; }
+.atlas-event-landing { --atlas-event-color: #f4c85b; }
+.atlas-event-impact { --atlas-event-color: #ff806b; }
+.atlas-event-orbit { --atlas-event-color: #b7a0ff; }
+.atlas-event-flyby { --atlas-event-color: #8de0ad; }
+.atlas-event-deployment { --atlas-event-color: #e4a0da; }
+.atlas-event-mission-end { --atlas-event-color: #e2e8f0; }
+.atlas-event-last-contact { --atlas-event-color: #afc5d0; }
+.atlas-event-mission { --atlas-event-color: #f2b17b; }
+.atlas-event-arrival { --atlas-event-color: #9ad0ef; }
+.atlas-event-visit { --atlas-event-color: #b8d78a; }
+
+.atlas-event-strip {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  overflow: hidden;
+}
+
+.atlas-event-chip {
+  display: inline-flex;
+  min-width: 0;
+  max-width: min(330px, 31vw);
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 4px;
+  border: 0;
+  border-left: 2px solid var(--atlas-event-color, #dce8eb);
+  color: #e7eff0;
+  background: transparent;
+  font: 10px/1.25 "Trebuchet MS", Arial, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.atlas-event-chip strong {
+  overflow: hidden;
+  color: #fff;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.atlas-event-chip span {
+  overflow: hidden;
+  color: rgba(231, 239, 240, .7);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.atlas-event-chip[aria-current="true"] {
+  color: #fff0bd;
+  background: rgba(220, 232, 236, .08);
+}
+
+.atlas-event-chip:hover,
+.atlas-event-chip:focus-visible {
+  outline: 1px solid rgba(145, 224, 242, .82);
+  outline-offset: 1px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 680px) {
+  .atlas-header {
+    top: max(10px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    left: max(12px, env(safe-area-inset-left));
+  }
+
+  .atlas-world-label {
+    font-size: 9px;
+  }
+
+  .atlas-header-actions button {
+    min-width: 38px;
+    min-height: 38px;
+  }
+
+  .atlas-map-stage {
+    bottom: calc(max(166px, var(--atlas-timeline-height)) + var(--atlas-timeline-bottom-spacing));
+  }
+
+  .atlas-map-stage canvas.location-globe {
+    width: min(var(--atlas-globe-width), 100vw);
+    height: min(var(--atlas-globe-height), 100%);
+  }
+
+  .atlas-selection-overlay {
+    top: 62px;
+    left: 12px;
+    max-width: 70vw;
+  }
+
+  .atlas-selection-overlay strong {
+    font-size: 21px;
+  }
+
+  .atlas-selection-overlay span {
+    max-width: 70vw;
+    font-size: 9px;
+  }
+
+  .atlas-marker-label {
+    max-width: min(230px, 48vw);
+    padding: 1px 3px;
+  }
+
+  .atlas-marker-label strong {
+    font-size: max(9px, var(--atlas-marker-label-font-size));
+  }
+
+  .atlas-marker-label small {
+    font-size: max(8px, var(--atlas-coordinate-font-size));
+  }
+
+  .atlas-timeline {
+    height: max(166px, var(--atlas-timeline-height));
+    padding: 8px 10px max(10px, env(safe-area-inset-bottom));
+    gap: 3px;
+  }
+
+  .atlas-timeline-heading {
+    font-size: 11px;
+  }
+
+  .atlas-event-strip {
+    gap: 2px 6px;
+  }
+
+  .atlas-event-chip {
+    max-width: calc(50% - 6px);
+    gap: 4px;
+    font-size: 9px;
+  }
+
+  .atlas-visualization-note {
+    right: 10px;
+    bottom: 8px;
+    max-width: 62vw;
+    font-size: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .location-view *,
+  .location-view *::before,
+  .location-view *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

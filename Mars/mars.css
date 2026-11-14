@@ -1,0 +1,133 @@
+:root {
+  /* Mars Mission Atlas controls */
+  --mars-atlas-globe-width: min(96vw, 1280px);
+  --mars-atlas-globe-height: min(84dvh, 1020px);
+  --mars-atlas-globe-offset-x: 0px;
+  --mars-atlas-globe-offset-y: -10px;
+  --mars-atlas-globe-scale: 1;
+  --mars-atlas-rotation-speed: 1;
+  --mars-atlas-lighting-intensity: 1;
+  --mars-atlas-texture-contrast: 1.08;
+  --mars-atlas-marker-size: 10px;
+  --mars-atlas-marker-label-font-size: 11px;
+  --mars-atlas-marker-label-offset: 15px;
+  --mars-atlas-marker-label-spacing: 24px;
+  --mars-atlas-coordinate-font-size: 9px;
+  --mars-atlas-orbit-line-width: 2px;
+  --mars-atlas-orbit-marker-size: 8px;
+  --mars-atlas-timeline-width: min(96vw, 1400px);
+  --mars-atlas-timeline-height: clamp(112px, 16dvh, 178px);
+  --mars-atlas-timeline-offset-x: 0px;
+  --mars-atlas-timeline-offset-y: 0px;
+  --mars-atlas-timeline-scale: 1;
+  --mars-atlas-timeline-bottom-spacing: 0px;
+  --mars-atlas-background-image: none;
+  --mars-atlas-background-size: cover;
+  --mars-atlas-background-position: center;
+  --mars-atlas-background-brightness: .78;
+
+  --mars-night: #090807;
+  --mars-rust: #a64e35;
+  --mars-copper: #db9870;
+  --mars-sand: #f0dfc8;
+  --mars-muted: #c9b8a4;
+  --mars-line: rgba(224, 169, 129, .58);
+  --mars-panel: rgba(14, 11, 10, .94);
+}
+
+#landing-location-view {
+  --atlas-globe-width: var(--mars-atlas-globe-width);
+  --atlas-globe-height: var(--mars-atlas-globe-height);
+  --atlas-globe-offset-x: var(--mars-atlas-globe-offset-x);
+  --atlas-globe-offset-y: var(--mars-atlas-globe-offset-y);
+  --atlas-globe-scale: var(--mars-atlas-globe-scale);
+  --atlas-rotation-speed: var(--mars-atlas-rotation-speed);
+  --atlas-lighting-intensity: var(--mars-atlas-lighting-intensity);
+  --atlas-texture-contrast: var(--mars-atlas-texture-contrast);
+  --atlas-marker-size: var(--mars-atlas-marker-size);
+  --atlas-marker-label-font-size: var(--mars-atlas-marker-label-font-size);
+  --atlas-marker-label-offset: var(--mars-atlas-marker-label-offset);
+  --atlas-marker-label-spacing: var(--mars-atlas-marker-label-spacing);
+  --atlas-coordinate-font-size: var(--mars-atlas-coordinate-font-size);
+  --atlas-orbit-line-width: var(--mars-atlas-orbit-line-width);
+  --atlas-orbit-marker-size: var(--mars-atlas-orbit-marker-size);
+  --atlas-timeline-width: var(--mars-atlas-timeline-width);
+  --atlas-timeline-height: var(--mars-atlas-timeline-height);
+  --atlas-timeline-offset-x: var(--mars-atlas-timeline-offset-x);
+  --atlas-timeline-offset-y: var(--mars-atlas-timeline-offset-y);
+  --atlas-timeline-scale: var(--mars-atlas-timeline-scale);
+  --atlas-timeline-bottom-spacing: var(--mars-atlas-timeline-bottom-spacing);
+  --atlas-background-image: var(--mars-atlas-background-image);
+  --atlas-background-size: var(--mars-atlas-background-size);
+  --atlas-background-position: var(--mars-atlas-background-position);
+  --atlas-background-brightness: var(--mars-atlas-background-brightness);
+}
+
+html,
+body.storytelling-active {
+  background: var(--mars-night);
+}
+
+body.storytelling-active {
+  color: #f4ede3;
+}
+
+.story-heading p,
+.dialogue-eyebrow,
+.message-meta {
+  color: var(--mars-copper);
+}
+
+.story-back-link,
+.story-mission-index-button {
+  border-color: var(--mars-line);
+  color: #f4ede3;
+  background: rgba(12, 9, 8, .88);
+}
+
+.story-back-link:hover,
+.story-back-link:focus-visible,
+.story-mission-index-button:hover,
+.story-mission-index-button:focus-visible {
+  border-color: var(--mars-copper);
+  color: #ffe0bd;
+  background: rgba(166, 78, 53, .24);
+}
+
+.dialogue-copy,
+.story-message {
+  border-color: var(--mars-line);
+  color: #f5eee6;
+  background: var(--mars-panel);
+}
+
+.dialogue-actions button,
+.story-control-button,
+.index-tab,
+.evidence-toggle {
+  border-color: var(--mars-line);
+}
+
+.dialogue-play,
+.student-ask-button,
+.story-control-button--next {
+  color: #1d100b;
+  background: linear-gradient(135deg, #edbd91, #bf704d);
+}
+
+.dialogue-repeat,
+.dialogue-reading,
+.story-control-button--previous,
+.evidence-toggle {
+  color: #f4eadd;
+  background: rgba(255, 255, 255, .055);
+}
+
+.speech-status,
+.story-status {
+  color: #e4ba92;
+}
+
+.mission-status {
+  color: var(--mars-sand);
+}
