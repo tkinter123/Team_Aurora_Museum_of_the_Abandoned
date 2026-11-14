@@ -1327,10 +1327,47 @@
     state.resumeNarrationGate?.();
   }
 
+  let landingChallengeFrame = null;
+  let landingChallengeStartButton = null;
+
+  function openLandingChallenge() {
+    if (landingChallengeFrame) return;
+    const frame = document.createElement("iframe");
+    frame.title = "Little Lunar Explorer landing challenge";
+    frame.setAttribute("aria-label", frame.title);
+    frame.style.cssText = "position:fixed;inset:0;width:100%;height:100%;border:0;z-index:2147483647;background:#030711";
+    frame.addEventListener("load", () => frame.contentWindow?.focus(), { once: true });
+    frame.src = new URL("./Moon_Landing_Challenge/landing.html", window.location.href).href;
+    landingChallengeFrame = frame;
+    root.inert = true;
+    document.body.appendChild(frame);
+  }
+
+  window.addEventListener("message", event => {
+    const frame = landingChallengeFrame;
+    if (!frame || event.source !== frame.contentWindow) return;
+    const challengeUrl = new URL(frame.src);
+    const challengeOrigin = challengeUrl.protocol === "file:" ? "null" : challengeUrl.origin;
+    if (event.origin !== challengeOrigin) return;
+    if (event.data?.type !== "moon-landing-challenge-exit") return;
+    frame.remove();
+    landingChallengeFrame = null;
+    root.inert = false;
+    landingChallengeStartButton?.focus();
+  });
+
   function showFinalCta() {
     if (!dialogueWrap) return;
     let cta = document.getElementById("final-cta");
     if (!cta) {
+      landingChallengeStartButton = document.createElement("button");
+      landingChallengeStartButton.id = "start-moon-landing-challenge";
+      landingChallengeStartButton.className = "dialogue-play";
+      landingChallengeStartButton.type = "button";
+      landingChallengeStartButton.textContent = "Begin the landing challenge";
+      landingChallengeStartButton.addEventListener("click", openLandingChallenge);
+      dialogueWrap.querySelector(".dialogue-actions")?.appendChild(landingChallengeStartButton);
+
       cta = document.createElement("button");
       cta.id = "final-cta";
       cta.className = "dialogue-play";
@@ -1343,6 +1380,7 @@
       dialogueWrap.querySelector(".dialogue-actions")?.appendChild(cta);
     }
     cta.hidden = false;
+    if (landingChallengeStartButton) landingChallengeStartButton.hidden = false;
     if (speechStatus) speechStatus.textContent = "Finale complete. Choose a mission from the index.";
   }
 
@@ -1418,6 +1456,7 @@
     if (!deferNarration) sequenceSlideMessages(slide, narration, animationRequest);
     const cta = document.getElementById("final-cta");
     if (cta) cta.hidden = true;
+    if (landingChallengeStartButton) landingChallengeStartButton.hidden = true;
     renderMissionIndex();
     return { slide, narration, animationRequest, imageReady };
   }
