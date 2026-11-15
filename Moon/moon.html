@@ -7,6 +7,7 @@
   <title>Moon Chronicle — Museum of the Abandoned</title>
   <link rel="stylesheet" href="storytelling.css?v=manual-position-controls-20261107">
   <link rel="stylesheet" href="moon.css?v=apollo12-video-20261116">
+  <link rel="stylesheet" href="innovation-lineage.css">
   <link rel="stylesheet" href="../location-view.css?v=atlas-mobile-layout-20261111b">
   <link rel="stylesheet" href="../Audio/background-music.css">
 </head>
@@ -41,7 +42,7 @@
             <div id="mission-image-visual" class="mission-image-visual">
               <div id="mission-image-position-layer" class="mission-image-position-layer">
                 <div id="mission-image-coordinate-space" class="mission-image-coordinate-space">
-                  <img class="story-hardware mission-image-item" src="./moon_images/Prologue/Sl1.jpg" alt="Global map showing the Moon's geological regions">
+                  <img class="story-hardware mission-image-item" src="./moon_images/moon.png" alt="Full Moon showing lunar maria and craters">
                   <img id="moon-story-hardware-secondary" class="story-hardware mission-image-item" alt="" hidden>
                 </div>
               </div>
@@ -93,6 +94,25 @@
           <button id="story-advance-slide" class="story-control-button story-control-button--next" type="button">Next</button>
         </nav>
       </div>
+    </section>
+
+    <section id="moon-innovation-lineage" aria-labelledby="moon-innovation-lineage-title" aria-hidden="true" hidden>
+      <main>
+        <h1 id="moon-innovation-lineage-title" class="t">Innovation Lineage</h1>
+        <p class="hint">Pick one or two missions to view side by side.</p>
+        <div class="chips" id="moon-innovation-lineage-chips" aria-label="Choose missions"></div>
+        <div id="moon-innovation-lineage-stage"></div>
+      </main>
+      <nav class="lineage-navigation" aria-label="Innovation Lineage navigation">
+        <button id="moon-innovation-lineage-previous" type="button">Previous</button>
+        <p id="moon-innovation-lineage-status" aria-live="polite"></p>
+        <button id="moon-innovation-lineage-continue" type="button">Continue to Evaluation</button>
+      </nav>
+      <div class="back" id="moon-innovation-lineage-backdrop"></div>
+      <aside class="sheet" id="moon-innovation-lineage-sheet" role="dialog" aria-modal="true" aria-label="Details" aria-hidden="true">
+        <button class="x" id="moon-innovation-lineage-close" type="button" aria-label="Close">×</button>
+        <div id="moon-innovation-lineage-sheet-body"></div>
+      </aside>
     </section>
 
     <div id="archive-interface" inert aria-hidden="true">
@@ -183,7 +203,8 @@
   <script src="ranger7-story.js"></script>
   <script src="../Audio/background-music.js"></script>
   <script src="../voice-selection.js"></script>
-  <script src="storytelling.js?v=apollo12-integration-20261116"></script>
+  <script src="storytelling.js?v=prologue-moon-image-20261116"></script>
+  <script src="innovation-lineage.js"></script>
   <script src="moon.js"></script>
 </body>
 </html>

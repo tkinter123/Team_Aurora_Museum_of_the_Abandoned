@@ -32,8 +32,8 @@
       alt: "",
       nodes: [
         {
-          image: "./moon_images/Prologue/Sl1.jpg",
-          alt: "Global map showing the Moon's geological regions",
+          image: "./moon_images/moon.png",
+          alt: "Full Moon showing lunar maria and craters",
           narration: "Welcome to the Off-World Archive, Explorer. Look closely at the Moon on your screen. To most people on Earth, it looks like a dead, gray sphere of dust and craters. But its surface holds a record of human engineering.",
           response: "Wait a second, Dr. Fredrick. Are there really machines still sitting on the Moon? Were they too heavy to bring home?",
           answer: "Many objects were left by design, while other hardware came to rest after planned impacts. Apollo crews also left equipment that was never meant to return. A small passive laser reflector can still return some laser pulses when observing conditions allow; it needs no battery. These are not simply forgotten machines: each left evidence or a scientific record. Ready to meet the first one? Let's tune our signal to Mare Cognitum."
@@ -840,7 +840,7 @@
   const missionImageDisplayArea = { x: 503, y: 254, width: 896, height: 376 };
   const missionImageControls = {
     prologueMoonMap: {
-      src: "./moon_images/Prologue/Sl1.jpg",
+      src: "./moon_images/moon.png",
       x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
     },
     ranger7OpeningInfographic: {

@@ -936,7 +936,7 @@ body.storytelling-active .museum-exhibit{
 
 .ranger-story .story-dialogue{
   border-color:rgba(53,217,255,.24);
-  background:rgba(3,12,27,.58);
+  background:rgba(3,12,27,.92);
   box-shadow:0 0 12px rgba(35,195,255,.08),inset 0 1px 0 rgba(139,234,255,.06);
   backdrop-filter:blur(2px);
   -webkit-backdrop-filter:blur(2px);
