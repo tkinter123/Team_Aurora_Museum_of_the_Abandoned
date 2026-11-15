@@ -808,10 +808,10 @@
       const available = stageSlides[index].length > 0;
       const label = stage.shortLabel;
       return `
-        <button class="index-tab story-mission-entry ${current ? "current" : done ? "done" : "upcoming"}" type="button" data-story-stage-index="${index}" ${available ? "" : "disabled"} aria-current="${current ? "step" : "false"}">
+        <button class="index-tab story-mission-entry ${current ? "current" : done ? "done" : "upcoming"}" type="button" data-story-stage-index="${index}" aria-current="${current ? "step" : "false"}">
           <span>${String(index + 1).padStart(2, "0")}</span>
           <strong>${label}</strong>
-          <small>${available ? stage.title : "Story unavailable"}</small>
+          <small>${available ? stage.title : "Coming Soon"}</small>
         </button>
       `;
     }).join("");
@@ -830,11 +830,15 @@
 
   missionIndex?.addEventListener("click", (event) => {
     const entry = event.target.closest("[data-story-stage-index]");
-    if (!entry || entry.disabled) return;
+    if (!entry) return;
     event.stopPropagation();
     const targetStageIndex = Number(entry.dataset.storyStageIndex);
     const targetSlides = stageSlides[targetStageIndex];
-    if (!Number.isInteger(targetStageIndex) || !targetSlides?.length || state.transitionLocked) return;
+    if (!Number.isInteger(targetStageIndex) || !storyStages[targetStageIndex] || state.transitionLocked) return;
+    if (!targetSlides?.length) {
+      if (speechStatus) speechStatus.textContent = "Coming Soon";
+      return;
+    }
     const targetSlideIndex = storySlides.indexOf(targetSlides[0]);
     if (targetSlideIndex < 0) return;
 

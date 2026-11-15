@@ -259,6 +259,172 @@
       ]
     },
     {
+      title: "Apollo 12",
+      shortLabel: "Apollo 12",
+      location: {
+        mission: "Apollo 12",
+        spacecraft: "Intrepid and Yankee Clipper",
+        body: "Moon",
+        locationType: "Crewed lunar landing",
+        sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099A",
+        texture: "./data/wac_preview.png",
+        color: [118, 116, 108],
+        note: "Apollo 12 landed in Oceanus Procellarum on November 19, 1969. The source PDF in this asset folder is an Apollo 11 script duplicate, so this is a NASA-sourced museum adaptation, not a recovered transcript."
+      },
+      nodes: [
+        {
+          storySlideNumber: 1,
+          media: [
+            {
+              id: "S1",
+              type: "video",
+              src: "./moon_images/Apollo12/Sl1.mp4",
+              poster: "./moon_images/Apollo12/Sl2.jpg",
+              title: "Apollo 12 crew and launch",
+              alt: "Apollo 12 title and crew video"
+            }
+          ],
+          narration: "Before we begin, one important note: the Apollo 12 folder contains a copy of the Apollo 11 script, not an Apollo 12 transcript. This museum story is built from NASA's mission record, so it is an adaptation, not a verbatim script. Apollo 12 launched on November 14, 1969, with Charles \"Pete\" Conrad, Richard Gordon, and Alan Bean aboard.",
+          response: "Why did NASA send another crew to the Moon so soon after Apollo 11?",
+          answer: "Apollo 12 was the next crewed lunar landing mission. It aimed to demonstrate a more precise landing and to carry out additional scientific work on the lunar surface."
+        },
+        {
+          storySlideNumber: 2,
+          media: [
+            {
+              id: "S2",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl2.jpg",
+              alt: "Apollo 12 astronaut in a spacesuit on the lunar surface"
+            }
+          ],
+          narration: "The three astronauts had different roles. Conrad and Bean descended to the Moon in the lunar module Intrepid. Gordon stayed in lunar orbit aboard the command module Yankee Clipper.",
+          response: "Did all three astronauts walk on the Moon?",
+          answer: "No. Conrad and Bean explored the surface, while Gordon remained in orbit and operated the command module."
+        },
+        {
+          storySlideNumber: 3,
+          media: [
+            {
+              id: "S3",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl3.jpg",
+              alt: "Apollo 12 astronaut working beside lunar equipment"
+            },
+            {
+              id: "S3-video",
+              type: "video",
+              src: "./moon_images/Apollo12/Sl3'_Video.webm",
+              poster: "./moon_images/Apollo12/Sl3.jpg",
+              title: "Apollo 12 lunar surface view",
+              alt: "Apollo 12 lunar surface video"
+            }
+          ],
+          narration: "On November 19, Intrepid landed in Oceanus Procellarum, the Ocean of Storms. Apollo 12 reached its planned area close to the earlier Surveyor 3 robotic spacecraft.",
+          response: "How close did they get to Surveyor 3?",
+          answer: "NASA's mission record places Intrepid about 180 meters from Surveyor 3. That careful landing let the crew visit the older probe during a moonwalk."
+        },
+        {
+          storySlideNumber: 4,
+          media: [
+            {
+              id: "S4",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl4.jpeg",
+              alt: "Apollo 12 lunar surface activity"
+            },
+            {
+              id: "S4-1",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl4'.jpeg",
+              alt: "Surveyor 3 on the lunar surface"
+            }
+          ],
+          narration: "During their second excursion, Conrad and Bean examined Surveyor 3. They photographed it and removed parts, including its television camera and soil-sampling scoop, to bring back to Earth.",
+          response: "Why bring pieces of an old robot home?",
+          answer: "Scientists could examine how the camera, scoop, and other hardware changed after years on the Moon. The returned pieces provided direct evidence about how spacecraft materials withstand the lunar environment."
+        },
+        {
+          storySlideNumber: 5,
+          media: [
+            {
+              id: "S5",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl5.jpeg",
+              alt: "Apollo 12 lunar surface equipment and activity"
+            },
+            {
+              id: "S5-1",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl5'.jpeg",
+              alt: "Apollo 12 astronaut working on the lunar surface"
+            }
+          ],
+          narration: "Conrad and Bean completed two moonwalks. They collected 34.35 kilograms of lunar rocks and soil for scientists to study after the crew returned.",
+          response: "What could scientists learn from those samples?",
+          answer: "The rocks and soil could be examined in Earth laboratories with tools that were too large to take to the Moon. The samples helped scientists investigate the age and history of the lunar surface."
+        },
+        {
+          storySlideNumber: 6,
+          media: [
+            {
+              id: "S6",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl6_AI_Gen.jpeg",
+              alt: "AI-generated Apollo 12 ALSEP illustration; labels in the image are not an authoritative instrument list"
+            }
+          ],
+          narration: "Apollo 12 also deployed an Apollo Lunar Surface Experiments Package, or ALSEP, so instruments could study the Moon after the astronauts left. This image is marked as AI-generated: its embedded labels are not a verified list of Apollo 12 experiments.",
+          response: "Can we trust every label in an AI-generated picture?",
+          answer: "No. We can use it as an illustration, but we should check scientific claims against NASA records. The story here relies on the documented ALSEP deployment, not on the picture's unverified labels."
+        },
+        {
+          storySlideNumber: 7,
+          media: [
+            {
+              id: "S7",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl7.jpeg",
+              alt: "Apollo-era lunar experiment hardware"
+            }
+          ],
+          narration: "The experiments were designed to keep collecting measurements without astronauts beside them. Their data helped scientists study the Moon as a physical world, not just as a place to land.",
+          response: "How could an experiment work after the crew left?",
+          answer: "The ALSEP instruments were set up on the surface to operate unattended and send measurements back to Earth. The astronauts could deploy them, but the science continued remotely."
+        },
+        {
+          storySlideNumber: 8,
+          media: [
+            {
+              id: "S8",
+              type: "video",
+              src: "./moon_images/Apollo12/Sl8.mp4",
+              poster: "./moon_images/Apollo12/Sl9.jpeg",
+              title: "Apollo 12 ALSEP power system",
+              alt: "Apollo 12 ALSEP and SNAP-27 power-system video"
+            }
+          ],
+          narration: "ALSEP needed a power source. Apollo 12 used a SNAP-27 radioisotope thermoelectric generator, which converted heat from plutonium-238 into electricity for the experiments.",
+          response: "Was SNAP-27 a rocket engine?",
+          answer: "No. It did not propel the spacecraft. SNAP-27 supplied electrical power to the surface experiments."
+        },
+        {
+          storySlideNumber: 9,
+          media: [
+            {
+              id: "S9",
+              type: "image",
+              src: "./moon_images/Apollo12/Sl9.jpeg",
+              alt: "SNAP-27 radioisotope thermoelectric generator exhibit"
+            }
+          ],
+          narration: "After completing their lunar work, the crew returned to Earth and splashed down in the Pacific Ocean on November 24, 1969. They brought back lunar samples and Surveyor 3 hardware; the ALSEP experiments remained on the Moon.",
+          response: "What made Apollo 12 an important step after Apollo 11?",
+          answer: "It demonstrated a precise lunar landing, explored and sampled the surface, investigated Surveyor 3, and deployed experiments that continued working after the astronauts went home."
+        }
+      ]
+    },
+    {
       title: "Surveyor 3 & Intrepid \u2014 The Robotic Reunion",
       shortLabel: "Surveyor 3 & Intrepid",
       location: {
@@ -477,6 +643,14 @@
       }
     },
     3: {
+      default: {
+        scientificReferenceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099A",
+        imageSourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099A",
+        imageCredit: "NASA NSSDCA Apollo 12 mission record",
+        label: "[SCIENTIFIC SOURCE ↗]"
+      }
+    },
+    4: {
       0: {
         scientificReferenceUrl: "https://science.nasa.gov/mission/surveyor-3/",
         imageSourceUrl: "https://science.nasa.gov/mission/surveyor-3/",
@@ -496,7 +670,7 @@
         label: "[SCIENTIFIC SOURCE ↗]"
       }
     },
-    4: {
+    5: {
       0: {
         scientificReferenceUrl: "https://www.nasa.gov/wp-content/uploads/static/history/alsj/WOTM/WOTM-LRVPerformance.html",
         imageSourceUrl: "https://www.nasa.gov/wp-content/uploads/static/history/alsj/WOTM/WOTM-LRVPerformance.html",
@@ -516,7 +690,7 @@
         label: "[SCIENTIFIC SOURCE ↗]"
       }
     },
-    5: {
+    6: {
       0: {
         scientificReferenceUrl: "https://science.nasa.gov/mission/lcross/",
         imageSourceUrl: "https://science.nasa.gov/mission/lcross/",
@@ -542,7 +716,7 @@
         label: "[SCIENTIFIC SOURCE ↗]"
       }
     },
-    6: {
+    7: {
       0: {
         scientificReferenceUrl: "https://science.nasa.gov/solar-system/",
         imageSourceUrl: "https://trek.nasa.gov/moon/",
@@ -556,7 +730,7 @@
     if (!slide) return null;
     const stageEntries = slideSourceCatalog[slide.stageIndex];
     if (!stageEntries) return null;
-    return stageEntries[slide.nodeIndex] || null;
+    return stageEntries[slide.nodeIndex] || stageEntries.default || null;
   }
 
   function renderEvidenceLink(slide) {
@@ -625,15 +799,16 @@
     if (Array.isArray(node.media) && node.media.length > 0) {
       const activeMedia = node.media[state.activeMediaIndex % node.media.length];
       return {
-        image: activeMedia.src,
-        alt: activeMedia.alt || node.alt || stage.alt || ""
+        image: activeMedia.type === "video" ? activeMedia.poster || null : activeMedia.src,
+        alt: activeMedia.alt || node.alt || stage.alt || "",
+        video: activeMedia.type === "video" ? activeMedia : null
       };
     }
     const explanationImage = hasImage
       ? node.image
       : hasAnswerImage ? null : stage.image;
     const imageAlt = node.alt || stage.alt || "";
-    return { image: explanationImage, alt: imageAlt };
+    return { image: explanationImage, alt: imageAlt, video: null };
   }
 
   const missionOverviewByStage = {
@@ -657,13 +832,12 @@
 
   /* =========================================
      MANUAL MISSION IMAGE POSITION CONTROLS
-     Coordinates use a 1920 x 1080 virtual canvas in CSS-pixel units.
-     x/y mark each image box's top-left; width/height scale with the canvas.
+     Image coordinates are relative to the Moon display aperture.
      Set height to "auto" to use the source's aspect ratio. Images use contain.
      visible: "on-slide" follows existing navigation, true keeps an image
      visible across slides, and false hides it.
   ========================================= */
-  const missionImageCoordinateSystem = { width: 1920, height: 1080 };
+  const missionImageDisplayArea = { x: 503, y: 254, width: 896, height: 376 };
   const missionImageControls = {
     prologueMoonMap: {
       src: "./moon_images/Prologue/Sl1.jpg",
@@ -771,6 +945,42 @@
     },
     apollo11OutcomeReflector: {
       src: "./moon_images/Apollo11/Sl10.jpeg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12Crew: {
+      src: "./moon_images/Apollo12/Sl2.jpg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12Landing: {
+      src: "./moon_images/Apollo12/Sl3.jpg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12SurveyorActivity: {
+      src: "./moon_images/Apollo12/Sl4.jpeg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12Surveyor: {
+      src: "./moon_images/Apollo12/Sl4'.jpeg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12EVA: {
+      src: "./moon_images/Apollo12/Sl5.jpeg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12EVASecondary: {
+      src: "./moon_images/Apollo12/Sl5'.jpeg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12ALSEPIllustration: {
+      src: "./moon_images/Apollo12/Sl6_AI_Gen.jpeg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12ExperimentHardware: {
+      src: "./moon_images/Apollo12/Sl7.jpeg",
+      x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
+    },
+    apollo12SNAP27: {
+      src: "./moon_images/Apollo12/Sl9.jpeg",
       x: 503, y: 254, width: 896, height: 376, visible: "on-slide"
     },
     surveyor3Spacecraft: {
@@ -930,7 +1140,12 @@
   const playNarrationButton = document.getElementById("play-narration");
   const continueReadingButton = document.getElementById("continue-reading");
   const storyMissionIndexButton = document.getElementById("story-mission-index-button");
-  const hardwareImage = document.querySelector(".story-hardware");
+  const hardwareImages = [
+    document.querySelector(".story-hardware"),
+    document.getElementById("moon-story-hardware-secondary")
+  ];
+  let hardwareImageIndex = 0;
+  let hardwareImage = hardwareImages[hardwareImageIndex];
   const missionMediaControls = document.getElementById("mission-media-controls");
   const previousMissionMediaButton = document.getElementById("mission-media-previous");
   const nextMissionMediaButton = document.getElementById("mission-media-next");
@@ -949,6 +1164,121 @@
   const guideDialogueLayer = document.getElementById("guide-dialogue-layer");
   const userRow = document.querySelector(".story-user-row");
 
+  if (!missionImageFrame) {
+    throw new Error("Moon mission image frame is missing from moon.html.");
+  }
+
+  const missionVideoButton = document.createElement("button");
+  missionVideoButton.type = "button";
+  missionVideoButton.className = "moon-watch-video-button";
+  missionVideoButton.textContent = "Watch Video";
+  missionVideoButton.hidden = true;
+  missionVideoButton.setAttribute("aria-label", "Watch the current mission video");
+  missionImageFrame.append(missionVideoButton);
+
+  const missionVideoModal = document.createElement("div");
+  missionVideoModal.className = "moon-video-modal";
+  missionVideoModal.hidden = true;
+  missionVideoModal.setAttribute("role", "dialog");
+  missionVideoModal.setAttribute("aria-modal", "true");
+  missionVideoModal.setAttribute("aria-label", "Moon mission video player");
+
+  const missionVideoDialog = document.createElement("div");
+  missionVideoDialog.className = "moon-video-dialog";
+
+  const missionVideoElement = document.createElement("video");
+  missionVideoElement.className = "moon-video-player";
+  missionVideoElement.controls = true;
+  missionVideoElement.preload = "metadata";
+  missionVideoElement.playsInline = true;
+
+  const missionVideoCloseButton = document.createElement("button");
+  missionVideoCloseButton.type = "button";
+  missionVideoCloseButton.className = "moon-video-close";
+  missionVideoCloseButton.textContent = "Close";
+  missionVideoCloseButton.setAttribute("aria-label", "Close video");
+
+  const missionVideoError = document.createElement("p");
+  missionVideoError.className = "moon-video-error";
+  missionVideoError.hidden = true;
+  missionVideoError.setAttribute("role", "status");
+  missionVideoError.textContent = "This video could not be loaded. Close this window and continue the mission.";
+
+  missionVideoDialog.append(missionVideoElement, missionVideoCloseButton, missionVideoError);
+  missionVideoModal.append(missionVideoDialog);
+  document.body.append(missionVideoModal);
+
+  let activeMissionVideo = null;
+  let selectedMissionVideo = null;
+
+  function updateMissionVideoButton(video) {
+    const hasVideo = video?.type === "video" && Boolean(video.src);
+    selectedMissionVideo = hasVideo ? video : null;
+    missionVideoButton.hidden = !hasVideo;
+    missionVideoButton.disabled = !hasVideo
+      || !state.controlsReady
+      || state.transitionLocked
+      || state.questionSpeechPending
+      || root.classList.contains("is-speaking")
+      || root.classList.contains("is-student-speaking");
+    if (hasVideo) {
+      missionVideoButton.setAttribute(
+        "aria-label",
+        `Watch ${video.title || "mission video"}`
+      );
+    }
+  }
+
+  function closeMissionVideo() {
+    const wasOpen = !missionVideoModal.hidden;
+    if (activeMissionVideo) {
+      missionVideoElement.pause();
+      missionVideoElement.removeAttribute("src");
+      missionVideoElement.removeAttribute("poster");
+      missionVideoElement.load();
+      activeMissionVideo = null;
+    }
+    missionVideoError.hidden = true;
+    missionVideoModal.hidden = true;
+    missionVideoModal.setAttribute("aria-hidden", "true");
+    if (wasOpen && !missionVideoButton.hidden) missionVideoButton.focus();
+  }
+
+  function openMissionVideo(video) {
+    if (!video || video.type !== "video" || !video.src) {
+      console.error("Moon mission video is missing a playable source.");
+      if (speechStatus) speechStatus.textContent = "The mission video is unavailable.";
+      return;
+    }
+    activeMissionVideo = video;
+    missionVideoElement.src = video.src;
+    if (video.poster) missionVideoElement.poster = video.poster;
+    missionVideoElement.load();
+    missionVideoError.hidden = true;
+    missionVideoModal.hidden = false;
+    missionVideoModal.setAttribute("aria-hidden", "false");
+    missionVideoElement.focus();
+  }
+
+  missionVideoButton.addEventListener("click", () => {
+    const slide = getCurrentSlide();
+    const media = getSlideMedia(slide);
+    const video = media[state.activeMediaIndex % Math.max(media.length, 1)];
+    openMissionVideo(video);
+  });
+  missionVideoCloseButton.addEventListener("click", closeMissionVideo);
+  missionVideoModal.addEventListener("click", event => {
+    if (event.target === missionVideoModal) closeMissionVideo();
+  });
+  document.addEventListener("keydown", event => {
+    if (!missionVideoModal.hidden && event.key === "Escape") closeMissionVideo();
+  });
+  missionVideoElement.addEventListener("ended", closeMissionVideo);
+  missionVideoElement.addEventListener("error", () => {
+    missionVideoError.hidden = false;
+    console.error(`Moon mission video could not be loaded: ${activeMissionVideo?.src || "unknown source"}`);
+  });
+
   function getMissionImageControl(source) {
     const control = missionImageControlBySource.get(source);
     if (!control) {
@@ -958,10 +1288,10 @@
   }
 
   function applyMissionImagePosition(image, control) {
-    const scaleX = missionImageCoordinateSpaceElement.clientWidth / missionImageCoordinateSystem.width;
-    const scaleY = missionImageCoordinateSpaceElement.clientHeight / missionImageCoordinateSystem.height;
-    image.style.setProperty("left", `${control.x * scaleX}px`, "important");
-    image.style.setProperty("top", `${control.y * scaleY}px`, "important");
+    const scaleX = missionImageCoordinateSpaceElement.clientWidth / missionImageDisplayArea.width;
+    const scaleY = missionImageCoordinateSpaceElement.clientHeight / missionImageDisplayArea.height;
+    image.style.setProperty("left", `${(control.x - missionImageDisplayArea.x) * scaleX}px`, "important");
+    image.style.setProperty("top", `${(control.y - missionImageDisplayArea.y) * scaleY}px`, "important");
     image.style.setProperty(
       "width",
       control.width === "auto" ? "auto" : `${control.width * scaleX}px`,
@@ -975,36 +1305,19 @@
   }
 
   function updateMissionImageFrame() {
-    const image = hardwareImage;
-    const imageRect = image.getBoundingClientRect();
-    const layerRect = missionImageFrameLayer.getBoundingClientRect();
-    if (
-      image.hidden
-      || !image.complete
-      || !image.naturalWidth
-      || !image.naturalHeight
-      || !imageRect.width
-      || !imageRect.height
-    ) {
-      missionImageFrame.classList.add("is-unavailable");
-      return;
-    }
+    const styles = getComputedStyle(document.documentElement);
+    const displayLeft = Number.parseFloat(styles.getPropertyValue("--moon-display-left"));
+    const displayTop = Number.parseFloat(styles.getPropertyValue("--moon-display-top"));
+    const displayWidth = Number.parseFloat(styles.getPropertyValue("--moon-display-width"));
+    const displayHeight = Number.parseFloat(styles.getPropertyValue("--moon-display-height"));
+    const displayCenterX = missionImageFrameLayer.clientWidth * (displayLeft + displayWidth / 2) / 100;
+    const displayCenterY = missionImageFrameLayer.clientHeight * (displayTop + displayHeight / 2) / 100;
+    const mobileWidth = window.matchMedia("(max-width: 760px)").matches;
+    const frameWidth = Math.min(window.innerWidth * (mobileWidth ? 0.78 : 0.46), 633);
+    const frameHeight = frameWidth * 322 / 633;
 
-    const imageScale = Math.min(
-      imageRect.width / image.naturalWidth,
-      imageRect.height / image.naturalHeight
-    );
-    const contentWidth = image.naturalWidth * imageScale;
-    const contentHeight = image.naturalHeight * imageScale;
-    const contentLeft = imageRect.left + (imageRect.width - contentWidth) / 2;
-    const contentTop = imageRect.top + (imageRect.height - contentHeight) / 2;
-    const frameWidth = (contentWidth + 12) / 0.936;
-    const frameHeight = (contentHeight + 12) / 0.956;
-    const frameLeft = contentLeft - 6 - frameWidth * 0.032;
-    const frameTop = contentTop - 6 - frameHeight * 0.022;
-
-    missionImageFrame.style.setProperty("left", `${frameLeft - layerRect.left}px`, "important");
-    missionImageFrame.style.setProperty("top", `${frameTop - layerRect.top}px`, "important");
+    missionImageFrame.style.setProperty("left", `${displayCenterX}px`, "important");
+    missionImageFrame.style.setProperty("top", `${displayCenterY}px`, "important");
     missionImageFrame.style.setProperty("width", `${frameWidth}px`, "important");
     missionImageFrame.style.setProperty("height", `${frameHeight}px`, "important");
     missionImageFrame.classList.remove("is-unavailable");
@@ -1046,7 +1359,7 @@
   if (
     !missionImagePositionLayer
     || !missionImageCoordinateSpaceElement
-    || !hardwareImage
+    || hardwareImages.some(image => !image)
     || !missionImageFrame
     || !missionImageFrameLayer
   ) {
@@ -1054,8 +1367,6 @@
   }
   updateMissionImagePositions();
   syncPersistentMissionImages(hardwareImage.getAttribute("src"));
-  hardwareImage.addEventListener("load", updateMissionImageFrame);
-  hardwareImage.addEventListener("error", updateMissionImageFrame);
   if ("ResizeObserver" in window) {
     const missionImagePositionObserver = new ResizeObserver(() => updateMissionImagePositions());
     missionImagePositionObserver.observe(missionImageCoordinateSpaceElement);
@@ -1175,7 +1486,7 @@
     if (missionMediaCount && media.length > 0) {
       const activeIndex = state.activeMediaIndex % media.length;
       missionMediaCount.textContent = `${activeIndex + 1} / ${media.length}`;
-      missionMediaCount.setAttribute("aria-label", `Image ${activeIndex + 1} of ${media.length}`);
+      missionMediaCount.setAttribute("aria-label", `Media item ${activeIndex + 1} of ${media.length}`);
     } else if (missionMediaCount) {
       missionMediaCount.textContent = "";
       missionMediaCount.removeAttribute("aria-label");
@@ -1185,7 +1496,8 @@
   function preloadNextMissionMedia(slide) {
     const media = getSlideMedia(slide);
     if (media.length < 2) return;
-    const nextSource = media[(state.activeMediaIndex + 1) % media.length]?.src;
+    const nextItem = media[(state.activeMediaIndex + 1) % media.length];
+    const nextSource = nextItem?.type === "video" ? nextItem.poster : nextItem?.src;
     if (!nextSource || state.preloadedMediaImages.has(nextSource)) return;
     const image = new Image();
     image.src = nextSource;
@@ -1201,6 +1513,8 @@
       || slide?.conversationState === "answer") return;
     state.activeMediaIndex = (state.activeMediaIndex + offset + media.length) % media.length;
     const visual = getSlideVisual(slide);
+    closeMissionVideo();
+    updateMissionVideoButton(visual.video);
     setCurrentImage(slide.stage, visual.image, { transition: true, alt: visual.alt });
     updateMissionMediaControls(slide);
     preloadNextMissionMedia(slide);
@@ -1367,14 +1681,25 @@
     return waitForImage(image);
   }
 
+  function clearMissionImageElement(image) {
+    image.hidden = true;
+    image.removeAttribute("src");
+    image.alt = "";
+    delete image.dataset.slide;
+    delete image.dataset.node;
+    delete image.dataset.state;
+    image.classList.remove("is-visible", "is-leaving");
+  }
+
   function setCurrentImage(stage, image, { transition = false, alt = stage?.alt || "" } = {}) {
     if (!stage || !hardwareImage) return Promise.resolve(false);
     const assignedImage = image;
-    hardwareImage.alt = alt;
+    const activeImage = hardwareImage;
+    activeImage.alt = alt;
     if (assignedImage && state.renderedImage === assignedImage) {
       updateMissionImagePositions(assignedImage);
       syncPersistentMissionImages(assignedImage);
-      return waitForImage(hardwareImage).then(() => true).catch(error => {
+      return waitForImage(activeImage).then(() => true).catch(error => {
         console.error("Moon mission image failed to load", error);
         if (speechStatus) speechStatus.textContent = "The mission image could not be loaded.";
         return false;
@@ -1382,31 +1707,36 @@
     }
 
     const request = ++state.imageTransitionRequest;
-    hardwareImage.classList.remove("is-image-fading-out", "is-image-materializing");
+    const inactiveImage = hardwareImages[1 - hardwareImageIndex];
     if (!assignedImage) {
       const clearImage = () => {
         if (request !== state.imageTransitionRequest) return false;
-        hardwareImage.hidden = true;
-        hardwareImage.removeAttribute("src");
+        clearMissionImageElement(activeImage);
+        clearMissionImageElement(inactiveImage);
         state.renderedImage = null;
         syncPersistentMissionImages(null);
         return true;
       };
-      if (!transition || hardwareImage.hidden || !state.renderedImage) return Promise.resolve(clearImage());
-      const fadeOutDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 150 : 300;
-      hardwareImage.classList.add("is-image-fading-out");
-      return wait(fadeOutDuration).then(() => {
-        hardwareImage.classList.remove("is-image-fading-out");
-        return clearImage();
-      });
+      if (!transition || activeImage.hidden || !state.renderedImage) return Promise.resolve(clearImage());
+      activeImage.classList.remove("is-visible");
+      activeImage.classList.add("is-leaving");
+      clearMissionImageElement(inactiveImage);
+      return wait(320).then(clearImage);
     }
 
     if (!transition || !state.renderedImage) {
-      hardwareImage.src = assignedImage;
+      clearMissionImageElement(inactiveImage);
+      activeImage.classList.remove("is-leaving");
+      activeImage.hidden = false;
+      activeImage.src = assignedImage;
       state.renderedImage = assignedImage;
       updateMissionImagePositions(assignedImage);
       syncPersistentMissionImages(assignedImage);
-      return waitForImage(hardwareImage).then(() => true).catch(error => {
+      return waitForImage(activeImage).then(() => {
+        if (request !== state.imageTransitionRequest) return false;
+        activeImage.classList.add("is-visible");
+        return true;
+      }).catch(error => {
         console.error("Moon mission image failed to load", error);
         if (speechStatus) speechStatus.textContent = "The mission image could not be loaded.";
         return false;
@@ -1415,32 +1745,43 @@
 
     return preloadImage(assignedImage).then(() => {
       if (request !== state.imageTransitionRequest) return false;
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const fadeOutDuration = reducedMotion ? 150 : 300;
-      const fadeInDuration = reducedMotion ? 150 : 600;
-      hardwareImage.classList.add("is-image-fading-out");
-      return wait(fadeOutDuration).then(() => {
-        if (request !== state.imageTransitionRequest) return false;
-        hardwareImage.src = assignedImage;
-        state.renderedImage = assignedImage;
-        updateMissionImagePositions(assignedImage);
-        syncPersistentMissionImages(assignedImage);
-        hardwareImage.classList.remove("is-image-fading-out");
-        if (!hardwareImage.hidden) hardwareImage.classList.add("is-image-materializing");
-        return waitForImage(hardwareImage).then(() => new Promise(resolve => {
-          window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
-            if (request !== state.imageTransitionRequest) {
-              resolve(false);
-              return;
+      const previousImage = hardwareImage;
+      const nextIndex = 1 - hardwareImageIndex;
+      const nextImage = hardwareImages[nextIndex];
+      const nextControl = getMissionImageControl(assignedImage);
+      clearMissionImageElement(nextImage);
+      nextImage.hidden = nextControl.visible === false;
+      nextImage.src = assignedImage;
+      nextImage.alt = alt;
+      nextImage.dataset.slide = previousImage.dataset.slide;
+      nextImage.dataset.node = previousImage.dataset.node;
+      nextImage.dataset.state = previousImage.dataset.state;
+      applyMissionImagePosition(nextImage, nextControl);
+
+      return waitForImage(nextImage).then(() => new Promise(resolve => {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+          if (request !== state.imageTransitionRequest) {
+            resolve(false);
+            return;
+          }
+          nextImage.classList.add("is-visible");
+          previousImage.classList.remove("is-visible");
+          previousImage.classList.add("is-leaving");
+          hardwareImageIndex = nextIndex;
+          hardwareImage = nextImage;
+          state.renderedImage = assignedImage;
+          updateMissionImagePositions(assignedImage);
+          syncPersistentMissionImages(assignedImage);
+          wait(320).then(() => {
+            if (request === state.imageTransitionRequest) {
+              clearMissionImageElement(previousImage);
             }
-            hardwareImage.classList.remove("is-image-materializing");
-            wait(fadeInDuration).then(() => resolve(true));
-          }));
+          });
+          resolve(true);
         }));
-      });
+      }));
     }).catch(error => {
       if (request === state.imageTransitionRequest) {
-        hardwareImage.classList.remove("is-image-fading-out", "is-image-materializing");
         if (speechStatus) speechStatus.textContent = "The next mission image could not be loaded.";
       }
       console.error("Moon mission image transition failed", error);
@@ -1452,20 +1793,34 @@
     return storySlides[state.slideIndex] || null;
   }
 
+  function isMoonStageAvailable(stage) {
+    return stage.shortLabel === "Prologue"
+      || stage.shortLabel === "Finale"
+      || stage.shortLabel === "Apollo 11"
+      || stage.shortLabel === "Apollo 12";
+  }
+
   function renderMissionIndex() {
     if (!missionIndex) return;
     const currentStageIndex = getCurrentSlide()?.stageIndex ?? 0;
-    missionIndex.innerHTML = storyStages.map((stage, index) => {
-      const current = index === currentStageIndex;
-      const done = index < currentStageIndex;
-      const upcoming = index > currentStageIndex;
-      const available = stageSlides[index].length > 0;
+    const orderedStages = storyStages
+      .map((stage, stageIndex) => ({ stage, stageIndex }))
+      .sort((a, b) => {
+        const priority = stage => stage.shortLabel === "Apollo 11"
+          ? 0
+          : stage.shortLabel === "Apollo 12" ? 1 : 2;
+        return priority(a.stage) - priority(b.stage) || a.stageIndex - b.stageIndex;
+      });
+    missionIndex.innerHTML = orderedStages.map(({ stage, stageIndex }, index) => {
+      const current = stageIndex === currentStageIndex;
+      const done = stageIndex < currentStageIndex;
+      const available = isMoonStageAvailable(stage) && stageSlides[stageIndex].length > 0;
       const label = stage.shortLabel;
       return `
-        <button class="index-tab story-mission-entry ${current ? "current" : done ? "done" : "upcoming"}" type="button" data-story-stage-index="${index}" ${available ? "" : "disabled"} aria-current="${current ? "step" : "false"}">
+        <button class="index-tab story-mission-entry ${current ? "current" : done ? "done" : "upcoming"}" type="button" data-story-stage-index="${stageIndex}" aria-current="${current ? "step" : "false"}">
           <span>${String(index + 1).padStart(2, "0")}</span>
           <strong>${label}</strong>
-          <small>${available ? stage.title : "Story unavailable"}</small>
+          <small>${available ? stage.title : "Coming Soon"}</small>
         </button>
       `;
     }).join("");
@@ -1487,8 +1842,14 @@
     if (!entry || entry.disabled) return;
     event.stopPropagation();
     const targetStageIndex = Number(entry.dataset.storyStageIndex);
+    const targetStage = storyStages[targetStageIndex];
+    if (!Number.isInteger(targetStageIndex) || !targetStage) return;
+    if (!isMoonStageAvailable(targetStage)) {
+      if (speechStatus) speechStatus.textContent = "Coming Soon";
+      return;
+    }
     const targetSlides = stageSlides[targetStageIndex];
-    if (!Number.isInteger(targetStageIndex) || !targetSlides?.length || state.transitionLocked) return;
+    if (!targetSlides?.length || state.transitionLocked) return;
     const targetSlideIndex = storySlides.indexOf(targetSlides[0]);
     if (targetSlideIndex < 0) return;
 
@@ -1608,6 +1969,7 @@
         || state.questionSpeechPending
         || state.questionVoiceUnavailable;
     }
+    updateMissionVideoButton(selectedMissionVideo);
     requestAnimationFrame(syncCharacterSizes);
   }
 
@@ -1842,6 +2204,7 @@
   }
 
   function renderCurrentSlide({ deferNarration = false, imageTransition = false } = {}) {
+    closeMissionVideo();
     const animationRequest = cancelSlideAnimations();
     const slide = getCurrentSlide();
     if (!slide) return;
@@ -1879,12 +2242,16 @@
     if (dialogueProgress) {
       const missionName = stage.shortLabel;
       const currentSlideNumber = slide.sourceSlideNumber;
-      dialogueProgress.textContent = stage.shortLabel === "Apollo 11" && currentSlideNumber
-        ? `${missionName} slide: ${String(currentSlideNumber).padStart(2, "0")}/10`
+      const numberedSlideCount = stage.shortLabel === "Apollo 11"
+        ? 10
+        : stage.shortLabel === "Apollo 12" ? 9 : 0;
+      dialogueProgress.textContent = numberedSlideCount && currentSlideNumber
+        ? `${missionName} slide: ${String(currentSlideNumber).padStart(2, "0")}/${String(numberedSlideCount).padStart(2, "0")}`
         : `${missionName} slide: ${String(missionSlide).padStart(2, "0")}/${String(currentStageSlides.length).padStart(2, "0")}`;
     }
 
     const visual = getSlideVisual(slide);
+    updateMissionVideoButton(visual.video);
     const sourceMeta = getSlideSourceMeta(slide);
     const imageSource = sourceMeta?.imageSourceUrl
       ?? slide.node.imageSourceUrl
@@ -2224,6 +2591,11 @@
 
   function startTransition(targetSlideIndex) {
     if (state.transitionLocked || targetSlideIndex < 0 || targetSlideIndex >= storySlides.length) return;
+    const targetSlide = storySlides[targetSlideIndex];
+    if (!isMoonStageAvailable(targetSlide.stage)) {
+      if (speechStatus) speechStatus.textContent = "Coming Soon";
+      return;
+    }
     state.transitionLocked = true;
     updateMissionMediaControls();
     state.questionSpeechRequest += 1;
@@ -2236,7 +2608,6 @@
     updateInteractionControls();
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const currentSlide = getCurrentSlide();
-    const targetSlide = storySlides[targetSlideIndex];
     const changesScene = currentSlide.stageIndex !== targetSlide.stageIndex;
     const entersMission = changesScene
       && targetSlide.stageIndex > 0
@@ -2316,7 +2687,7 @@
     state.isMissionOpening = false;
     state.imageTransitionRequest += 1;
     root.classList.remove("is-mission-opening", "is-mission-materializing", "is-mission-materialized");
-    hardwareImage?.classList.remove("is-image-fading-out", "is-image-materializing");
+    hardwareImages.forEach(image => image?.classList.remove("is-visible", "is-leaving"));
     state.questionSpeechRequest += 1;
     state.questionSpeechPending = false;
     cancelNarration();

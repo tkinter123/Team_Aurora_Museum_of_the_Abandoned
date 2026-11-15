@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#000000">
   <title>Moon Chronicle — Museum of the Abandoned</title>
   <link rel="stylesheet" href="storytelling.css?v=manual-position-controls-20261107">
-  <link rel="stylesheet" href="moon.css?v=moon-image-layer-20261113b">
+  <link rel="stylesheet" href="moon.css?v=apollo12-video-20261116">
   <link rel="stylesheet" href="../location-view.css?v=atlas-mobile-layout-20261111b">
   <link rel="stylesheet" href="../Audio/background-music.css">
 </head>
@@ -38,19 +38,21 @@
       <div class="mission-image-layer">
         <div class="story-image-frame" role="region" aria-label="Moon mission display">
           <div class="mission-image-layout">
-            <div id="mission-image-visual" class="mission-image-visual"></div>
+            <div id="mission-image-visual" class="mission-image-visual">
+              <div id="mission-image-position-layer" class="mission-image-position-layer">
+                <div id="mission-image-coordinate-space" class="mission-image-coordinate-space">
+                  <img class="story-hardware mission-image-item" src="./moon_images/Prologue/Sl1.jpg" alt="Global map showing the Moon's geological regions">
+                  <img id="moon-story-hardware-secondary" class="story-hardware mission-image-item" alt="" hidden>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div id="mission-image-position-layer" class="mission-image-position-layer">
-        <div id="mission-image-coordinate-space" class="mission-image-coordinate-space">
-          <img class="story-hardware mission-image-item" src="./moon_images/Prologue/Sl1.jpg" alt="Global map showing the Moon's geological regions">
-        </div>
-      </div>
-      <nav id="mission-media-controls" class="mission-media-controls" aria-label="Slide image navigation" hidden>
-        <button id="mission-media-previous" type="button" aria-label="Previous image">‹</button>
+      <nav id="mission-media-controls" class="mission-media-controls" aria-label="Slide media navigation" hidden>
+        <button id="mission-media-previous" type="button" aria-label="Previous media item">‹</button>
         <span id="mission-media-count" aria-live="polite"></span>
-        <button id="mission-media-next" type="button" aria-label="Next image">›</button>
+        <button id="mission-media-next" type="button" aria-label="Next media item">›</button>
       </nav>
       <div id="guide-dialogue-layer" class="guide-dialogue-layer" aria-hidden="false">
         <section class="story-dialogue" aria-label="Moon mission story">
@@ -181,7 +183,7 @@
   <script src="ranger7-story.js"></script>
   <script src="../Audio/background-music.js"></script>
   <script src="../voice-selection.js"></script>
-  <script src="storytelling.js?v=moon-image-layer-20261113b"></script>
+  <script src="storytelling.js?v=apollo12-integration-20261116"></script>
   <script src="moon.js"></script>
 </body>
 </html>

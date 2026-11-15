@@ -1,0 +1,29 @@
+Mars Pathfinder & Sojourner: The Space Flower and the Robot Bug
+What
+
+In 1997, a spacecraft landed on Mars using one of the strangest landing methods ever tried! Meet Mars Pathfinder and its tiny rover, Sojourner. Pathfinder landed using giant airbags, then opened its panels like a flower to release the first successful wheeled rover on Mars.
+
+Q: But wait, didn't the spacecraft crash when it landed?
+
+A: It did hit the ground, but the airbags protected it! The spacecraft bounced about 15 times, sometimes reaching 50 feet into the air, before coming to a safe stop!
+
+Why
+
+Earlier Mars landers could only study the ground around them. Scientists wanted a cheaper way to explore more of the planet. Pathfinder would test a new landing system, while Sojourner would prove that small robots could drive across the Martian surface.
+
+How
+
+Once the airbags deflated, Pathfinder opened its panels and lowered a ramp. Out rolled Sojourner, a tiny six-wheeled rover weighing just 10.5 kilograms! It used cameras and navigation systems to move around rocks. It also carried a special instrument called APXS to study the chemical composition of rocks and soil.
+
+Q: Could a robot that tiny really discover anything important?
+
+A: Absolutely! It studied rounded pebbles and rocks that suggested ancient floods had once carried water across the landing area!
+
+Hardware – Sojourner Rover: The Tiny Six-Wheeled Explorer
+Sojourner used six independently driven wheels and a rocker-bogie suspension system to climb over rocks and travel across uneven Martian ground. Its special design helped keep all six wheels in contact with the surface, even when crossing obstacles.
+Q: Wait, how could such a tiny robot climb over rocks without tipping over?
+A: Its suspension system allowed each wheel to move up and down independently, helping the rover stay balanced while driving over rough terrain!
+
+Outcome
+
+Pathfinder and Sojourner sent back thousands of pictures and valuable scientific data, showing that Mars had once been warmer and wetter. Most importantly, they proved that small, affordable rovers could explore another planet, paving the way for future missions like Spirit, Opportunity and Curiosity.

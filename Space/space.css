@@ -10,13 +10,12 @@ body{margin:0;min-width:320px;min-height:100vh;background:#02040b;color:#edf1ff;
 .library-heading h1{margin:7px 0;color:#fff4db;font-family:Georgia,serif;font-size:clamp(30px,4vw,54px);font-weight:400;letter-spacing:.04em}
 .library-heading span{color:#e2e7fa;font-family:Georgia,serif;font-size:clamp(13px,1.4vw,18px)}
 .library-books{position:absolute;z-index:2;display:block}
-.library-book{position:absolute;display:block;padding:0;border:1px solid transparent;border-radius:10px;color:#fff4db;background:transparent;text-align:center;cursor:pointer;transition:border-color .24s ease,background-color .24s ease}
-.library-book--moon{left:6.5%;top:55%;width:29%;height:39%}
-.library-book--mars{left:38.5%;top:55%;width:28%;height:39%}
-.library-book--space{left:67%;top:55%;width:29%;height:39%}
+.library-book{position:absolute;display:block;padding:0;border:1px solid transparent;border-radius:10px;color:#fff4db;background:transparent;text-align:center;text-decoration:none;cursor:pointer;transition:border-color .24s ease,background-color .24s ease}
+.library-book--moon{left:25.5%;top:59%;width:22%;height:23%}
+.library-book--mars{left:56%;top:59%;width:22.5%;height:23%}
 .library-book:hover,.library-book:focus-visible{border-color:rgba(244,199,112,.72);background:rgba(8,15,36,.12);outline:none}
 .library-book-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.library-book-action{position:absolute;top:61%;left:50%;display:inline-flex;min-height:40px;align-items:center;justify-content:center;padding:0 clamp(10px,1.5vw,20px);border:1px solid rgba(248,205,121,.9);border-radius:24px;color:#fff1ca;background:rgba(7,11,25,.9);font-size:clamp(8px,.8vw,11px);font-weight:700;letter-spacing:.16em;white-space:nowrap;box-shadow:0 6px 24px rgba(0,0,0,.55);transform:translateX(-50%);transition:color .2s ease,background-color .2s ease}
+.library-book-action{position:absolute;bottom:7%;left:50%;display:inline-flex;min-width:44px;min-height:40px;align-items:center;justify-content:center;padding:0 12px;border:1px solid rgba(248,205,121,.75);border-radius:24px;color:#fff1ca;background:rgba(7,11,25,.72);font-size:clamp(10px,.8vw,12px);font-weight:700;letter-spacing:.08em;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.35);transform:translateX(-50%);transition:color .2s ease,background-color .2s ease}
 .library-book:hover .library-book-action,.library-book:focus-visible .library-book-action{color:#201706;background:#f4c66b}
 .guide-welcome{width:min(900px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);padding:0;overflow:visible;border:0;color:#30281f;background:transparent}
 .guide-welcome::backdrop{background:rgba(0,0,0,.76);backdrop-filter:blur(5px)}
@@ -30,13 +29,6 @@ body{margin:0;min-width:320px;min-height:100vh;background:#02040b;color:#edf1ff;
 .guide-welcome-dismiss{min-height:44px;padding:0 20px;border:1px solid #997743;border-radius:24px;color:#fff4db;background:#60472a;font-weight:700;cursor:pointer}
 .guide-welcome-dismiss:hover,.guide-welcome-dismiss:focus-visible{background:#80602f;outline:2px solid #c8a96b;outline-offset:3px}
 @keyframes welcome-pop{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
-.book-dialog{width:min(440px,calc(100vw - 32px));padding:clamp(20px,5vw,32px);border:2px solid #c8a96b;color:#30281f;background:#f3ecd8;box-shadow:0 30px 90px #000}
-.book-dialog::backdrop{background:rgba(0,0,0,.72)}
-.book-dialog form{margin:0}
-.dialog-close{float:right;border:1px solid #997743;padding:2px 9px;color:#60472a;background:transparent;font-size:20px;cursor:pointer}
-.dialog-kicker{margin:0;color:#80602f;font-size:10px;letter-spacing:.2em}
-.book-dialog h2{margin:18px 0 8px;font-family:Georgia,serif;font-size:clamp(24px,6vw,32px);font-weight:400}
-.book-dialog #book-dialog-description{margin:0;line-height:1.55}
 @media(max-width:760px),(max-aspect-ratio:4/3){
   .library-entry{background:#02040b}
   .library-scene-image{position:absolute;z-index:0;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;pointer-events:none}
@@ -48,7 +40,7 @@ body{margin:0;min-width:320px;min-height:100vh;background:#02040b;color:#edf1ff;
   .library-heading span{font-size:clamp(11px,3vw,14px)}
   .library-books{z-index:3}
   .library-book{border-radius:6px}
-  .library-book-action{top:57%;min-height:clamp(28px,5vh,36px);padding-inline:clamp(5px,1.8vw,10px);font-size:clamp(7px,2.3vw,9px);letter-spacing:.08em}
+  .library-book-action{min-height:40px;padding-inline:8px;font-size:clamp(9px,2.8vw,11px);letter-spacing:.04em}
   body .background-music-toggle{top:clamp(5.5rem,14vh,7rem);bottom:auto}
 }
 @media(max-width:600px){

@@ -948,14 +948,10 @@
     if (showsVideo) {
       watchVideoButton.setAttribute("aria-label", `Watch ${mediaItem.title || "mission video"}`);
     }
-    window.museumLocationView?.setImageSource(
-      imageData.src,
-      imageData.sourceUrl,
-      imageData.scientificReferenceUrl
-    );
   }
 
   function clearImages() {
+    window.museumLocationView?.setImageSource(null);
     state.imageGeneration += 1;
     if (state.imageTransitionTimer) {
       window.clearTimeout(state.imageTransitionTimer);
@@ -1000,6 +996,7 @@
 
   function showPreparedImage(preparedImage) {
     if (!preparedImage) {
+      window.museumLocationView?.setImageSource(null);
       fadeImageOut();
       return;
     }
@@ -1010,6 +1007,12 @@
       setStatus("Mission image unavailable.");
       return;
     }
+
+    window.museumLocationView?.setImageSource(
+      preparedImage.src,
+      preparedImage.sourceUrl,
+      preparedImage.scientificReferenceUrl
+    );
 
     const activeImage = elements.images[state.activeImageIndex];
     if (activeImage
@@ -1074,11 +1077,28 @@
     state.activeImageIndex = nextIndex;
   }
 
+  function isChapterAvailable(chapter) {
+    return ["prologue", "spirit-opportunity", "pathfinder", "dawn", "finale"].includes(chapter.id);
+  }
+
   function updateMissionIndex() {
     const activeSlide = currentSlide();
     elements.missionIndex.replaceChildren();
 
-    archive.chapters.forEach((chapter, chapterIndex) => {
+    const chapterPriority = {
+      "spirit-opportunity": 0,
+      pathfinder: 1,
+      dawn: 2
+    };
+    const orderedChapters = archive.chapters
+      .map((chapter, chapterIndex) => ({ chapter, chapterIndex }))
+      .sort((a, b) => {
+        const priorityA = chapterPriority[a.chapter.id] ?? 3;
+        const priorityB = chapterPriority[b.chapter.id] ?? 3;
+        return priorityA - priorityB || a.chapterIndex - b.chapterIndex;
+      });
+
+    orderedChapters.forEach(({ chapter, chapterIndex }, index) => {
       const button = document.createElement("button");
       const number = document.createElement("span");
       const title = document.createElement("strong");
@@ -1088,16 +1108,19 @@
       button.dataset.chapterIndex = String(chapterIndex);
       button.setAttribute("aria-current", chapterIndex === activeSlide.chapterIndex ? "step" : "false");
       number.className = "index-tab-number";
-      number.textContent = String(chapterIndex + 1).padStart(2, "0");
       title.className = "index-tab-title";
       title.textContent = chapter.label;
       detail.className = "index-tab-detail";
       const isSpiritOpportunity = chapter.id === "spirit-opportunity";
+      const isAvailable = isChapterAvailable(chapter);
       detail.hidden = isSpiritOpportunity;
       if (!isSpiritOpportunity) {
-        detail.textContent = `${chapter.status} · ${chapter.statusDetail}`;
+        detail.textContent = isAvailable
+          ? `${chapter.status} · ${chapter.statusDetail}`
+          : "Coming Soon";
       }
       button.classList.toggle("index-tab--metadata-free", isSpiritOpportunity);
+      number.textContent = String(index + 1).padStart(2, "0");
       button.append(number, title, detail);
       elements.missionIndex.append(button);
     });
@@ -1335,11 +1358,6 @@
     const mediaItems = getCurrentMediaItems();
     if (!mediaItems.length) {
       const displayedImage = imageAlreadyShown ? preparedImage : imageDetails(slide.line.image);
-      window.museumLocationView?.setImageSource(
-        displayedImage?.src,
-        displayedImage?.sourceUrl,
-        displayedImage?.scientificReferenceUrl
-      );
       if (arguments.length > 1) {
         if (!imageAlreadyShown) {
           showPreparedImage(preparedImage);
@@ -1461,6 +1479,11 @@
 
   function navigateToSlide(slideIndex) {
     if (slideIndex < 0 || slideIndex >= slides.length) {
+      return;
+    }
+    const chapter = archive.chapters[slides[slideIndex].chapterIndex];
+    if (!chapter || !isChapterAvailable(chapter)) {
+      elements.speechStatus.textContent = "Coming Soon";
       return;
     }
     if (root.classList.contains("is-mission-opening")) {
@@ -1741,6 +1764,14 @@
       return;
     }
     const chapterIndex = Number(button.dataset.chapterIndex);
+    const chapter = archive.chapters[chapterIndex];
+    if (!chapter) {
+      return;
+    }
+    if (!isChapterAvailable(chapter)) {
+      elements.speechStatus.textContent = "Coming Soon";
+      return;
+    }
     const firstSlide = chapterSlides[chapterIndex][0];
     if (!firstSlide) {
       return;

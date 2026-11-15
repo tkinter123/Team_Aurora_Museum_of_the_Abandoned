@@ -42,9 +42,10 @@
 
   /* Storytelling text/dialogue box controls */
   --_guide-x-default: 3%;
-  --_guide-y-default: 0px;
+  /* Account for the transparent margins in the guide image when aligning his feet. */
+  --_guide-y-default: calc(var(--guide-dialogue-height) - 4.86vh);
   --_guide-width-default: 300px;
-  --_guide-height-default: 68vh;
+  --_guide-height-default: 85vh;
   --guide-x: var(--_guide-x-default);
   --guide-y: var(--_guide-y-default);
   --guide-width: var(--_guide-width-default);
@@ -635,8 +636,6 @@ body.storytelling-active::before {
   bottom: 0;
   left: 0;
   display: block;
-  width: 100%;
-  height: 100%;
   object-fit: contain;
   object-position: center bottom;
   clip-path: none;
@@ -644,10 +643,14 @@ body.storytelling-active::before {
 }
 
 .story-guide img {
+  width: auto;
+  height: 100%;
   filter: sepia(.62) saturate(.92) hue-rotate(335deg) contrast(1.04) drop-shadow(0 5px 12px rgba(0, 0, 0, .78));
 }
 
 .story-listener img {
+  width: 100%;
+  height: 100%;
   filter: saturate(.78) drop-shadow(0 5px 12px rgba(0, 0, 0, .78));
 }
 
@@ -917,9 +920,9 @@ body.storytelling-active::before {
     --mars-exhibit-screen-y: clamp(120px, 20vh, 144px);
     --mars-exhibit-screen-width: min(78vw, 633px);
     --_guide-width-default: min(300px, 35vw);
-    --_guide-height-default: min(68vh, 45vh);
+    --_guide-y-default: calc(var(--guide-dialogue-y) + min(var(--guide-dialogue-height), var(--mars-dialogue-max-height)) - 4vh);
+    --_guide-height-default: 82vh;
     --_guide-x-default: 6px;
-    --_guide-y-default: calc(48px + env(safe-area-inset-bottom));
     --_user-width-default: min(280px, 35vw);
     --_user-height-default: min(65vh, 45vh);
     --_user-x-default: 6px;

@@ -1,7 +1,4 @@
 (() => {
-  const bookDialog = document.querySelector("#book-dialog");
-  const dialogTitle = document.querySelector("#book-dialog-title");
-  const dialogDescription = document.querySelector("#book-dialog-description");
   const welcomeDialog = document.querySelector("#guide-welcome");
   const welcomeMessage = document.querySelector("#guide-welcome-message");
   const libraryEntry = document.querySelector("#library-entry");
@@ -24,50 +21,10 @@
     const renderedHeight = libraryImage.naturalHeight * scale;
 
     bookHotspots.style.left = `${(width - renderedWidth) / 2}px`;
-    bookHotspots.style.top = `${height - renderedHeight}px`;
+    bookHotspots.style.top = `${isMobile ? height - renderedHeight : (height - renderedHeight) / 2}px`;
     bookHotspots.style.width = `${renderedWidth}px`;
     bookHotspots.style.height = `${renderedHeight}px`;
   }
-
-  const collections = {
-    MARS: {
-      title: "Mars Missions",
-      description: "Mars is a cold desert world with a long history of robotic exploration. No verified abandoned-hardware records are loaded yet."
-    },
-    SPACE: {
-      title: "Deep Space Missions",
-      description: "Explore the stories of spacecraft and missions that expanded humanity's knowledge beyond Earth."
-    }
-  };
-
-  document.querySelectorAll("[data-library-destination]").forEach(button => {
-    button.addEventListener("click", () => {
-      const destination = button.dataset.libraryDestination;
-      if (destination === "MOON") {
-        window.location.href = "../Moon/moon.html";
-        return;
-      }
-      if (destination === "MARS") {
-        dialogTitle.textContent = "Mars Missions";
-        dialogDescription.textContent = "Coming Soon with the Section";
-        bookDialog.showModal();
-        return;
-      }
-      if (destination === "SPACE") {
-        window.location.href = "../DeepSpace/deepspace.html";
-        return;
-      }
-
-      const collection = collections[destination];
-      if (!collection) {
-        throw new Error(`Unknown mission collection: ${destination}`);
-      }
-
-      dialogTitle.textContent = collection.title;
-      dialogDescription.textContent = collection.description;
-      bookDialog.showModal();
-    });
-  });
 
   libraryImage.addEventListener("load", positionBookHotspots);
   new ResizeObserver(positionBookHotspots).observe(libraryEntry);

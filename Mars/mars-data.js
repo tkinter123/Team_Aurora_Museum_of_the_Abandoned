@@ -1,5 +1,65 @@
 "use strict";
 
+const PATHFINDER_MEDIA = {
+  what: [
+    { id: "S1", type: "image", src: "./mars_images/Mas Pathfinder/Sl1.jfif", alt: "Mars Pathfinder lander and Sojourner rover on the Martian surface", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S1-1", type: "image", src: "./mars_images/Mas Pathfinder/Sl1'.jfif", alt: "Sojourner rover near the Pathfinder lander", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S2", type: "image", src: "./mars_images/Mas Pathfinder/Sl2.jfif", alt: "Pathfinder lander protected by its airbag system", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S2-1", type: "image", src: "./mars_images/Mas Pathfinder/Sl2'.jfif", alt: "Pathfinder airbags on the Martian surface", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" }
+  ],
+  why: [
+    { id: "S4", type: "image", src: "./mars_images/Mas Pathfinder/Sl4.jfif", alt: "Mars exploration vehicles across multiple generations", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S5", type: "image", src: "./mars_images/Mas Pathfinder/Sl5.jfif", alt: "Sojourner rover and Pathfinder mission hardware", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S5-1", type: "image", src: "./mars_images/Mas Pathfinder/Sl5'.jfif", alt: "Sojourner rover on the Martian surface", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" }
+  ],
+  how: [
+    { id: "S3", type: "image", src: "./mars_images/Mas Pathfinder/Sl3.jfif", alt: "Mars Pathfinder landing sequence illustration", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S3-1", type: "image", src: "./mars_images/Mas Pathfinder/Sl3'.jfif", alt: "Diagram of Pathfinder's Mars landing sequence", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S6", type: "image", src: "./mars_images/Mas Pathfinder/Sl6.jfif", alt: "Sojourner rover instrument and component diagram", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S6-1", type: "image", src: "./mars_images/Mas Pathfinder/Sl6'.jfif", alt: "Sojourner rover examining a Martian rock", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S7", type: "image", src: "./mars_images/Mas Pathfinder/Sl7.jfif", alt: "Pathfinder view of the Martian landing area", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S7-1", type: "image", src: "./mars_images/Mas Pathfinder/Sl7'.jfif", alt: "Martian rocks and soil observed by Pathfinder", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" }
+  ],
+  hardware: [
+    { id: "S8", type: "image", src: "./mars_images/Mas Pathfinder/Sl8.jfif", alt: "Sojourner rover wheel and chassis design", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S8-1", type: "image", src: "./mars_images/Mas Pathfinder/Sl8'.jfif", alt: "Sojourner rover mobility system", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S9", type: "image", src: "./mars_images/Mas Pathfinder/Sl9.jfif", alt: "Diagram of Sojourner's rocker-bogie suspension", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" },
+    { id: "S10", type: "image", src: "./mars_images/Mas Pathfinder/Sl10.jfif", alt: "Sojourner wheel suspension on uneven ground", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" }
+  ],
+  outcome: [
+    { id: "S11", type: "image", src: "./mars_images/Mas Pathfinder/Sl11.jfif", alt: "Mars Pathfinder and Sojourner mission overview", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A" }
+  ]
+};
+
+const DAWN_MEDIA = {
+  what: [
+    { id: "S1", type: "image", src: "./mars_images/Dawn/Sl1.jpg", alt: "Dawn spacecraft exploring Vesta and Ceres", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S2", type: "image", src: "./mars_images/Dawn/Sl2.jpg", alt: "Dawn spacecraft ion propulsion system", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S9-1", type: "image", src: "./mars_images/Dawn/Sl9'.jpg", alt: "Dawn spacecraft's ion engine", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" }
+  ],
+  why: [
+    { id: "S3", type: "image", src: "./mars_images/Dawn/Sl3.jpg", alt: "Color view of asteroid Vesta", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S3-1", type: "image", src: "./mars_images/Dawn/Sl3'.jpg", alt: "Global view of asteroid Vesta", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S4", type: "image", src: "./mars_images/Dawn/Sl4.jpg", alt: "Dawn's route between Vesta and Ceres", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" }
+  ],
+  how: [
+    { id: "S5", type: "image", src: "./mars_images/Dawn/Sl5.jpg", alt: "Dawn spacecraft instruments", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S5-1", type: "image", src: "./mars_images/Dawn/Sl5'.jpg", alt: "Dawn spacecraft components and instruments", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S5-2", type: "image", src: "./mars_images/Dawn/Sl5''.jpg", alt: "Dawn spacecraft technical layout", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S6", type: "image", src: "./mars_images/Dawn/Sl6.jpg", alt: "Dawn radio antenna used to communicate with Earth", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S6-1", type: "image", src: "./mars_images/Dawn/Sl6'.jpg", alt: "Dawn spacecraft model", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S6-2", type: "image", src: "./mars_images/Dawn/Sl6''.jfif", alt: "Illustration of spacecraft communication with Earth", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S7", type: "image", src: "./mars_images/Dawn/Sl7.jpg", alt: "Dawn observing Ceres from orbit", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S7-1", type: "image", src: "./mars_images/Dawn/Sl7'.jpg", alt: "Dawn spacecraft near Vesta", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" }
+  ],
+  outcome: [
+    { id: "S8", type: "image", src: "./mars_images/Dawn/Sl8.jpg", alt: "Dawn image of a geological feature on Ceres", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S8-1", type: "image", src: "./mars_images/Dawn/Sl8'.jpg", alt: "Topographic map of a feature on Ceres", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S8-2", type: "image", src: "./mars_images/Dawn/Sl8''.jpg", alt: "Dawn view of the surface of Ceres", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" },
+    { id: "S9", type: "image", src: "./mars_images/Dawn/Sl9.jpg", alt: "Dawn map of a geological feature on Ceres", sourceUrl: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-043A" }
+  ]
+};
+
 window.MARS_ARCHIVE = {
   title: "The Red Planet Archive",
   guide: "Dr. Fredrick",
@@ -10,7 +70,7 @@ window.MARS_ARCHIVE = {
       title: "The Red Planet Archive",
       label: "Prologue",
       status: "OVERVIEW",
-      statusDetail: "Five places to investigate.",
+      statusDetail: "Explore documented mission stories.",
       setting: "Mars archive overview",
       location: {
         mission: "Mars archive overview",
@@ -24,7 +84,7 @@ window.MARS_ARCHIVE = {
         { speaker: "leo", text: "Why are we looking for silent machines? If they stopped working, isn’t their story already over?", image: null },
         { speaker: "avery", text: "Their missions may be over. That is not the same as their stories being over. Some left cameras, instruments, tracks and samples behind. Those records changed what we know about Mars.", image: null },
         { speaker: "leo", text: "So the signal can disappear, but the evidence stays?", image: null },
-        { speaker: "avery", text: "Exactly. We’ll investigate five places. At each one, we’ll ask when the signal ended, what remains, what the machine discovered, and what we can learn from it.", image: null },
+        { speaker: "avery", text: "Exactly. We’ll investigate the missions in this archive. At each one, we’ll ask when the signal ended, what remains, what the machine discovered, and what we can learn from it.", image: null },
         { speaker: "leo", text: "Then don’t just tell me. Show me the evidence.", image: null }
       ]
     },
@@ -92,42 +152,96 @@ window.MARS_ARCHIVE = {
       },
       evidenceTask: "Let users inspect a NASA landing image and toggle labels for the lander, deflated airbags, rover and terrain. A second panel shows Sojourner’s path and APXS target images. Keep landing reconstructions separate from actual photographs.",
       lines: [
-        { speaker: "leo", text: "This white material around the lander looks like a deflated balloon. Did NASA really bounce a spacecraft onto Mars?", image: null },
         {
           speaker: "avery",
-          text: "Yes. Pathfinder used a protective airbag system. It was not twenty-four separate beach balls: four large multi-lobed bags, each made from interconnected smaller spheres, cushioned the lander. It bounced at least fifteen times before coming to rest.",
-          image: {
-            src: "./mars_images'''/Pathfinder_1.png",
-            alt: "Pathfinder's rover and deflated airbags on the Martian terrain shortly after landing",
-            sourceUrl: "https://science.nasa.gov/photojournal/pathfinders-rover-airbags-and-martian-terrain/"
-          }
-        },
-        { speaker: "leo", text: "And that tiny rover on the ramp?", image: null },
-        {
-          speaker: "avery",
-          text: "Sojourner. It was the first wheeled rover to operate on another planet. Planned for seven days, it explored for 83. Its Alpha Proton X-ray Spectrometer examined rocks and soil, including a rock called Yogi.",
-          image: {
-            src: "./mars_images'''/Pathfinder_4.png",
-            alt: "Sojourner rover using its Alpha Proton X-ray Spectrometer on the rock Yogi",
-            sourceUrl: "https://science.nasa.gov/photojournal/sojourner-and-yogi/"
-          }
+          text: "In 1997, a spacecraft landed on Mars using one of the strangest landing methods ever tried! Meet Mars Pathfinder and its tiny rover, Sojourner. Pathfinder landed using giant airbags, then opened its panels like a flower to release the first successful wheeled rover on Mars.",
+          media: PATHFINDER_MEDIA.what
         },
         {
           speaker: "leo",
-          text: "Did the rocks prove a giant flood?",
-          image: {
-            src: "./mars_images'''/Pathfinder_3.png",
-            alt: "Portions of Pathfinder's deflated airbags and lander petal amid Martian soil and rocks",
-            sourceUrl: "https://science.nasa.gov/photojournal/lander-airbags-and-martian-terrain/"
-          }
+          text: "But wait, didn't the spacecraft crash when it landed?",
+          media: PATHFINDER_MEDIA.what
         },
         {
           speaker: "avery",
-          text: "Pathfinder’s landscape and rock observations supported the interpretation that powerful floods shaped Ares Vallis. But one instrument reading or one rounded rock is not a complete reconstruction of the whole river system. We show the evidence and its limits.",
-          image: null
+          text: "It did hit the ground, but the airbags protected it. Pathfinder bounced at least fifteen times, reaching about 12 meters (40 feet) into the air, before coming to rest.",
+          media: PATHFINDER_MEDIA.what
         },
-        { speaker: "leo", text: "When did the signal stop?", image: null },
-        { speaker: "avery", text: "The last data transmission from Pathfinder was received on September 27, 1997. NASA later ended the mission on March 10, 1998, after attempts to restore communication.", image: null }
+        {
+          speaker: "avery",
+          text: "Earlier Mars landers could only study the ground around them. Scientists wanted a cheaper way to explore more of the planet. Pathfinder would test a new landing system, while Sojourner would prove that small robots could drive across the Martian surface.",
+          media: PATHFINDER_MEDIA.why
+        },
+        {
+          speaker: "avery",
+          text: "Once the airbags deflated, Pathfinder opened its panels and lowered a ramp. Out rolled Sojourner, a tiny six-wheeled rover weighing about 10.5 kilograms. It used cameras and navigation systems to move around rocks. It also carried an APXS instrument to study the chemical composition of rocks and soil.",
+          media: PATHFINDER_MEDIA.how
+        },
+        { speaker: "leo", text: "Could a robot that tiny really discover anything important?", media: PATHFINDER_MEDIA.how },
+        {
+          speaker: "avery",
+          text: "Absolutely. Sojourner studied rounded pebbles and rocks that suggested ancient floods had once carried water across the landing area.",
+          media: PATHFINDER_MEDIA.how
+        },
+        {
+          speaker: "avery",
+          text: "Sojourner used six independently driven wheels and a rocker-bogie suspension system to climb over rocks and travel across uneven Martian ground. Its design helped keep all six wheels in contact with the surface.",
+          media: PATHFINDER_MEDIA.hardware
+        },
+        { speaker: "leo", text: "How could such a tiny robot climb over rocks without tipping over?", media: PATHFINDER_MEDIA.hardware },
+        {
+          speaker: "avery",
+          text: "Its suspension allowed the wheels to move over uneven ground while helping the rover stay balanced as it crossed obstacles.",
+          media: PATHFINDER_MEDIA.hardware
+        },
+        {
+          speaker: "avery",
+          text: "Pathfinder and Sojourner sent back thousands of pictures and valuable scientific data. Their observations supported the idea that water once shaped the landing region and proved that small, affordable rovers could explore another planet, paving the way for later missions.",
+          media: PATHFINDER_MEDIA.outcome
+        }
+      ]
+    },
+    {
+      id: "dawn",
+      title: "Dawn — The Blue-Beam Time Machine",
+      label: "Dawn",
+      status: "COMPLETED",
+      statusDetail: "Launched 27 September 2007 · Vesta arrival 2011 · Ceres arrival 2015 · Communications ended 31 October 2018.",
+      setting: "Vesta & Ceres",
+      evidenceTask: "Compare Dawn's observations of Vesta and Ceres, and distinguish its ion-propulsion system from the hydrazine used for spacecraft attitude control.",
+      lines: [
+        {
+          speaker: "avery",
+          text: "Deep in the asteroid belt between Mars and Jupiter lie two ancient worlds: Vesta and Ceres. In 2007, NASA launched a spacecraft called Dawn to explore both of them. It became the first spacecraft ever to orbit two different worlds.",
+          media: DAWN_MEDIA.what
+        },
+        { speaker: "leo", text: "Wait, it visited two worlds? How did it travel so far without running out of fuel?", media: DAWN_MEDIA.what },
+        {
+          speaker: "avery",
+          text: "Dawn used a special engine called an ion engine. Instead of powerful rocket blasts, it released tiny particles of charged xenon gas to create a gentle, continuous push through space.",
+          media: DAWN_MEDIA.what
+        },
+        {
+          speaker: "avery",
+          text: "Scientists wanted to understand how our solar system formed billions of years ago. Vesta is a rocky asteroid, while Ceres is a dwarf planet. By studying these two ancient worlds, scientists hoped to learn how the building blocks of planets formed and changed over time.",
+          media: DAWN_MEDIA.why
+        },
+        {
+          speaker: "avery",
+          text: "Dawn used its solar-powered ion engines to travel through space and change its orbit. It spent about fourteen months studying Vesta, then continued to Ceres, where it arrived in 2015. Cameras, mapping instruments, and gravity measurements helped it study both worlds.",
+          media: DAWN_MEDIA.how
+        },
+        { speaker: "leo", text: "Did Dawn ever return to Earth to show us what it found?", media: DAWN_MEDIA.how },
+        {
+          speaker: "avery",
+          text: "No. Dawn sent its pictures and scientific data back using radio signals. In 2018, it exhausted the hydrazine needed to control its orientation, so it could no longer point its antenna toward Earth. Dawn remains in orbit around Ceres.",
+          media: DAWN_MEDIA.how
+        },
+        {
+          speaker: "avery",
+          text: "Dawn found evidence of salty water beneath Ceres' surface and a large mountain on Vesta that rises about 22 kilometers above the surrounding terrain. These discoveries helped scientists understand how water and rocky worlds developed in the early solar system. Dawn also proved that ion engines could take spacecraft on long journeys between distant worlds.",
+          media: DAWN_MEDIA.outcome
+        }
       ]
     },
     {

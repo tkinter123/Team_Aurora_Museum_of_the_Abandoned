@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Museum of the Abandoned — Space Library</title>
-  <link rel="stylesheet" href="./space.css?v=mobile-book-controls-20261112">
+  <link rel="stylesheet" href="./space.css?v=moon-mars-book-hotspots-20261115">
   <link rel="stylesheet" href="../Audio/background-music.css">
 </head>
 <body>
@@ -18,18 +18,14 @@
         <span>Choose a book to begin your next discovery.</span>
       </header>
       <div class="library-books" aria-label="Choose a mission collection">
-        <button type="button" class="library-book library-book--moon" data-library-destination="MOON" aria-label="Open Moon Missions">
+        <a class="library-book library-book--moon" href="../Moon/moon.html" aria-label="Open Moon Missions">
           <span class="library-book-title">Moon Missions</span>
-          <span class="library-book-action">Explore</span>
-        </button>
-        <button type="button" class="library-book library-book--mars" data-library-destination="MARS" aria-label="Open Mars Missions">
+          <span class="library-book-action">Moon</span>
+        </a>
+        <a class="library-book library-book--mars" href="../Mars/mars.html" aria-label="Open Mars Missions">
           <span class="library-book-title">Mars Missions</span>
-          <span class="library-book-action">Explore</span>
-        </button>
-        <button type="button" class="library-book library-book--space" data-library-destination="SPACE" aria-label="Open Deep Space Missions">
-          <span class="library-book-title">Deep Space Missions</span>
-          <span class="library-book-action">Explore</span>
-        </button>
+          <span class="library-book-action">Mars</span>
+        </a>
       </div>
     </section>
   </main>
@@ -46,15 +42,7 @@
       </div>
     </section>
   </dialog>
-  <dialog id="book-dialog" class="book-dialog" aria-labelledby="book-dialog-title">
-    <form method="dialog">
-      <button class="dialog-close" aria-label="Close">&times;</button>
-    </form>
-    <p class="dialog-kicker">MISSION COLLECTION</p>
-    <h2 id="book-dialog-title"></h2>
-    <p id="book-dialog-description"></p>
-  </dialog>
   <script src="../Audio/background-music.js"></script>
-  <script src="./space.js?v=deepspace-destination-20261112"></script>
+  <script src="./space.js?v=moon-mars-book-links-20261115"></script>
 </body>
 </html>

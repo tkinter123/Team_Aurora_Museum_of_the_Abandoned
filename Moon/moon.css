@@ -34,6 +34,7 @@
   --moon-display-top:26.7800%;
   --moon-display-width:46.6507%;
   --moon-display-height:34.8565%;
+  --moon-sliding-frame-width:min(46vw,633px);
   --moon-display-canvas-width:max(100vw,177.79dvh);
   --moon-display-canvas-height:max(100dvh,56.28vw);
 
@@ -281,6 +282,7 @@ body.storytelling-active .museum-exhibit{
   :root{
     --moon-display-canvas-width:min(max(100vw,177.79dvh),198.11vw);
     --moon-display-canvas-height:min(max(100dvh,56.28vw),111.5vw);
+    --moon-sliding-frame-width:min(78vw,633px);
   }
 
   .story-display{
@@ -291,36 +293,147 @@ body.storytelling-active .museum-exhibit{
 
 .story-image-frame{
   position:absolute;
-  top:var(--moon-display-top)!important;
-  right:auto!important;
-  bottom:auto!important;
-  left:var(--moon-display-left)!important;
+  top:50%;
+  left:50%;
+  right:auto;
+  bottom:auto;
   display:block;
-  width:var(--moon-display-width)!important;
-  height:var(--moon-display-height)!important;
-  aspect-ratio:auto!important;
-  overflow:visible!important;
-  border:0;
-  outline:0;
-  background:transparent;
+  width:var(--moon-sliding-frame-width);
+  height:auto;
+  aspect-ratio:633 / 322;
+  transform:translate(-50%,-50%);
+  overflow:hidden;
+  border:5px solid rgba(73,176,224,.92);
+  border-radius:clamp(12px,1.5vw,22px);
+  background:
+    linear-gradient(145deg,rgba(167,238,255,.9),transparent 13% 84%,rgba(12,59,96,.95)),
+    linear-gradient(160deg,#28698e,#73d5ef 16%,#1a5277 37%,#0c243d 74%,#62c6e8);
+  box-shadow:
+    0 0 0 1px rgba(5,23,42,.86),
+    0 0 14px rgba(62,202,255,.58),
+    0 0 32px rgba(43,140,255,.27),
+    inset 0 0 9px rgba(180,246,255,.78);
   pointer-events:none;
 }
 
-.story-image-frame::before,.story-image-frame::after{display:none!important}
+.moon-watch-video-button,
+.moon-video-close{
+  border:1px solid rgba(106,221,255,.72);
+  border-radius:999px;
+  background:rgba(5,17,31,.84);
+  color:#e6f4ff;
+  font:11px/1.2 "Trebuchet MS",Arial,sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
 
-.mission-image-layout{
+.moon-watch-video-button{
   position:absolute;
+  z-index:12;
+  top:16px;
+  left:16px;
+  padding:8px 12px;
+  box-shadow:0 0 0 1px rgba(84,156,255,.28),0 0 12px rgba(63,149,255,.18);
+  pointer-events:auto;
+}
+
+.moon-watch-video-button:hover,
+.moon-video-close:hover{
+  transform:translateY(-1px);
+  border-color:rgba(142,230,255,.9);
+  box-shadow:0 0 16px rgba(78,172,255,.35);
+}
+
+.moon-video-modal{
+  position:fixed;
+  z-index:200;
   inset:0;
+  display:grid;
+  place-items:center;
+  padding:16px;
+  background:rgba(3,8,18,.84);
+  backdrop-filter:blur(6px);
+}
+
+.moon-video-modal[hidden]{
+  display:none;
+}
+
+.moon-video-dialog{
+  position:relative;
+  width:min(86vw,980px);
+  max-height:calc(100vh - 32px);
+  padding:22px 22px 16px;
+  border:1px solid rgba(133,212,255,.7);
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(10,22,40,.97),rgba(7,10,28,.96));
+  box-shadow:0 0 0 1px rgba(167,126,255,.24),0 18px 40px rgba(0,0,0,.42);
+}
+
+.moon-video-player{
+  display:block;
   width:100%;
-  height:100%;
+  max-height:74vh;
+  border-radius:10px;
+  background:#01070d;
+}
+
+.moon-video-close{
+  position:absolute;
+  top:8px;
+  right:8px;
+  padding:7px 12px;
+  pointer-events:auto;
+}
+
+.moon-video-error{
+  margin:14px 0 0;
+  color:#ffd3d3;
+  font:12px/1.5 "Trebuchet MS",Arial,sans-serif;
+  letter-spacing:.04em;
+}
+
+.story-image-frame .mission-image-layout{
+  position:absolute;
+  inset:2.2% 3.2%;
+  display:block;
+  width:auto;
+  height:auto;
+  overflow:hidden;
+  padding:0;
+  border:1px solid rgba(106,221,255,.7);
+  border-radius:clamp(7px,1vw,13px);
+  background:#020914;
+  pointer-events:none;
 }
 
 #mission-image-visual{
   position:absolute!important;
   inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  overflow:visible!important;
+  width:auto!important;
+  height:auto!important;
+  overflow:hidden!important;
+  pointer-events:none;
+}
+
+.mission-image-position-layer{
+  position:absolute;
+  z-index:1;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.mission-image-coordinate-space{
+  position:absolute;
+  inset:0;
+  width:auto;
+  height:auto;
+  transform:none;
+  overflow:hidden;
+  pointer-events:none;
 }
 
 .story-hardware{
@@ -341,8 +454,13 @@ body.storytelling-active .museum-exhibit{
   object-fit:contain!important;
   object-position:center;
   background:transparent;
+  opacity:0;
+  transition:opacity .62s cubic-bezier(.22,.61,.36,1);
   animation:none!important;
 }
+
+.story-hardware.is-visible{opacity:1}
+.story-hardware.is-leaving{opacity:0;transition-duration:.3s}
 
 .mission-image-item{
   position:absolute;
@@ -778,18 +896,6 @@ body.storytelling-active .museum-exhibit{
 }
 
 /* Cinematic mission openings and bounded hologram image transitions. */
-.story-hardware{
-  transition:opacity .32s ease-in-out;
-}
-
-.story-hardware.is-image-fading-out,
-.story-hardware.is-image-materializing{
-  opacity:0!important;
-}
-
-.story-hardware.is-image-materializing{
-  transition:opacity .62s cubic-bezier(.22,.7,.25,1);
-}
 
 .ranger-story.is-mission-opening .story-guide-row,
 .ranger-story.is-mission-opening .story-user-row{
@@ -1139,7 +1245,7 @@ body.storytelling-active .museum-exhibit{
 
 @media(prefers-reduced-motion:reduce){
   .story-hardware,
-  .story-hardware.is-image-materializing,
+  .story-hardware.is-leaving,
   .ranger-story.is-mission-opening .story-listener img,
   .ranger-story.is-mission-opening.is-mission-materialized .story-hardware{
     transition-duration:.15s!important;
