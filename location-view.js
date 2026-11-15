@@ -99,17 +99,12 @@
       imageSourceControl.setAttribute("tabindex", "-1");
       imageSourceControl.setAttribute(
         "aria-label",
-        isAiGenerated
-          ? "AI-generated image; scientific reference not verified"
-          : "Image source not verified; no source link available"
+        isAiGenerated ? "AI-generated image" : ""
       );
-      imageSourceControl.title = isAiGenerated
-        ? "AI-generated image; scientific reference not verified"
-        : "Image source not verified";
-      imageSourceLabel.hidden = false;
-      imageSourceLabel.textContent = isAiGenerated
-        ? "AI GENERATED · SCIENTIFIC REFERENCE NOT VERIFIED"
-        : "SOURCE NOT VERIFIED";
+      imageSourceControl.title = isAiGenerated ? "AI-generated image" : "";
+      imageSourceControl.hidden = !isAiGenerated;
+      imageSourceLabel.hidden = !isAiGenerated;
+      imageSourceLabel.textContent = isAiGenerated ? "AI GENERATED" : "";
     }
 
     imageSourceIcon.hidden = false;
