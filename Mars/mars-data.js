@@ -2,7 +2,7 @@
 
 window.MARS_ARCHIVE = {
   title: "The Red Planet Archive",
-  guide: "Dr. Avery Vance",
+  guide: "Dr. Fredrick",
   visitor: "Leo",
   chapters: [
     {
@@ -128,6 +128,226 @@ window.MARS_ARCHIVE = {
         },
         { speaker: "leo", text: "When did the signal stop?", image: null },
         { speaker: "avery", text: "The last data transmission from Pathfinder was received on September 27, 1997. NASA later ended the mission on March 10, 1998, after attempts to restore communication.", image: null }
+      ]
+    },
+    {
+      id: "spirit-opportunity",
+      title: "Spirit & Opportunity — Twin Detectives of the Red Desert",
+      label: "Spirit & Opportunity",
+      status: "COMPLETED",
+      statusDetail: "Landed 3 January 2004 · Missions ended 2010 and 2018.",
+      setting: "Gusev Crater & Meridiani Planum",
+      location: {
+        mission: "Spirit & Opportunity",
+        spacecraft: "Spirit and Opportunity rovers",
+        body: "Mars",
+        locationType: "Dual robotic landings",
+        note: "The twin rovers explored different Martian terrains while carrying the same kinds of rock-analysis tools."
+      },
+      evidenceTask: "Compare rover motion, instrument work and mineral clues from both landing sites. Link each observation to the larger story of ancient water on Mars.",
+      lines: [
+        {
+          speaker: "avery",
+          text: "Two robotic explorers arrived on Mars in January 2004, each with a mission to investigate the planet's past. Their names were Spirit and Opportunity, and they were designed to work for just 90 Martian days. But they went on exploring for years!",
+          media: [
+            {
+              id: "S1",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S1.png",
+              alt: "Spirit and Opportunity on the Martian surface during the early mission",
+              sourceUrl: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+            },
+            {
+              id: "S1(1)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S1(1).png",
+              alt: "The pair of Mars rovers in the desert-like terrain of the planet",
+              sourceUrl: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+            }
+          ]
+        },
+        {
+          speaker: "avery",
+          text: "They lasted far longer than expected! Martian winds sometimes swept dust off their solar panels, helping them collect more sunlight and continue exploring.",
+          media: [
+            {
+              id: "S2",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S2.png",
+              alt: "A rover solar array coated in dust against the Martian horizon",
+              sourceUrl: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+            },
+            {
+              id: "S2(1)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S2(1).png",
+              alt: "The twin rover mission surviving longer than planned thanks to sunlight and dust-clearing winds",
+              sourceUrl: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+            }
+          ]
+        },
+        {
+          speaker: "avery",
+          text: "Scientists wanted to know whether Mars once had lakes, rivers or other watery environments where life might have existed. To find clues, they needed mobile robots that could travel across the surface, climb hills and study rocks in different locations.",
+          media: [
+            {
+              id: "S3",
+              type: "video",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3.mp4",
+              poster: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3.png",
+              alt: "Opportunity driving across the Martian terrain",
+              sourceUrl: "https://science.nasa.gov/photojournal/rear-view-of-opportunitys-drive/"
+            },
+            {
+              id: "S3(1)",
+              type: "video",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(1).mp4",
+              poster: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(1).png",
+              alt: "Spirit and Opportunity move through rough terrain",
+              sourceUrl: "https://science.nasa.gov/photojournal/rover-takes-a-sunday-drive/"
+            },
+            {
+              id: "S3(2)",
+              type: "video",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(2).mp4",
+              poster: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(2).png",
+              alt: "Rover exploration footage of the red desert surface",
+              sourceUrl: "https://science.nasa.gov/photojournal/rear-view-of-opportunitys-drive/"
+            },
+            {
+              id: "S3(3)",
+              type: "video",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(3).mp4",
+              poster: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(3).png",
+              alt: "A close rover pass across the Martian landscape",
+              sourceUrl: "https://science.nasa.gov/photojournal/rover-takes-a-sunday-drive/"
+            },
+            {
+              id: "S3(4)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(4).png",
+              alt: "Martian landscape waiting for rover investigation",
+              sourceUrl: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+            },
+            {
+              id: "S3(5)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S3(5).png",
+              alt: "Wide rover path across the surface of Mars",
+              sourceUrl: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+            }
+          ]
+        },
+        {
+          speaker: "avery",
+          text: "These rover twins carried special science instruments to examine Martian rocks. Both rovers carried a Rock Abrasion Tool (RAT) with a diamond-tipped grinder to scrape away dusty rock surfaces. Then, X-ray instruments and other scientific tools helped identify the minerals and discover how water had changed the rocks. They also carried Mössbauer and alpha particle X-ray spectrometers to investigate what the Martian rocks were made of.",
+          media: [
+            {
+              id: "S4",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S4.png",
+              alt: "A rover calibration and inspection shot with its tools and instruments",
+              sourceUrl: "https://science.nasa.gov/photojournal/spring-cleaning/"
+            },
+            {
+              id: "S4(1)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S4(1).png",
+              alt: "A rover tool scrape on a rocky Martian surface",
+              sourceUrl: "https://science.nasa.gov/photojournal/spring-cleaning/"
+            },
+            {
+              id: "S4(2)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S4(2).png",
+              alt: "A microscope image showing the grain structure of a rock after inspection",
+              sourceUrl: "https://science.nasa.gov/photojournal/martian-microscope/"
+            },
+            {
+              id: "S4(3)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S4(3).png",
+              alt: "Rock formation posing a scientific mystery on Mars",
+              sourceUrl: "https://science.nasa.gov/photojournal/mars-rock-formation-poses-mystery-2/"
+            },
+            {
+              id: "S4(4)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S4(4).png",
+              alt: "Close view of a rock after abrasion by the Opportunity rover",
+              sourceUrl: "https://science.nasa.gov/photojournal/close-up-of-esperance-after-abrasion-by-opportunity/"
+            }
+          ]
+        },
+        {
+          speaker: "avery",
+          text: "They found exciting clues! Opportunity discovered tiny, round formations called 'blueberries', rich in a mineral called hematite. Spirit found rocks rich in silica, suggesting that ancient hot springs or steam vents once existed on Mars!",
+          media: [
+            {
+              id: "S5",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S5.png",
+              alt: "Opportunity's blueberry-like Martian formations, rich in hematite",
+              sourceUrl: "https://science.nasa.gov/resource/martian-blueberries-2/"
+            },
+            {
+              id: "S5(1)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S5(1).png",
+              alt: "The hematite-rich concretions nicknamed blueberries on Mars",
+              sourceUrl: "https://science.nasa.gov/resource/martian-blueberries-2/"
+            },
+            {
+              id: "S5(2)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S5(2).png",
+              alt: "Silica-rich soil excavated by Spirit reveals evidence of hot springs or steam vents",
+              sourceUrl: "https://science.nasa.gov/photojournal/silica-rich-soil-found-by-spirit/"
+            },
+            {
+              id: "S5(3)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S5(3).png",
+              alt: "Spirit's bright silica excavation trench on the Martian surface",
+              sourceUrl: "https://science.nasa.gov/photojournal/rovers-wheel-churns-up-bright-martian-soil/"
+            }
+          ]
+        },
+        {
+          speaker: "avery",
+          text: "Spirit and Opportunity discovered strong evidence that Mars once had liquid water and environments that could have supported life. Spirit explored for over six years, while Opportunity travelled about 28 miles over nearly 15 years. Their discoveries completely changed how scientists understood the Red Planet!",
+          media: [
+            {
+              id: "S6",
+              type: "video",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S6.mp4",
+              poster: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S6.png",
+              alt: "A panoramic overview of Opportunity's long journey and legacy",
+              sourceUrl: "https://science.nasa.gov/resource/opportunity-legacy-pan/"
+            },
+            {
+              id: "S6(1)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S6(1).png",
+              alt: "Opportunity's wide legacy panorama across the Martian desert",
+              sourceUrl: "https://science.nasa.gov/resource/opportunitys-marathon-journey/"
+            },
+            {
+              id: "S6(2)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S6(2).png",
+              alt: "A long-distance mission route showing the rover's marathon journey",
+              sourceUrl: "https://science.nasa.gov/resource/opportunitys-marathon-journey/"
+            },
+            {
+              id: "S6(3)",
+              type: "image",
+              src: "./mars_images/Spirit and Opportunity/Spirit and Opportunity S6(3).png",
+              alt: "Legacy view of the rover mission and scientific exploration on Mars",
+              sourceUrl: "https://science.nasa.gov/resource/opportunity-legacy-pan/"
+            }
+          ]
+        }
       ]
     },
     {

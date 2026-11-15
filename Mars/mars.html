@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090807">
-  <meta name="description" content="An evidence-led archive of Mars missions, told by Leo and Dr. Avery Vance.">
+  <meta name="description" content="An evidence-led archive of Mars missions, told by Leo and Dr. Fredrick.">
   <title>Project Ghost Signal — Mars Archive</title>
   <link rel="stylesheet" href="./mars.css">
   <link rel="stylesheet" href="./mars-storytelling.css?v=mars-layout-alignment-20261112">
@@ -14,19 +14,18 @@
 <body class="storytelling-active">
   <audio id="backgroundMusic" class="background-music-audio" src="../Audio/Piano.mp3" loop preload="auto"></audio>
   <main class="museum-exhibit">
-    <section id="ranger-story" class="ranger-story is-mission-opening" aria-labelledby="story-title">
-      <div class="mars-environment">
-        <section class="story-display" aria-label="Mars holographic display">
-          <div class="story-image-frame" aria-label="Mission image aperture">
-            <div class="mission-image-layout">
-              <div id="mission-image-visual" class="mission-image-visual">
-                <img id="story-hardware-primary" class="story-hardware" alt="" hidden>
-                <img id="story-hardware-secondary" class="story-hardware" alt="" hidden>
-              </div>
+    <section id="ranger-story" class="ranger-story museum-scene is-mission-opening" aria-labelledby="story-title">
+      <div class="mars-environment" aria-hidden="true"></div>
+      <section class="holographic-monitor-layer" aria-label="Mars holographic display">
+        <div class="story-image-frame" aria-label="Mission image aperture">
+          <div class="mission-image-layout">
+            <div id="mission-image-visual" class="mission-image-visual">
+              <img id="story-hardware-primary" class="story-hardware" alt="" hidden>
+              <img id="story-hardware-secondary" class="story-hardware" alt="" hidden>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
       <header class="story-topbar">
         <a class="story-back-link" href="../Space/space.html">Space Library</a>
         <div class="story-heading">
@@ -49,11 +48,10 @@
         <section class="story-conversation" aria-label="Mars mission dialogue">
           <div id="guide-stage" class="story-character-row story-guide-row" hidden>
             <figure class="story-guide">
-              <img id="guide-character" src="../images/Guide_speaking.png" alt="Dr. Avery Vance, Mars mission scientist">
-              <figcaption>Dr. Avery Vance</figcaption>
+              <img id="guide-character" src="../images/Guide_speaking.png" alt="Dr. Fredrick, Mars mission scientist">
             </figure>
-            <section class="story-dialogue" aria-label="Dr. Avery Vance speaking">
-              <p class="dialogue-eyebrow"><span id="dialogue-speaker">Dr. Avery Vance</span><span id="dialogue-progress"></span></p>
+            <section class="story-dialogue" aria-label="Dr. Fredrick speaking">
+              <p class="dialogue-eyebrow"><span id="dialogue-speaker">Dr. Fredrick</span><span id="dialogue-progress"></span></p>
               <p id="ranger-dialogue" class="dialogue-copy" aria-live="polite"></p>
               <div class="dialogue-actions">
                 <button id="play-narration" class="dialogue-play" type="button">Play voice narration</button>
@@ -68,21 +66,21 @@
               <p class="dialogue-eyebrow"><span id="student-speaker">Leo</span><span id="student-progress"></span></p>
               <p id="student-dialogue-copy" class="dialogue-copy" aria-live="polite"></p>
               <div class="dialogue-actions">
-                <button id="ask-student-question" class="student-ask-button" type="button" hidden>Ask Dr. Avery</button>
+                <button id="ask-student-question" class="student-ask-button" type="button" hidden>Ask Dr. Fredrick</button>
                 <button id="play-student-narration" class="dialogue-play" type="button">Play voice narration</button>
                 <button id="continue-student-reading" class="dialogue-reading" type="button" hidden>Continue reading</button>
                 <button id="repeat-student-dialogue" class="dialogue-repeat" type="button">Repeat message</button>
               </div>
             </section>
             <figure class="story-listener">
-              <img id="visitor-character" src="../images/Boy_user_listening.png" alt="Leo speaking with Dr. Avery Vance">
+              <img id="visitor-character" src="../images/Boy_user_listening.png" alt="Leo speaking with Dr. Fredrick">
               <figcaption id="visitor-caption">Leo</figcaption>
             </figure>
           </div>
           <p id="speech-status" class="speech-status" role="status" aria-live="polite"></p>
 
           <section class="story-evidence" aria-label="Evidence investigation">
-            <button id="mission-evidence-toggle" class="evidence-toggle" type="button" aria-expanded="false" aria-controls="mission-evidence-panel">Evidence task</button>
+            <button id="mission-evidence-toggle" class="evidence-toggle" type="button" aria-expanded="false" aria-controls="mission-evidence-panel"></button>
             <p id="mission-evidence-panel" class="evidence-panel" hidden></p>
             <button id="uncertainty-toggle" class="evidence-toggle uncertainty-toggle" type="button" aria-expanded="false" aria-controls="uncertainty-panel" hidden>What remains uncertain?</button>
             <p id="uncertainty-panel" class="evidence-panel" hidden></p>

@@ -1,4 +1,4 @@
-﻿/* ==================== MANUAL DESIGN CONTROLS ==================== */
+/* ==================== MANUAL DESIGN CONTROLS ==================== */
 :root{
   /* Moon Mission Atlas controls */
   --moon-atlas-globe-width:min(96vw, 1280px);
@@ -26,15 +26,6 @@
   --moon-atlas-background-size:cover;
   --moon-atlas-background-position:center;
   --moon-atlas-background-brightness:.78;
-
-  /* =========================================
-     MANUAL MISSION IMAGE CONTROLS
-     ========================================= */
-  --moon-mission-image-max-width:100%;
-  --moon-mission-image-max-height:100%;
-  --moon-mission-image-offset-x:0px;
-  --moon-mission-image-offset-y:-35px;
-  --moon-mission-image-scale:1;
 
   /* Background artwork and its built-in holographic frame. */
   --moon-background-image:url("./moon_images/bg.png");
@@ -68,6 +59,7 @@
   --_dialogue-width-default:55%;
   --dialogue-width:var(--_dialogue-width-default);
   --dialogue-height:150px;
+  --moon-dialogue-max-height:min(34vh,320px);
   /* Dialogue x moves inward from each speaker's side; y is a bottom offset. */
   --dialogue-x:300px;
   --dialogue-y:0px;
@@ -88,6 +80,14 @@
   --moon-text-secondary:#a9cbd9;
   --moon-interface-dark:rgba(3,15,30,.94);
   --moon-glow:rgba(35,195,255,.55);
+  --moon-royal:#315de8;
+  --moon-violet:#7956d9;
+  --moon-pink:#e99be9;
+  --moon-yellow:#ffd65a;
+  --moon-panel:rgba(6,17,48,.97);
+  --moon-panel-raised:rgba(21,24,76,.96);
+  --moon-panel-border:rgba(90,211,255,.78);
+  --moon-panel-glow:0 0 16px rgba(35,195,255,.2),0 0 28px rgba(121,86,217,.12);
 
   /* Navigation controls: dimensions and offsets are independent per button. */
   --moon-navigation-left:14%;
@@ -248,6 +248,35 @@ body.storytelling-active .museum-exhibit{
   pointer-events:none;
 }
 
+.mission-image-position-layer{
+  position:fixed;
+  z-index:60;
+  inset:0;
+  overflow:visible;
+  pointer-events:none;
+}
+
+.mission-image-coordinate-space{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:var(--moon-display-canvas-width);
+  height:var(--moon-display-canvas-height);
+  transform:translate(-50%,-50%);
+  overflow:visible;
+  pointer-events:none;
+}
+
+.guide-dialogue-layer{
+  position:fixed;
+  z-index:100;
+  inset:0;
+  pointer-events:none;
+}
+
+.guide-dialogue-layer[hidden]{display:none!important}
+.guide-dialogue-layer .story-dialogue{pointer-events:auto}
+
 @media (max-width:760px){
   :root{
     --moon-display-canvas-width:min(max(100vw,177.79dvh),198.11vw);
@@ -296,29 +325,48 @@ body.storytelling-active .museum-exhibit{
 
 .story-hardware{
   position:absolute!important;
-  top:calc(50% + var(--moon-mission-image-offset-y, 0px))!important;
-  left:calc(50% + var(--moon-mission-image-offset-x, 0px))!important;
+  top:0!important;
+  left:0!important;
   right:auto!important;
   bottom:auto!important;
   display:block;
-  width:var(--moon-mission-image-fit-width, auto)!important;
-  height:var(--moon-mission-image-fit-height, auto)!important;
+  width:auto;
+  height:auto;
   min-width:0!important;
   min-height:0!important;
   max-width:none!important;
   max-height:none!important;
-  transform:translate(-50%,-50%)!important;
-  transform-origin:center center!important;
+  transform:none!important;
+  transform-origin:top left!important;
   object-fit:contain!important;
+  object-position:center;
   background:transparent;
   animation:none!important;
 }
 
+.mission-image-item{
+  position:absolute;
+  top:0;
+  left:0;
+  right:auto;
+  bottom:auto;
+  display:block;
+  min-width:0;
+  min-height:0;
+  max-width:none;
+  max-height:none;
+  transform:none;
+  transform-origin:top left;
+  object-fit:contain;
+  object-position:center;
+  background:transparent;
+  pointer-events:none;
+}
+
+.mission-image-overlay[hidden]{display:none!important}
 .story-hardware[hidden]{display:none!important}
 
 .story-mission-indicator{display:none}
-.scene-credit{display:block}
-
 .story-conversation{
   position:absolute;
   z-index:4;
@@ -392,9 +440,9 @@ body.storytelling-active .museum-exhibit{
   z-index:4;
   top:auto;
   bottom:var(--dialogue-y)!important;
-  width:var(--dialogue-width)!important;
   height:var(--dialogue-height)!important;
-  max-width:none!important;
+  max-width:calc(100vw - 32px)!important;
+  max-height:var(--moon-dialogue-max-height)!important;
   min-width:0;
   box-sizing:border-box;
   padding:0!important;
@@ -412,6 +460,7 @@ body.storytelling-active .museum-exhibit{
 .story-dialogue{
   right:calc(3% + var(--dialogue-x))!important;
   left:auto!important;
+  width:min(var(--dialogue-width),max(0px,calc(100vw - 3% - var(--guide-width) - 14px - var(--dialogue-x))))!important;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -424,6 +473,7 @@ body.storytelling-active .museum-exhibit{
 .story-message{
   right:auto!important;
   left:calc(3% + var(--dialogue-x))!important;
+  width:min(var(--dialogue-width),max(0px,calc(100vw - 3% - var(--user-width) - 14px - var(--dialogue-x))))!important;
   gap:7px;
   align-self:stretch;
 }
@@ -450,7 +500,7 @@ body.storytelling-active .museum-exhibit{
   font-family:"Times New Roman",Times,serif;
   font-weight:400;
   letter-spacing:.005em;
-  text-shadow:0 1px 2px rgba(0,0,0,.58);
+  text-shadow:0 0 5px rgba(53,217,255,.18);
   white-space:normal;
   overflow-wrap:anywhere;
   overflow-y:auto;
@@ -618,10 +668,10 @@ body.storytelling-active .museum-exhibit{
     --_guide-height-default:min(68vh,45vh);
     --_user-width-default:min(280px,35vw);
     --_user-height-default:min(65vh,45vh);
-    --_dialogue-width-default:calc(100vw - 35vw - 28px);
     --_dialogue-font-size-default:14px;
     --_dialogue-line-height-default:1.4;
     --_dialogue-text-padding-default:9px;
+    --moon-dialogue-max-height:min(30vh,300px);
     --moon-navigation-left:4%;
     --moon-navigation-right:4%;
     --moon-previous-button-width:82px;
@@ -662,6 +712,7 @@ body.storytelling-active .museum-exhibit{
   /* Keep the mobile anchors unchanged at the default 300px while honoring X adjustments. */
   .story-dialogue{
     right:auto!important;
+    width:calc(100vw - var(--guide-width) - 28px)!important;
     left:clamp(
       0px,
       calc(var(--guide-width) + 18px + 300px - var(--dialogue-x)),
@@ -671,6 +722,7 @@ body.storytelling-active .museum-exhibit{
 
   .story-message{
     right:auto!important;
+    width:calc(100vw - var(--user-width) - 28px)!important;
     left:clamp(
       0px,
       calc(10px + var(--dialogue-x) - 300px),
@@ -761,6 +813,314 @@ body.storytelling-active .museum-exhibit{
 
 .ranger-story.is-mission-opening.is-mission-materializing .story-user-row .story-response-panel{
   visibility:hidden!important;
+}
+
+/* Moon Museum exhibit-panel theme. */
+.ranger-story .story-dialogue,
+.ranger-story .story-message{
+  border:1px solid rgba(53,217,255,.78);
+  border-radius:12px;
+  color:var(--moon-text-primary);
+  background:rgba(3,12,27,.82);
+  box-shadow:0 0 16px rgba(35,195,255,.16),inset 0 1px 0 rgba(139,234,255,.12),inset 0 0 18px rgba(0,82,143,.12);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  overflow:hidden;
+}
+
+.ranger-story .story-dialogue{
+  border-color:rgba(53,217,255,.24);
+  background:rgba(3,12,27,.58);
+  box-shadow:0 0 12px rgba(35,195,255,.08),inset 0 1px 0 rgba(139,234,255,.06);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+}
+
+.ranger-story .dialogue-eyebrow,
+.ranger-story .dialogue-eyebrow #dialogue-speaker{
+  color:var(--moon-cyan-bright);
+  text-shadow:0 0 8px rgba(53,217,255,.28);
+}
+
+.ranger-story #dialogue-progress{
+  color:var(--moon-text-secondary);
+  text-shadow:none;
+}
+
+.ranger-story .message-meta{
+  color:var(--moon-cyan-bright);
+  text-shadow:0 0 5px rgba(53,217,255,.22);
+}
+
+.ranger-story .dialogue-copy,
+.ranger-story .story-message p{
+  color:var(--moon-text-primary);
+  font-family:"Times New Roman",Times,serif;
+  line-height:var(--dialogue-line-height);
+  text-shadow:0 0 5px rgba(53,217,255,.18);
+}
+
+.ranger-story .speech-status{
+  color:#c8d9f4;
+}
+
+.ranger-story .dialogue-actions button,
+.ranger-story .story-interaction-actions button{
+  border:1px solid rgba(53,217,255,.78);
+  border-radius:4px;
+  color:var(--moon-text-primary);
+  background:var(--moon-interface-dark);
+  box-shadow:0 0 0 1px rgba(2,10,22,.8),inset 0 1px 0 rgba(139,234,255,.16),0 0 10px rgba(35,195,255,.2);
+  transition:color .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .12s ease;
+}
+
+.ranger-story .dialogue-actions .dialogue-play,
+.ranger-story .story-interaction-actions .dialogue-continue,
+.ranger-story .story-interaction-actions .dialogue-question-fallback{
+  border-color:rgba(53,217,255,.78);
+  color:var(--moon-text-primary)!important;
+  background:var(--moon-interface-dark)!important;
+  box-shadow:0 0 0 1px rgba(2,10,22,.8),inset 0 1px 0 rgba(139,234,255,.16),0 0 10px rgba(35,195,255,.2);
+  font-weight:700;
+}
+
+.ranger-story .dialogue-actions button:hover:not(:disabled),
+.ranger-story .dialogue-actions button:focus-visible,
+.ranger-story .story-interaction-actions button:hover:not(:disabled),
+.ranger-story .story-interaction-actions button:focus-visible{
+  border-color:var(--moon-cyan-bright);
+  color:var(--moon-text-primary);
+  background:rgba(8,42,63,.98);
+  box-shadow:0 0 0 1px rgba(2,10,22,.9),inset 0 1px 0 rgba(234,250,255,.24),0 0 14px rgba(35,195,255,.42);
+  outline:2px solid rgba(139,234,255,.4);
+  outline-offset:2px;
+  transform:translateY(-1px);
+}
+
+.ranger-story .dialogue-actions .dialogue-play:hover:not(:disabled),
+.ranger-story .dialogue-actions .dialogue-play:focus-visible,
+.ranger-story .story-interaction-actions .dialogue-continue:hover:not(:disabled),
+.ranger-story .story-interaction-actions .dialogue-continue:focus-visible,
+.ranger-story .story-interaction-actions .dialogue-question-fallback:hover:not(:disabled),
+.ranger-story .story-interaction-actions .dialogue-question-fallback:focus-visible{
+  border-color:var(--moon-cyan-bright);
+  color:var(--moon-text-primary)!important;
+  background:rgba(8,42,63,.98)!important;
+  box-shadow:0 0 0 1px rgba(2,10,22,.9),inset 0 1px 0 rgba(234,250,255,.24),0 0 14px rgba(35,195,255,.42);
+}
+
+.ranger-story .dialogue-actions button:active,
+.ranger-story .story-interaction-actions button:active{
+  transform:translateY(1px);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.42),0 0 7px rgba(53,217,255,.18);
+}
+
+.ranger-story .dialogue-actions button:disabled,
+.ranger-story .story-interaction-actions button:disabled{
+  opacity:.48;
+  cursor:not-allowed;
+  filter:saturate(.55);
+  transform:none;
+  box-shadow:inset 0 1px 0 rgba(230,250,255,.08);
+}
+
+@media(max-width:760px){
+  .ranger-story .story-dialogue,
+  .ranger-story .story-message{
+    border-radius:10px;
+  }
+}
+
+.ranger-story .story-control-button--previous,
+.ranger-story .story-control-button--next{
+  border-radius:10px;
+  transition:color .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .12s ease;
+}
+
+.ranger-story .story-control-button--previous{
+  border-color:rgba(90,211,255,.72);
+  color:#f1f7ff;
+  background:linear-gradient(135deg,rgba(6,20,56,.98),rgba(43,34,111,.98));
+  box-shadow:0 0 0 1px rgba(121,86,217,.18),0 0 14px rgba(53,217,255,.15),0 0 18px rgba(121,86,217,.14);
+  text-indent:6px;
+}
+
+.ranger-story .story-control-button--next{
+  border-color:rgba(105,225,255,.9);
+  color:#f4f9ff;
+  background:linear-gradient(135deg,#2147ae,var(--moon-royal) 55%,#1769a8);
+  box-shadow:0 0 0 1px rgba(53,217,255,.2),0 0 16px rgba(53,217,255,.2),0 0 16px rgba(121,86,217,.13);
+  text-shadow:0 0 5px rgba(139,234,255,.22);
+  text-indent:-6px;
+}
+
+.ranger-story .story-control-button--previous::before,
+.ranger-story .story-control-button--next::after{
+  position:absolute;
+  top:50%;
+  font-family:Arial,sans-serif;
+  font-size:1.05em;
+  line-height:1;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+
+.ranger-story .story-control-button--previous::before{
+  left:8px;
+  content:"\2190";
+}
+
+.ranger-story .story-control-button--next::after{
+  right:8px;
+  content:"\2192";
+}
+
+.ranger-story .story-control-button--previous:hover:not(:disabled),
+.ranger-story .story-control-button--previous:focus-visible{
+  border-color:#9cecff;
+  color:#fff;
+  background:linear-gradient(135deg,#1d4b9d,#3858c4 58%,#6544ad);
+  box-shadow:0 0 0 1px rgba(139,234,255,.22),0 0 17px rgba(53,217,255,.34),0 0 23px rgba(121,86,217,.26);
+}
+
+.ranger-story .story-control-button--next:hover:not(:disabled),
+.ranger-story .story-control-button--next:focus-visible{
+  border-color:#a9f1ff;
+  color:#fff;
+  background:linear-gradient(135deg,#2868d9,#4269eb 54%,#704bc2);
+  box-shadow:0 0 0 1px rgba(139,234,255,.3),0 0 22px rgba(53,217,255,.48),0 0 30px rgba(121,86,217,.28);
+}
+
+.ranger-story .story-control-button--next:hover:not(:disabled)::after,
+.ranger-story .story-control-button--next:focus-visible::after{
+  color:var(--moon-yellow);
+  text-shadow:0 0 8px rgba(255,214,90,.46);
+}
+
+.ranger-story .story-control-button--previous:active:not(:disabled),
+.ranger-story .story-control-button--previous:active:not(:disabled):hover,
+.ranger-story .story-control-button--next:active:not(:disabled),
+.ranger-story .story-control-button--next:active:not(:disabled):hover{
+  border-color:rgba(90,211,255,.72);
+  color:#e7f2ff;
+  background:linear-gradient(135deg,#101e4c,#252650);
+  box-shadow:inset 0 2px 7px rgba(0,0,0,.5),0 0 8px rgba(53,217,255,.18);
+  transform:translateY(1px);
+}
+
+.ranger-story .story-control-button:disabled{
+  border-color:rgba(139,174,207,.38);
+  color:#aab8cf;
+  background:linear-gradient(135deg,rgba(28,38,64,.78),rgba(38,34,65,.78));
+  box-shadow:inset 0 1px 0 rgba(230,250,255,.06);
+  opacity:.52;
+  text-shadow:none;
+}
+
+.ranger-story .story-control-button:disabled::before,
+.ranger-story .story-control-button:disabled::after{
+  color:#aab8cf;
+  text-shadow:none;
+}
+
+.ranger-story .story-back-link,
+.ranger-story .story-mission-index-button{
+  border-color:rgba(112,218,255,.68);
+  border-radius:9px;
+  color:#f1f7ff;
+  background:linear-gradient(135deg,rgba(10,28,72,.96),rgba(41,28,91,.94));
+  box-shadow:inset 0 1px 0 rgba(230,250,255,.12),0 0 12px rgba(53,217,255,.12);
+}
+
+.ranger-story .story-back-link:hover,
+.ranger-story .story-mission-index-button:hover,
+.ranger-story .story-back-link:focus-visible,
+.ranger-story .story-mission-index-button:focus-visible{
+  border-color:var(--moon-cyan-bright);
+  color:#fff;
+  background:linear-gradient(135deg,rgba(33,81,172,.98),rgba(92,54,166,.96));
+  box-shadow:0 0 0 1px rgba(139,234,255,.2),0 0 15px rgba(53,217,255,.3),0 0 20px rgba(121,86,217,.18);
+  outline:2px solid rgba(139,234,255,.46);
+  outline-offset:2px;
+}
+
+.ranger-story .mission-index{
+  border:1px solid rgba(112,218,255,.52);
+  border-radius:12px;
+  background:linear-gradient(145deg,rgba(5,17,46,.98),rgba(28,18,67,.98));
+  box-shadow:0 12px 32px rgba(0,0,0,.55),0 0 18px rgba(53,217,255,.14);
+}
+
+.ranger-story .index-tab{
+  border-bottom-color:rgba(139,179,255,.16);
+  border-radius:6px;
+  background:transparent;
+  transition:color .18s ease,background .18s ease,border-color .18s ease;
+}
+
+.ranger-story .index-tab:hover,
+.ranger-story .index-tab.active{
+  color:#f7f5ff;
+  background:linear-gradient(100deg,rgba(49,93,232,.34),rgba(121,86,217,.28));
+}
+
+.ranger-story .index-tab:disabled{
+  color:#91a1bb;
+  opacity:.58;
+  cursor:not-allowed;
+}
+
+#landing-location-view button{
+  border:1px solid rgba(112,218,255,.72);
+  border-radius:8px;
+  color:#f2f8ff;
+  background:linear-gradient(135deg,var(--moon-royal),var(--moon-violet));
+  box-shadow:inset 0 1px 0 rgba(230,250,255,.16),0 0 10px rgba(35,195,255,.14);
+  transition:color .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .12s ease;
+}
+
+#landing-location-view button:hover:not(:disabled),
+#landing-location-view button:focus-visible{
+  border-color:#c3f5ff;
+  color:#fff;
+  background:linear-gradient(135deg,#2868d9,#7449c7);
+  box-shadow:0 0 0 1px rgba(139,234,255,.24),0 0 16px rgba(53,217,255,.34),0 0 22px rgba(121,86,217,.18);
+  outline:2px solid rgba(139,234,255,.46);
+  outline-offset:2px;
+}
+
+#landing-location-view button:active{
+  transform:translateY(1px);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.42),0 0 7px rgba(53,217,255,.18);
+}
+
+#landing-location-view button:disabled{
+  border-color:rgba(139,174,207,.36);
+  color:#aab8cf;
+  background:linear-gradient(135deg,rgba(28,38,64,.78),rgba(38,34,65,.78));
+  box-shadow:none;
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+#landing-location-view .atlas-selection-overlay button{
+  border-color:rgba(255,214,90,.76);
+  color:#fff0a1;
+  background:linear-gradient(135deg,var(--moon-royal),var(--moon-violet));
+  text-shadow:0 1px 3px rgba(0,0,0,.58);
+}
+
+#landing-location-view .atlas-selection-overlay button:hover:not(:disabled),
+#landing-location-view .atlas-selection-overlay button:focus-visible{
+  border-color:#fff3b5;
+  color:#fff8d5;
+  background:linear-gradient(135deg,#2868d9,#7449c7);
+}
+
+#landing-location-view .atlas-year-controls > button{
+  min-width:30px;
+  padding:0;
+  font:22px/1 "Trebuchet MS",Arial,sans-serif;
 }
 
 .ranger-story.is-mission-opening .story-listener img{

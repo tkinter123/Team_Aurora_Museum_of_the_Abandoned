@@ -87,101 +87,71 @@
   scheduleMissionIndicatorPositionUpdate();
 
   const missionImageFrame = document.querySelector(".story-image-frame");
-  const missionImageViewport = document.getElementById("mission-image-visual");
   if (!missionImageFrame) {
     throw new Error("Mars mission image frame is missing from mars.html.");
   }
-
-  function updateMissionImageFit(image) {
-    if (!image?.naturalWidth || !image.naturalHeight) return;
-    const frameRect = missionImageFrame.getBoundingClientRect();
-    const viewportRect = missionImageViewport.getBoundingClientRect();
-    const frameWidth = frameRect.width;
-    const frameHeight = frameRect.height;
-    const controls = getComputedStyle(document.documentElement);
-    const value = (name, fallback) => {
-      const parsed = Number.parseFloat(controls.getPropertyValue(`--mars-mission-image-${name}`));
-      return Number.isFinite(parsed) ? parsed : fallback;
-    };
-    const ratio = image.naturalWidth / image.naturalHeight;
-    const requestedScale = Math.max(0, value("scale", 1));
-    const fitWidth = Math.max(0, Math.min(
-      value("max-width", 700),
-      frameWidth,
-      value("max-height", 500) * ratio,
-      frameHeight * ratio
-    ));
-    const fitHeight = fitWidth / ratio;
-    const viewportWidth = document.documentElement.clientWidth;
-    const viewportHeight = document.documentElement.clientHeight;
-    const frameCenterX = frameRect.left + frameWidth / 2;
-    const frameCenterY = frameRect.top + frameHeight / 2;
-    const maximumScale = fitWidth && fitHeight
-      ? Math.max(0, Math.min(
-        (2 * Math.min(frameCenterX, viewportWidth - frameCenterX)) / fitWidth,
-        (2 * Math.min(frameCenterY, viewportHeight - frameCenterY)) / fitHeight
-      ))
-      : requestedScale;
-    const scale = Math.min(requestedScale, maximumScale);
-    const width = fitWidth * scale;
-    const height = fitHeight * scale;
-    const minOffsetX = width / 2 - frameCenterX;
-    const maxOffsetX = viewportWidth - width / 2 - frameCenterX;
-    const minOffsetY = height / 2 - frameCenterY;
-    const maxOffsetY = viewportHeight - height / 2 - frameCenterY;
-    const requestedOffsetX = value("offset-x", 0);
-    const requestedOffsetY = value("offset-y", 0);
-    const centerOffsetX = frameCenterX - (viewportRect.left + viewportRect.width / 2);
-    const centerOffsetY = frameCenterY - (viewportRect.top + viewportRect.height / 2);
-    const offsetX = Math.max(minOffsetX, Math.min(requestedOffsetX, maxOffsetX));
-    const offsetY = Math.max(minOffsetY, Math.min(requestedOffsetY, maxOffsetY));
-    image.style.setProperty("--mars-mission-image-fit-width", `${width}px`);
-    image.style.setProperty("--mars-mission-image-fit-height", `${height}px`);
-    image.style.setProperty("--mars-mission-image-center-x", `${centerOffsetX}px`);
-    image.style.setProperty("--mars-mission-image-center-y", `${centerOffsetY}px`);
-    image.style.setProperty("--mars-mission-image-fit-offset-x", `${offsetX}px`);
-    image.style.setProperty("--mars-mission-image-fit-offset-y", `${offsetY}px`);
-
-    const constrainedSettings = [];
-    if (Math.abs(requestedOffsetX - offsetX) > 0.1) {
-      constrainedSettings.push(`horizontal offset ${requestedOffsetX}px (safe range ${minOffsetX.toFixed(1)}px to ${maxOffsetX.toFixed(1)}px)`);
-    }
-    if (Math.abs(requestedOffsetY - offsetY) > 0.1) {
-      constrainedSettings.push(`vertical offset ${requestedOffsetY}px (safe range ${minOffsetY.toFixed(1)}px to ${maxOffsetY.toFixed(1)}px)`);
-    }
-    if (requestedScale - scale > 0.001) {
-      constrainedSettings.push(`scale ${requestedScale} (maximum safe scale ${scale.toFixed(2)})`);
-    }
-    const limitMessage = constrainedSettings.length
-      ? `Mars image settings are limited to keep the full image inside the screen: ${constrainedSettings.join(", ")}.`
-      : "";
-    if (limitMessage !== image.dataset.limitMessage) {
-      if (limitMessage) console.warn(limitMessage);
-      image.dataset.limitMessage = limitMessage;
-      if (limitMessage) {
-        missionImageFrame.setAttribute("aria-description", limitMessage);
-      } else {
-        missionImageFrame.removeAttribute("aria-description");
-      }
-    }
+  const missionImageVisual = document.getElementById("mission-image-visual");
+  if (!missionImageVisual) {
+    throw new Error("Mars mission image positioning area is missing from mars.html.");
   }
 
-  function updateAllMissionImageFits() {
-    elements.images.forEach(updateMissionImageFit);
-  }
+  const mediaNavigation = document.createElement("div");
+  mediaNavigation.className = "mars-media-navigation";
+  mediaNavigation.hidden = true;
+  mediaNavigation.setAttribute("aria-live", "polite");
 
-  elements.images.forEach(image => {
-    image.addEventListener("load", () => updateMissionImageFit(image));
-    if (image.complete) updateMissionImageFit(image);
-  });
-  if ("ResizeObserver" in window) {
-    new ResizeObserver(updateAllMissionImageFits).observe(missionImageViewport);
-  }
-  window.addEventListener("resize", updateAllMissionImageFits);
-  new MutationObserver(updateAllMissionImageFits).observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["style"]
-  });
+  const watchVideoButton = document.createElement("button");
+  watchVideoButton.type = "button";
+  watchVideoButton.className = "mars-watch-video-button";
+  watchVideoButton.textContent = "Watch Video";
+  watchVideoButton.hidden = true;
+  watchVideoButton.setAttribute("aria-label", "Watch the current mission video");
+
+  const mediaPreviousButton = document.createElement("button");
+  mediaPreviousButton.type = "button";
+  mediaPreviousButton.className = "mars-media-control mars-media-control--previous";
+  mediaPreviousButton.textContent = "‹";
+  mediaPreviousButton.setAttribute("aria-label", "Previous media item");
+
+  const mediaNextButton = document.createElement("button");
+  mediaNextButton.type = "button";
+  mediaNextButton.className = "mars-media-control mars-media-control--next";
+  mediaNextButton.textContent = "›";
+  mediaNextButton.setAttribute("aria-label", "Next media item");
+
+  mediaNavigation.append(mediaPreviousButton, mediaNextButton);
+  missionImageFrame.append(watchVideoButton, mediaNavigation);
+
+  const videoModal = document.createElement("div");
+  videoModal.className = "mars-video-modal";
+  videoModal.hidden = true;
+  videoModal.setAttribute("role", "dialog");
+  videoModal.setAttribute("aria-modal", "true");
+  videoModal.setAttribute("aria-label", "Mission video player");
+
+  const videoDialog = document.createElement("div");
+  videoDialog.className = "mars-video-dialog";
+
+  const videoElement = document.createElement("video");
+  videoElement.className = "mars-video-player";
+  videoElement.controls = true;
+  videoElement.preload = "metadata";
+  videoElement.playsInline = true;
+
+  const videoCloseButton = document.createElement("button");
+  videoCloseButton.type = "button";
+  videoCloseButton.className = "mars-video-close";
+  videoCloseButton.textContent = "Close";
+  videoCloseButton.setAttribute("aria-label", "Close video");
+
+  const videoError = document.createElement("p");
+  videoError.className = "mars-video-error";
+  videoError.hidden = true;
+  videoError.textContent = "This video could not be loaded. Please close this window and continue the mission.";
+
+  videoDialog.append(videoElement, videoCloseButton, videoError);
+  videoModal.append(videoDialog);
+  document.body.append(videoModal);
 
   const slides = [];
   function splitDialogue(text, maxCharacters = 260) {
@@ -241,6 +211,7 @@
   );
   const state = {
     slideIndex: 0,
+    mediaIndex: 0,
     navigationGeneration: 0,
     imageGeneration: 0,
     openingTimer: 0,
@@ -264,7 +235,8 @@
     introTextComplete: false,
     introNarrationComplete: false,
     openingImage: null,
-    visitorRevealTimer: 0
+    visitorRevealTimer: 0,
+    activeVideoItem: null
   };
 
   const OPENING_DURATION_MS = 1000;
@@ -429,8 +401,495 @@
       src: value.src,
       alt: typeof value.alt === "string" ? value.alt : "Mars mission image",
       sourceUrl: value.sourceUrl,
-      scientificReferenceUrl: value.scientificReferenceUrl
+      scientificReferenceUrl: value.scientificReferenceUrl,
+      preview: value.preview,
+      poster: value.poster,
+      type: value.type,
+      title: value.title,
+      configKey: value.configKey
     };
+  }
+
+  const STORY_IMAGE_LAYOUT_CONFIG = {
+    // Only explicitly configured per-image overrides belong here.
+    // Root CSS variables provide all default values.
+    items: {}
+  };
+  const EMBEDDED_SCREEN_ARTWORK_PATH_PREFIX = "./mars_images/Spirit and Opportunity/";
+  const EMBEDDED_SCREEN_ARTWORK_CLASS = "story-hardware--embedded-screen-artwork";
+  const STORY_IMAGE_LAYOUT_STORAGE_KEY = "mars-story-image-layouts-v1";
+  const storyImageLayoutKeys = new Set();
+  const persistedStoryImageLayouts = (() => {
+    try {
+      const saved = window.localStorage.getItem(STORY_IMAGE_LAYOUT_STORAGE_KEY);
+      const parsed = saved ? JSON.parse(saved) : {};
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+        return {};
+      }
+      Object.entries(parsed).forEach(([key, settings]) => {
+        if (!settings || typeof settings !== "object" || Array.isArray(settings)) {
+          return;
+        }
+        if (settings.maxWidth === undefined && settings.width !== undefined) {
+          settings.maxWidth = settings.width;
+        }
+        if (settings.maxHeight === undefined && settings.height !== undefined) {
+          settings.maxHeight = settings.height;
+        }
+        delete settings.width;
+        delete settings.height;
+        parsed[key] = settings;
+      });
+      return parsed;
+    } catch (error) {
+      console.error("Mars slide image settings could not be restored from local storage.", error);
+      return {};
+    }
+  })();
+
+  function makeStoryImageLayoutKey(slide, mediaId, mediaIndex) {
+    return `${slide.chapter.id}:${slide.lineIndex}:${mediaId}:${mediaIndex}`;
+  }
+
+  function normalizeStoryImageLayoutPatch(patch) {
+    if (!patch || typeof patch !== "object" || Array.isArray(patch)) {
+      throw new TypeError("Mars slide image settings must be an object.");
+    }
+    const normalized = {};
+    const cssProperties = {
+      x: "left",
+      y: "top",
+      maxWidth: "max-width",
+      maxHeight: "max-height",
+      width: "max-width",
+      height: "max-height"
+    };
+    Object.entries(patch).forEach(([name, value]) => {
+      if (Object.prototype.hasOwnProperty.call(cssProperties, name)) {
+        const cssValue = typeof value === "number" ? `${value}px` : String(value).trim();
+        if (!cssValue || !window.CSS.supports(cssProperties[name], cssValue)) {
+          throw new TypeError(`Invalid Mars slide image ${name} value: ${value}`);
+        }
+        normalized[name === "width" ? "maxWidth" : name === "height" ? "maxHeight" : name] = cssValue;
+        return;
+      }
+      if (name === "scale" || name === "rotation") {
+        const numericValue = Number(value);
+        if (!Number.isFinite(numericValue)) {
+          throw new TypeError(`Mars slide image ${name} must be a finite number.`);
+        }
+        normalized[name] = numericValue;
+        return;
+      }
+      if (name === "visible" && typeof value === "boolean") {
+        normalized.visible = value;
+        return;
+      }
+      throw new TypeError(`Unknown Mars slide image setting: ${name}`);
+    });
+    return normalized;
+  }
+
+  function getStoryImageLayout(key) {
+    const image = elements.images.find(
+      item => item.dataset.layoutKey === key
+    );
+
+    const rootStyles = window.getComputedStyle(document.documentElement);
+    const readCss = property =>
+      rootStyles.getPropertyValue(property).trim();
+    const scale = Number(readCss("--mars-mission-image-scale"));
+    const rotation = Number.parseFloat(readCss("--mars-mission-image-rotation"));
+
+    const cssDefaults = {
+      x: readCss("--mars-mission-image-offset-x") || "0px",
+      y: readCss("--mars-mission-image-offset-y") || "0px",
+      maxWidth: readCss("--mars-mission-image-max-width") || "1000px",
+      maxHeight: readCss("--mars-mission-image-max-height") || "800px",
+      scale: Number.isFinite(scale) ? scale : 1,
+      rotation: Number.isFinite(rotation) ? rotation : 0,
+      visible: true
+    };
+
+    const inlineOverrides = {};
+
+    if (image) {
+      const properties = {
+        x: "--mars-story-image-offset-x",
+        y: "--mars-story-image-offset-y",
+        maxWidth: "--mars-story-image-max-width",
+        maxHeight: "--mars-story-image-max-height",
+        scale: "--mars-story-image-scale",
+        rotation: "--mars-story-image-rotation"
+      };
+
+      Object.entries(properties).forEach(([setting, property]) => {
+        const value = image.style.getPropertyValue(property).trim();
+        if (value) inlineOverrides[setting] = value;
+      });
+
+      if (image.style.visibility === "hidden") {
+        inlineOverrides.visible = false;
+      }
+    }
+
+    return {
+      ...cssDefaults,
+      ...STORY_IMAGE_LAYOUT_CONFIG.items[key],
+      ...persistedStoryImageLayouts[key],
+      ...inlineOverrides
+    };
+  }
+
+  const missionImageFitProbes = new WeakMap();
+  const missionImageFitProbeImages = new WeakMap();
+  let missionImageFitObserver = null;
+
+  function getMissionImageFitProbe(image) {
+    let probe = missionImageFitProbes.get(image);
+    if (probe) {
+      return probe;
+    }
+
+    probe = document.createElement("div");
+    probe.setAttribute("aria-hidden", "true");
+    probe.style.position = "absolute";
+    probe.style.top = "0";
+    probe.style.left = "0";
+    probe.style.width = "100%";
+    probe.style.height = "100%";
+    probe.style.maxWidth = "var(--mars-story-image-max-width, var(--mars-mission-image-max-width))";
+    probe.style.maxHeight = "var(--mars-story-image-max-height, var(--mars-mission-image-max-height))";
+    probe.style.visibility = "hidden";
+    probe.style.pointerEvents = "none";
+    missionImageVisual.append(probe);
+    missionImageFitProbes.set(image, probe);
+    missionImageFitProbeImages.set(probe, image);
+    missionImageFitObserver?.observe(probe);
+    return probe;
+  }
+
+  function resolveMissionImageLimit(image, property) {
+    const probe = getMissionImageFitProbe(image);
+    const probeStyles = window.getComputedStyle(probe);
+    const value = probeStyles.getPropertyValue(property).trim();
+    if (!value || !window.CSS.supports(property, value)) {
+      throw new TypeError(`Invalid Mars mission image ${property}: ${value}`);
+    }
+    const measuredSize = property === "max-width" ? probeStyles.width : probeStyles.height;
+    const limit = Number.parseFloat(measuredSize);
+    if (!limit) {
+      throw new RangeError(`Mars mission image ${property} resolved to a zero-sized fit area.`);
+    }
+    return limit;
+  }
+
+  function updateMissionImageFit(image, naturalWidth = image.naturalWidth, naturalHeight = image.naturalHeight) {
+    if (!naturalWidth || !naturalHeight) {
+      return;
+    }
+
+    if (!missionImageVisual.clientWidth || !missionImageVisual.clientHeight) {
+      return;
+    }
+
+    const maxWidth = resolveMissionImageLimit(image, "max-width");
+    const maxHeight = resolveMissionImageLimit(image, "max-height");
+    const styles = window.getComputedStyle(image);
+    const isEmbeddedScreenArtwork = image.classList.contains(EMBEDDED_SCREEN_ARTWORK_CLASS);
+    const cropWidth = isEmbeddedScreenArtwork
+      ? Number.parseFloat(styles.getPropertyValue("--mars-story-embedded-screen-crop-width")) / 100
+      : 1;
+    const cropHeight = isEmbeddedScreenArtwork
+      ? Number.parseFloat(styles.getPropertyValue("--mars-story-embedded-screen-crop-height")) / 100
+      : 1;
+    if (!Number.isFinite(cropWidth) || cropWidth <= 0 || cropWidth > 1
+      || !Number.isFinite(cropHeight) || cropHeight <= 0 || cropHeight > 1) {
+      throw new RangeError("Mars mission image crop dimensions must be percentages between 0 and 100.");
+    }
+    const imageScaleValue = Number.parseFloat(styles.getPropertyValue("--mars-story-image-scale")
+      || styles.getPropertyValue("--mars-mission-image-scale"));
+    const rotationValue = Number.parseFloat(styles.getPropertyValue("--mars-story-image-rotation")
+      || styles.getPropertyValue("--mars-mission-image-rotation"));
+    const imageScale = Number.isFinite(imageScaleValue) ? imageScaleValue : 1;
+    const rotation = Number.isFinite(rotationValue) ? rotationValue : 0;
+    const radians = rotation * Math.PI / 180;
+    const visibleWidth = naturalWidth * cropWidth;
+    const visibleHeight = naturalHeight * cropHeight;
+    const scaledWidth = visibleWidth * Math.abs(imageScale);
+    const scaledHeight = visibleHeight * Math.abs(imageScale);
+    const rotatedWidth = Math.abs(Math.cos(radians)) * scaledWidth
+      + Math.abs(Math.sin(radians)) * scaledHeight;
+    const rotatedHeight = Math.abs(Math.sin(radians)) * scaledWidth
+      + Math.abs(Math.cos(radians)) * scaledHeight;
+    const fitScale = Math.min(
+      1,
+      maxWidth / visibleWidth,
+      maxHeight / visibleHeight,
+      maxWidth / rotatedWidth,
+      maxHeight / rotatedHeight
+    );
+    image.style.setProperty("--mars-story-image-fit-width", `${naturalWidth * fitScale}px`);
+    image.style.setProperty("--mars-story-image-fit-height", `${naturalHeight * fitScale}px`);
+  }
+
+  function clearMissionImageFit(image) {
+    image.style.removeProperty("--mars-story-image-fit-width");
+    image.style.removeProperty("--mars-story-image-fit-height");
+  }
+
+  function updateAllMissionImageFits() {
+    elements.images.forEach(image => updateMissionImageFit(image));
+  }
+
+  let missionImageFitTimer = 0;
+  function scheduleMissionImageFitUpdate() {
+    window.clearTimeout(missionImageFitTimer);
+    missionImageFitTimer = window.setTimeout(() => {
+      missionImageFitTimer = 0;
+      updateAllMissionImageFits();
+    }, 0);
+  }
+
+  function applyStoryImageLayout(image, key) {
+    const overrides = {
+      ...STORY_IMAGE_LAYOUT_CONFIG.items[key],
+      ...persistedStoryImageLayouts[key]
+    };
+    image.dataset.layoutKey = key;
+    const properties = {
+      x: "--mars-story-image-offset-x",
+      y: "--mars-story-image-offset-y",
+      maxWidth: "--mars-story-image-max-width",
+      maxHeight: "--mars-story-image-max-height",
+      scale: "--mars-story-image-scale",
+      rotation: "--mars-story-image-rotation"
+    };
+    Object.entries(properties).forEach(([setting, property]) => {
+      if (Object.prototype.hasOwnProperty.call(overrides, setting)) {
+        const value = setting === "rotation"
+          ? `${overrides[setting]}deg`
+          : String(overrides[setting]);
+
+        image.style.setProperty(property, value);
+      } else {
+        image.style.removeProperty(property);
+      }
+    });
+    const fitProbe = getMissionImageFitProbe(image);
+    [["maxWidth", "--mars-story-image-max-width"], ["maxHeight", "--mars-story-image-max-height"]]
+      .forEach(([setting, property]) => {
+        if (Object.prototype.hasOwnProperty.call(overrides, setting)) {
+          fitProbe.style.setProperty(property, image.style.getPropertyValue(property));
+        } else {
+          fitProbe.style.removeProperty(property);
+        }
+      });
+    if (Object.prototype.hasOwnProperty.call(overrides, "visible")) {
+      image.style.visibility = overrides.visible ? "visible" : "hidden";
+    } else {
+      image.style.removeProperty("visibility");
+    }
+    updateMissionImageFit(image);
+  }
+
+  elements.images.forEach(image => {
+    image.addEventListener("load", () => updateMissionImageFit(image));
+  });
+  if ("ResizeObserver" in window) {
+    missionImageFitObserver = new ResizeObserver(entries => {
+      const affectedImages = new Set();
+      let visualAreaResized = false;
+      entries.forEach(entry => {
+        if (entry.target === missionImageVisual || entry.target === missionImageFrame) {
+          visualAreaResized = true;
+          return;
+        }
+        const image = missionImageFitProbeImages.get(entry.target);
+        if (image) {
+          affectedImages.add(image);
+        }
+      });
+      if (visualAreaResized) {
+        updateAllMissionImageFits();
+      } else {
+        affectedImages.forEach(image => updateMissionImageFit(image));
+      }
+    });
+    missionImageFitObserver.observe(missionImageVisual);
+    missionImageFitObserver.observe(missionImageFrame);
+  }
+  window.addEventListener("resize", scheduleMissionImageFitUpdate);
+  new MutationObserver(updateAllMissionImageFits).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["style", "class"]
+  });
+
+  function normalizeMediaItems(slide) {
+    if (!slide) {
+      return [];
+    }
+    const line = slide.line || {};
+    const itemList = Array.isArray(line.media) && line.media.length > 0 ? line.media : [];
+    if (itemList.length > 0) {
+      return itemList.map((media, index) => {
+        if (typeof media === "string") {
+          return {
+            id: `media-${index + 1}`,
+            configKey: makeStoryImageLayoutKey(slide, `media-${index + 1}`, index),
+            type: "image",
+            src: media,
+            alt: "Mars mission image"
+          };
+        }
+        const src = typeof media.src === "string" ? media.src.trim() : "";
+        if (!src) {
+          return null;
+        }
+        const normalizedType = String(media.type || "").toLowerCase();
+        const explicitType = normalizedType === "video" || normalizedType === "image" ? normalizedType : null;
+        const inferredType = /\.(mp4|webm|ogg)(?:[?#]|$)/i.test(src) ? "video" : "image";
+        return {
+          id: media.id || `media-${index + 1}`,
+          configKey: makeStoryImageLayoutKey(slide, media.id || `media-${index + 1}`, index),
+          type: explicitType || inferredType,
+          src,
+          poster: media.poster || media.preview || (inferredType === "video" ? src.replace(/\.(mp4|webm|ogg)(?:[?#]|$)/i, ".png") : ""),
+          alt: typeof media.alt === "string" && media.alt.trim() ? media.alt : "Mars mission image",
+          sourceUrl: media.sourceUrl,
+          scientificReferenceUrl: media.scientificReferenceUrl,
+          title: typeof media.title === "string" ? media.title : "",
+          video: media.video === true || inferredType === "video"
+        };
+      }).filter(Boolean);
+    }
+    const fallback = imageDetails(line.image);
+    if (!fallback) {
+      return [];
+    }
+    return [{
+      id: "primary-media",
+      configKey: makeStoryImageLayoutKey(slide, "primary-media", 0),
+      type: "image",
+      src: fallback.src,
+      alt: fallback.alt,
+      sourceUrl: fallback.sourceUrl,
+      scientificReferenceUrl: fallback.scientificReferenceUrl,
+      title: fallback.title || ""
+    }];
+  }
+
+  slides.forEach(slide => {
+    normalizeMediaItems(slide).forEach(mediaItem => {
+      storyImageLayoutKeys.add(mediaItem.configKey);
+      if (!STORY_IMAGE_LAYOUT_CONFIG.items[mediaItem.configKey]) {
+        STORY_IMAGE_LAYOUT_CONFIG.items[mediaItem.configKey] = {};
+      }
+    });
+  });
+
+  function persistStoryImageLayouts() {
+    try {
+      window.localStorage.setItem(
+        STORY_IMAGE_LAYOUT_STORAGE_KEY,
+        JSON.stringify(persistedStoryImageLayouts)
+      );
+    } catch (error) {
+      console.error("Mars slide image settings could not be saved to local storage.", error);
+      throw error;
+    }
+  }
+
+  window.marsStoryImageControls = Object.freeze({
+    list: () => Array.from(storyImageLayoutKeys),
+    get: key => {
+      if (!storyImageLayoutKeys.has(key)) {
+        throw new RangeError(`Unknown Mars slide image configuration: ${key}`);
+      }
+      return { ...getStoryImageLayout(key) };
+    },
+    set: (key, patch) => {
+      if (!storyImageLayoutKeys.has(key)) {
+        throw new RangeError(`Unknown Mars slide image configuration: ${key}`);
+      }
+      Object.assign(persistedStoryImageLayouts[key] ||= {}, normalizeStoryImageLayoutPatch(patch));
+      persistStoryImageLayouts();
+      elements.images
+        .filter(image => image.dataset.layoutKey === key)
+        .forEach(image => applyStoryImageLayout(image, key));
+    },
+    reset: key => {
+      if (!storyImageLayoutKeys.has(key)) {
+        throw new RangeError(`Unknown Mars slide image configuration: ${key}`);
+      }
+      delete persistedStoryImageLayouts[key];
+      persistStoryImageLayouts();
+      elements.images
+        .filter(image => image.dataset.layoutKey === key)
+        .forEach(image => applyStoryImageLayout(image, key));
+    }
+  });
+
+  function getCurrentMediaItems() {
+    return normalizeMediaItems(currentSlide());
+  }
+
+  function getCurrentMediaItem() {
+    const mediaItems = getCurrentMediaItems();
+    if (!mediaItems.length) {
+      return null;
+    }
+    if (state.mediaIndex < 0) {
+      state.mediaIndex = 0;
+    }
+    if (state.mediaIndex >= mediaItems.length) {
+      state.mediaIndex = mediaItems.length - 1;
+    }
+    return mediaItems[state.mediaIndex] || mediaItems[0];
+  }
+
+  function updateMediaNavigationControls() {
+    const mediaItems = getCurrentMediaItems();
+    const requiresNavigation = mediaItems.length > 1;
+    mediaNavigation.hidden = !requiresNavigation;
+    mediaPreviousButton.hidden = !requiresNavigation;
+    mediaNextButton.hidden = !requiresNavigation;
+    if (!requiresNavigation) {
+      return;
+    }
+    mediaPreviousButton.disabled = state.mediaIndex <= 0;
+    mediaNextButton.disabled = state.mediaIndex >= mediaItems.length - 1;
+  }
+
+  function closeVideoPlayback() {
+    if (state.activeVideoItem) {
+      videoElement.pause();
+      videoElement.removeAttribute("src");
+      videoElement.load();
+      state.activeVideoItem = null;
+    }
+    videoError.hidden = true;
+    videoModal.hidden = true;
+    videoModal.setAttribute("aria-hidden", "true");
+  }
+
+  function openVideoPlayback(mediaItem) {
+    if (!mediaItem || mediaItem.type !== "video") {
+      return;
+    }
+    const source = mediaItem.src || "";
+    if (!source) {
+      videoError.hidden = false;
+      return;
+    }
+    state.activeVideoItem = mediaItem;
+    videoElement.src = source;
+    videoElement.poster = mediaItem.poster || "";
+    videoElement.load();
+    videoError.hidden = true;
+    videoModal.hidden = false;
+    videoModal.setAttribute("aria-hidden", "false");
+    videoElement.focus();
   }
 
   function preloadImage(value) {
@@ -441,13 +900,59 @@
 
     return new Promise(resolve => {
       const image = new Image();
-      image.addEventListener("load", () => resolve({ ...details, loaded: true }), { once: true });
+      image.addEventListener("load", () => resolve({
+        ...details,
+        loaded: true,
+        naturalWidth: image.naturalWidth,
+        naturalHeight: image.naturalHeight
+      }), { once: true });
       image.addEventListener("error", () => {
         console.error(`Mars mission image could not be loaded: ${details.src}`);
         resolve({ ...details, loaded: false });
       }, { once: true });
       image.src = details.src;
     });
+  }
+
+  function renderCurrentMediaSelection() {
+    const mediaItems = getCurrentMediaItems();
+    const mediaItem = mediaItems[state.mediaIndex] || mediaItems[0] || null;
+    updateMediaNavigationControls();
+
+    if (!mediaItem) {
+      clearImages();
+      return;
+    }
+
+    const displaySource = mediaItem.type === "video"
+      ? (mediaItem.poster || mediaItem.src)
+      : mediaItem.src;
+    const imageData = {
+      src: displaySource,
+      alt: mediaItem.alt || mediaItem.title || "Mars mission image",
+      sourceUrl: mediaItem.sourceUrl,
+      scientificReferenceUrl: mediaItem.scientificReferenceUrl,
+      configKey: mediaItem.configKey
+    };
+
+    const generation = state.navigationGeneration;
+    preloadImage(imageData).then(image => {
+      if (generation !== state.navigationGeneration || !currentSlide()) {
+        return;
+      }
+      showPreparedImage(image);
+    });
+
+    const showsVideo = mediaItem.type === "video";
+    watchVideoButton.hidden = !showsVideo;
+    if (showsVideo) {
+      watchVideoButton.setAttribute("aria-label", `Watch ${mediaItem.title || "mission video"}`);
+    }
+    window.museumLocationView?.setImageSource(
+      imageData.src,
+      imageData.sourceUrl,
+      imageData.scientificReferenceUrl
+    );
   }
 
   function clearImages() {
@@ -458,11 +963,15 @@
     }
     elements.images.forEach(image => {
       image.classList.remove("is-visible", "is-leaving");
+      image.classList.remove(EMBEDDED_SCREEN_ARTWORK_CLASS);
       image.hidden = true;
       image.removeAttribute("src");
       image.alt = "";
+      delete image.dataset.layoutKey;
+      clearMissionImageFit(image);
     });
     state.activeImageIndex = -1;
+    watchVideoButton.hidden = true;
   }
 
   function fadeImageOut() {
@@ -483,6 +992,8 @@
       activeImage.removeAttribute("src");
       activeImage.alt = "";
       activeImage.classList.remove("is-leaving");
+      activeImage.classList.remove(EMBEDDED_SCREEN_ARTWORK_CLASS);
+      clearMissionImageFit(activeImage);
       state.imageTransitionTimer = 0;
     }, IMAGE_FADE_OUT_MS);
   }
@@ -501,7 +1012,9 @@
     }
 
     const activeImage = elements.images[state.activeImageIndex];
-    if (activeImage && activeImage.getAttribute("src") === preparedImage.src) {
+    if (activeImage
+      && activeImage.getAttribute("src") === preparedImage.src
+      && activeImage.dataset.layoutKey === preparedImage.configKey) {
       activeImage.alt = preparedImage.alt;
       return;
     }
@@ -515,9 +1028,17 @@
     const nextIndex = previousIndex === 0 ? 1 : 0;
     const nextImage = elements.images[nextIndex];
     nextImage.classList.remove("is-visible", "is-leaving");
+    nextImage.classList.toggle(
+      EMBEDDED_SCREEN_ARTWORK_CLASS,
+      preparedImage.src.startsWith(EMBEDDED_SCREEN_ARTWORK_PATH_PREFIX)
+    );
+    if (preparedImage.configKey) {
+      applyStoryImageLayout(nextImage, preparedImage.configKey);
+    }
     nextImage.src = preparedImage.src;
     nextImage.alt = preparedImage.alt;
     nextImage.hidden = false;
+    updateMissionImageFit(nextImage, preparedImage.naturalWidth, preparedImage.naturalHeight);
 
     const revealImage = () => {
       if (generation !== state.imageGeneration) {
@@ -545,6 +1066,8 @@
         previousImage.removeAttribute("src");
         previousImage.alt = "";
         previousImage.classList.remove("is-leaving");
+        previousImage.classList.remove(EMBEDDED_SCREEN_ARTWORK_CLASS);
+        clearMissionImageFit(previousImage);
         state.imageTransitionTimer = 0;
       }, IMAGE_FADE_OUT_MS);
     }
@@ -569,7 +1092,12 @@
       title.className = "index-tab-title";
       title.textContent = chapter.label;
       detail.className = "index-tab-detail";
-      detail.textContent = `${chapter.status} · ${chapter.statusDetail}`;
+      const isSpiritOpportunity = chapter.id === "spirit-opportunity";
+      detail.hidden = isSpiritOpportunity;
+      if (!isSpiritOpportunity) {
+        detail.textContent = `${chapter.status} · ${chapter.statusDetail}`;
+      }
+      button.classList.toggle("index-tab--metadata-free", isSpiritOpportunity);
       button.append(number, title, detail);
       elements.missionIndex.append(button);
     });
@@ -579,10 +1107,15 @@
 
   function updateMissionMetadata(slide) {
     const { chapter } = slide;
+    const isSpiritOpportunity = chapter.id === "spirit-opportunity";
+    root.classList.toggle("is-spirit-opportunity", isSpiritOpportunity);
     elements.title.textContent = chapter.title;
     elements.missionStatus.textContent = chapter.status;
     elements.missionStatus.dataset.status = chapter.status;
-    elements.indicator.textContent = `${chapter.label} · ${chapter.setting} · ${chapter.statusDetail}`;
+    elements.indicator.hidden = isSpiritOpportunity;
+    elements.indicator.textContent = isSpiritOpportunity
+      ? ""
+      : `${chapter.label} · ${chapter.setting} · ${chapter.statusDetail}`;
     scheduleMissionIndicatorPositionUpdate();
     const location = chapter.location;
     const hasLandingLocation = Boolean(location?.mission
@@ -617,7 +1150,7 @@
         && nextSlide.line.speaker === "avery";
       elements.askButton.hidden = !canAsk;
       elements.askButton.disabled = false;
-      elements.askButton.textContent = "Ask Dr. Avery";
+      elements.askButton.textContent = "Ask Dr. Fredrick";
       elements.studentPlayButton.hidden = false;
     } else {
       elements.guideSpeaker.textContent = archive.guide;
@@ -772,7 +1305,7 @@
     elements.nextButton.disabled = disabled;
     elements.askButton.textContent = state.questionVoiceUnavailable
       ? "Continue without voice"
-      : state.questionSpeechPending ? "Speaking…" : "Ask Dr. Avery";
+      : state.questionSpeechPending ? "Speaking…" : "Ask Dr. Fredrick";
     elements.askButton.disabled = isOpening || !state.controlsReady || state.questionSpeechPending;
     if (state.questionVoiceUnavailable) {
       elements.askButton.disabled = !state.controlsReady;
@@ -780,22 +1313,17 @@
     elements.nextButton.textContent = state.slideIndex === slides.length - 1
       ? "Replay archive"
       : isAskStep ? "Ask" : "Next";
-    elements.nextButton.setAttribute("aria-label", isAskStep ? "Ask Dr. Avery and continue" : elements.nextButton.textContent);
+    elements.nextButton.setAttribute("aria-label", isAskStep ? "Ask Dr. Fredrick and continue" : elements.nextButton.textContent);
   }
 
   function renderSlide(slideIndex, preparedImage, imageAlreadyShown = false) {
     state.slideIndex = slideIndex;
+    state.mediaIndex = 0;
     state.controlsReady = false;
     state.textReady = false;
     const slide = currentSlide();
     state.narrationReady = slide.line.speaker === "leo";
     updateMissionMetadata(slide);
-    const displayedImage = imageAlreadyShown ? preparedImage : imageDetails(slide.line.image);
-    window.museumLocationView?.setImageSource(
-      displayedImage?.src,
-      displayedImage?.sourceUrl,
-      displayedImage?.scientificReferenceUrl
-    );
     setSpeakerStage(slide);
     updateEvidence(slide);
     elements.speechStatus.textContent = "";
@@ -804,18 +1332,29 @@
     setStatus(`${slide.chapter.label} · slide ${chapterSlideIndex} of ${chapterSlides[slide.chapterIndex].length}${partStatus}`);
     updateControls();
 
-    if (arguments.length > 1) {
-      if (!imageAlreadyShown) {
-        showPreparedImage(preparedImage);
+    const mediaItems = getCurrentMediaItems();
+    if (!mediaItems.length) {
+      const displayedImage = imageAlreadyShown ? preparedImage : imageDetails(slide.line.image);
+      window.museumLocationView?.setImageSource(
+        displayedImage?.src,
+        displayedImage?.sourceUrl,
+        displayedImage?.scientificReferenceUrl
+      );
+      if (arguments.length > 1) {
+        if (!imageAlreadyShown) {
+          showPreparedImage(preparedImage);
+        }
+      } else {
+        const generation = state.navigationGeneration;
+        preloadImage(slide.line.image).then(image => {
+          if (generation !== state.navigationGeneration || slideIndex !== state.slideIndex) {
+            return;
+          }
+          showPreparedImage(image);
+        });
       }
     } else {
-      const generation = state.navigationGeneration;
-      preloadImage(slide.line.image).then(image => {
-        if (generation !== state.navigationGeneration || slideIndex !== state.slideIndex) {
-          return;
-        }
-        showPreparedImage(image);
-      });
+      renderCurrentMediaSelection();
     }
 
     const animationRequest = state.animationRequest;
@@ -873,7 +1412,17 @@
     setStatus(`Entering ${slide.chapter.label}…`);
     updateControls();
 
-    const preparedImage = preloadImage(slide.line.image);
+    const mediaItems = getCurrentMediaItems();
+    const openingMedia = mediaItems[0] || null;
+    const preparedImage = openingMedia
+      ? preloadImage({
+          src: openingMedia.type === "video" ? (openingMedia.poster || openingMedia.src) : openingMedia.src,
+          alt: openingMedia.alt || openingMedia.title || "Mars mission image",
+          sourceUrl: openingMedia.sourceUrl,
+        scientificReferenceUrl: openingMedia.scientificReferenceUrl,
+        configKey: openingMedia.configKey
+        })
+      : preloadImage(slide.line.image);
     const minimumOpening = new Promise(resolve => {
       state.openingTimer = window.setTimeout(() => {
         state.openingTimer = 0;
@@ -1093,7 +1642,7 @@
       state.questionVoiceUnavailable = true;
       elements.askButton.disabled = false;
       elements.askButton.textContent = "Continue without voice";
-      elements.speechStatus.textContent = "Question narration stopped. Continue without voice to hear Dr. Avery's response.";
+      elements.speechStatus.textContent = "Question narration stopped. Continue without voice to hear Dr. Fredrick's response.";
       updateControls();
       return;
     }
@@ -1166,6 +1715,15 @@
     });
   }
 
+  function cycleMedia(direction) {
+    const mediaItems = getCurrentMediaItems();
+    if (!mediaItems.length) {
+      return;
+    }
+    state.mediaIndex = (state.mediaIndex + direction + mediaItems.length) % mediaItems.length;
+    renderCurrentMediaSelection();
+  }
+
   function togglePanel(button, panel) {
     const isOpen = button.getAttribute("aria-expanded") !== "true";
     button.setAttribute("aria-expanded", String(isOpen));
@@ -1189,6 +1747,25 @@
     }
     elements.missionIndex.hidden = true;
     navigateToSlide(slides.indexOf(firstSlide));
+  });
+
+  watchVideoButton.addEventListener("click", () => {
+    const mediaItem = getCurrentMediaItem();
+    if (mediaItem?.type === "video") {
+      openVideoPlayback(mediaItem);
+    }
+  });
+  mediaPreviousButton.addEventListener("click", () => cycleMedia(-1));
+  mediaNextButton.addEventListener("click", () => cycleMedia(1));
+  videoCloseButton.addEventListener("click", closeVideoPlayback);
+  videoModal.addEventListener("click", event => {
+    if (event.target === videoModal) {
+      closeVideoPlayback();
+    }
+  });
+  videoElement.addEventListener("ended", closeVideoPlayback);
+  videoElement.addEventListener("error", () => {
+    videoError.hidden = false;
   });
 
   elements.previousButton.addEventListener("click", previousStoryStep);

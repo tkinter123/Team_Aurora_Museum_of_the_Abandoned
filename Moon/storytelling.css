@@ -224,7 +224,6 @@ body.storytelling-active::before{display:none;background:#000000}
 .museum-column::after{bottom:-9px;height:14px}
 .story-display{position:relative;z-index:1;display:flex;min-height:0;flex-direction:column;align-items:center;justify-content:center}
 .story-mission-indicator{flex:0 0 auto;margin:0 0 7px;color:#e1cb9a;font:9px/1.2 "Trebuchet MS",Arial,sans-serif;letter-spacing:.2em;text-align:center;text-transform:uppercase;text-shadow:0 1px 14px rgba(0,0,0,.9)}
-.scene-credit{position:absolute;z-index:2;right:0;bottom:0;left:0;margin:0;padding:14px 12px 8px;color:rgba(247,241,224,.82);background:rgba(0,0,0,.72);font:8px/1.35 "Trebuchet MS",Arial,sans-serif;letter-spacing:.09em;text-align:right;text-transform:uppercase;pointer-events:none}
 .story-controls{position:relative;z-index:3;top:-12px;display:grid;min-height:38px;grid-template-columns:1fr minmax(0,2fr) 1fr;align-items:center;gap:12px}
 .story-control-button{
   width:fit-content;
@@ -346,4 +345,48 @@ body.storytelling-active::before{display:none;background:#000000}
   .story-image-frame{width:100%!important;height:100dvh!important;aspect-ratio:auto!important}
   .story-dialogue,.story-message{padding:10px}
   .dialogue-copy,.story-message p{font-size:17px}
+}
+
+.mission-media-controls{
+  position:fixed;
+  z-index:70;
+  top:calc(var(--moon-display-top) + var(--moon-display-height) - 42px);
+  left:calc(var(--moon-display-left) + var(--moon-display-width) / 2);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:4px 7px;
+  border:1px solid rgba(200,169,107,.72);
+  border-radius:4px;
+  color:#f3ecd8;
+  background:rgba(7,9,13,.82);
+  transform:translateX(-50%);
+  pointer-events:auto;
+}
+
+.mission-media-controls[hidden]{display:none!important}
+.mission-media-controls button{
+  display:grid;
+  width:34px;
+  height:30px;
+  place-items:center;
+  border:1px solid rgba(200,169,107,.45);
+  color:#f3ecd8;
+  background:rgba(255,255,255,.06);
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+}
+.mission-media-controls button:hover,.mission-media-controls button:focus-visible{
+  border-color:var(--brass-light);
+  color:var(--brass-light);
+  outline:2px solid var(--brass-light);
+  outline-offset:2px;
+}
+.mission-media-count{
+  min-width:42px;
+  color:#f3ecd8;
+  font:10px/1.2 "Trebuchet MS",Arial,sans-serif;
+  letter-spacing:.08em;
+  text-align:center;
 }

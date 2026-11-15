@@ -38,12 +38,31 @@
       <div class="mission-image-layer">
         <div class="story-image-frame" role="region" aria-label="Moon mission display">
           <div class="mission-image-layout">
-            <div id="mission-image-visual" class="mission-image-visual">
-              <img class="story-hardware" src="./moon_images/Prologue/Sl1.jpg" alt="Global map showing the Moon's geological regions">
-              <p id="scene-credit" class="scene-credit"></p>
-            </div>
+            <div id="mission-image-visual" class="mission-image-visual"></div>
           </div>
         </div>
+      </div>
+      <div id="mission-image-position-layer" class="mission-image-position-layer">
+        <div id="mission-image-coordinate-space" class="mission-image-coordinate-space">
+          <img class="story-hardware mission-image-item" src="./moon_images/Prologue/Sl1.jpg" alt="Global map showing the Moon's geological regions">
+        </div>
+      </div>
+      <nav id="mission-media-controls" class="mission-media-controls" aria-label="Slide image navigation" hidden>
+        <button id="mission-media-previous" type="button" aria-label="Previous image">‹</button>
+        <span id="mission-media-count" aria-live="polite"></span>
+        <button id="mission-media-next" type="button" aria-label="Next image">›</button>
+      </nav>
+      <div id="guide-dialogue-layer" class="guide-dialogue-layer" aria-hidden="false">
+        <section class="story-dialogue" aria-label="Moon mission story">
+          <p class="dialogue-eyebrow"><span id="dialogue-speaker">Dr. Fredrick</span><span id="dialogue-progress"></span></p>
+          <p id="ranger-dialogue" class="dialogue-copy" aria-live="polite"></p>
+          <p id="speech-status" class="speech-status" role="status" aria-live="polite"></p>
+          <div class="dialogue-actions">
+            <button id="play-narration" class="dialogue-play" type="button" hidden>Play voice narration</button>
+            <button id="continue-reading" class="dialogue-reading" type="button" hidden>Continue reading</button>
+            <button id="repeat-dialogue" class="dialogue-repeat" type="button">Repeat message</button>
+          </div>
+        </section>
       </div>
       <div class="story-stage">
         <section class="story-display">
@@ -55,16 +74,6 @@
               <img src="../Space/space_images/Guide.png" alt="Dr. Fredrick speaking">
               <figcaption>Dr. Fredrick</figcaption>
             </figure>
-            <section class="story-dialogue" aria-label="Moon mission story">
-              <p class="dialogue-eyebrow"><span id="dialogue-speaker">Dr. Fredrick</span><span id="dialogue-progress"></span></p>
-              <p id="ranger-dialogue" class="dialogue-copy" aria-live="polite"></p>
-              <p id="speech-status" class="speech-status" role="status" aria-live="polite"></p>
-              <div class="dialogue-actions">
-                <button id="play-narration" class="dialogue-play" type="button" hidden>Play voice narration</button>
-                <button id="continue-reading" class="dialogue-reading" type="button" hidden>Continue reading</button>
-                <button id="repeat-dialogue" class="dialogue-repeat" type="button">Repeat message</button>
-              </div>
-            </section>
           </div>
           <div id="student-stage" class="story-character-row story-user-row" hidden>
             <div class="story-listeners" aria-label="You listening to Dr. Fredrick">
