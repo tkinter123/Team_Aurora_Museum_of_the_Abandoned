@@ -284,7 +284,7 @@
               alt: "Apollo 12 title and crew video"
             }
           ],
-          narration: "Before we begin, one important note: the Apollo 12 folder contains a copy of the Apollo 11 script, not an Apollo 12 transcript. This museum story is built from NASA's mission record, so it is an adaptation, not a verbatim script. Apollo 12 launched on November 14, 1969, with Charles \"Pete\" Conrad, Richard Gordon, and Alan Bean aboard.",
+          narration: "Apollo 12 launched on November 14, 1969, with Charles \"Pete\" Conrad, Richard Gordon, and Alan Bean aboard.",
           response: "Why did NASA send another crew to the Moon so soon after Apollo 11?",
           answer: "Apollo 12 was the next crewed lunar landing mission. It aimed to demonstrate a more precise landing and to carry out additional scientific work on the lunar surface."
         },
