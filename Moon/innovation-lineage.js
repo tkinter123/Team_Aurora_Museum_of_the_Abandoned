@@ -104,9 +104,9 @@
   };
 
   const missions = [
-    { id: "s3", n: "Surveyor 3", y: "1967", g: "Soft-land and test how lunar soil behaves.", i: "lander", d: S3 },
-    { id: "a11", n: "Apollo 11", y: "1969", g: "First crewed lunar landing and return.", i: "star", d: A11 },
-    { id: "a15", n: "Apollo 15", y: "1971", g: "Extended-stay mission with a lunar rover.", i: "rock", d: A15 }
+    { id: "s3", stageLabel: "Surveyor 3 & Intrepid", n: "Surveyor 3", y: "1967", g: "Soft-land and test how lunar soil behaves.", i: "lander", d: S3 },
+    { id: "a11", stageLabel: "Apollo 11", n: "Apollo 11", y: "1969", g: "First crewed lunar landing and return.", i: "star", d: A11 },
+    { id: "a15", stageLabel: "Apollo 15 Lunar Rover", n: "Apollo 15", y: "1971", g: "Extended-stay mission with a lunar rover.", i: "rock", d: A15 }
   ];
   const NA = "Not stated in the PDF.";
   const $ = selector => exhibit.querySelector(selector);
@@ -262,28 +262,15 @@
   }
 
   const cache = {};
-  let selectedMissions = ["a11"];
-  const chips = missions.map(mission => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.textContent = `${mission.n} ${mission.y}`;
-    button.addEventListener("click", () => {
-      if (selectedMissions.includes(mission.id)) {
-        if (selectedMissions.length > 1) selectedMissions = selectedMissions.filter(id => id !== mission.id);
-      } else {
-        selectedMissions.push(mission.id);
-        if (selectedMissions.length > 2) selectedMissions.shift();
-      }
-      render();
-    });
-    $("#moon-innovation-lineage-chips").appendChild(button);
-    return button;
-  });
+  const title = $("#moon-innovation-lineage-title");
+  const status = $("#moon-innovation-lineage-status");
+  const continueButton = $("#moon-innovation-lineage-continue");
 
-  function render() {
-    chips.forEach((button, index) => button.setAttribute("aria-pressed", String(selectedMissions.includes(missions[index].id))));
-    stage.classList.toggle("two", selectedMissions.length > 1);
-    stage.replaceChildren(...selectedMissions.map(id => cache[id] || (cache[id] = panel(missions.find(mission => mission.id === id)))));
+  function render(mission, nextStageLabel) {
+    title.textContent = `Innovation Lineage - ${mission.n}`;
+    status.textContent = `${mission.n} innovation lineage`;
+    continueButton.textContent = nextStageLabel ? `Continue to ${nextStageLabel}` : "Continue";
+    stage.replaceChildren(cache[mission.id] || (cache[mission.id] = panel(mission)));
   }
 
   function card(data, trigger) {
@@ -313,14 +300,13 @@
       closeCard();
     }
   });
-  render();
-
   const story = document.getElementById("ranger-story");
-  const status = $("#moon-innovation-lineage-status");
-  let allowEvaluation = false;
-  let finaleWasVisible = false;
+  let activeMission = null;
+  let continueToNextSection = false;
 
-  function openExhibit() {
+  function openExhibit(mission, nextStageLabel) {
+    activeMission = mission;
+    render(mission, nextStageLabel);
     exhibit.hidden = false;
     exhibit.setAttribute("aria-hidden", "false");
     story.inert = true;
@@ -331,52 +317,33 @@
     exhibit.hidden = true;
     exhibit.setAttribute("aria-hidden", "true");
     story.inert = false;
-    const finaleButton = document.getElementById("start-moon-landing-challenge");
-    (finaleButton || document.getElementById("story-advance-slide")).focus();
+    document.getElementById("story-advance-slide").focus();
   }
 
-  document.addEventListener("click", event => {
-    const entryButton = event.target.closest("#start-moon-landing-challenge");
-    if (!entryButton || allowEvaluation) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    openExhibit();
-  }, true);
-
-  const finaleObserver = new MutationObserver(() => {
-    const finale = document.getElementById("final-cta");
-    const isFinaleVisible = Boolean(finale && !finale.hidden);
-    if (isFinaleVisible && !finaleWasVisible) {
-      openExhibit();
+  document.addEventListener("moon:before-story-advance", event => {
+    const mission = missions.find(item => item.stageLabel === event.detail.stageLabel);
+    if (!mission) return;
+    if (continueToNextSection) {
+      continueToNextSection = false;
+      return;
     }
-    finaleWasVisible = isFinaleVisible;
-  });
-  finaleObserver.observe(story, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    attributeFilter: ["hidden"]
+    event.preventDefault();
+    openExhibit(mission, event.detail.nextStageLabel);
   });
 
   $("#moon-innovation-lineage-previous").addEventListener("click", returnToStory);
   $("#moon-innovation-lineage-continue").addEventListener("click", () => {
-    const entryButton = document.getElementById("start-moon-landing-challenge");
-    if (!entryButton) {
-      status.textContent = "The existing Evaluation entry is unavailable.";
-      console.error("Innovation Lineage cannot open Evaluation: landing challenge entry button is missing.");
+    const advanceButton = document.getElementById("story-advance-slide");
+    if (!activeMission || !advanceButton || advanceButton.disabled) {
+      status.textContent = "The next Moon story section is unavailable.";
+      console.error("Innovation Lineage cannot continue: the Moon story Next control is unavailable.");
       return;
     }
-    allowEvaluation = true;
-    try {
-      entryButton.click();
-    } finally {
-      allowEvaluation = false;
-    }
-  });
-
-  window.addEventListener("message", event => {
-    if (event.data?.type === "moon-landing-challenge-exit" && !exhibit.hidden) {
-      story.inert = true;
-    }
+    exhibit.hidden = true;
+    exhibit.setAttribute("aria-hidden", "true");
+    story.inert = false;
+    continueToNextSection = true;
+    advanceButton.focus();
+    advanceButton.click();
   });
 })();

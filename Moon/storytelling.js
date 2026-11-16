@@ -1795,9 +1795,13 @@
 
   function isMoonStageAvailable(stage) {
     return stage.shortLabel === "Prologue"
+      || stage.shortLabel === "Ranger 7"
       || stage.shortLabel === "Finale"
       || stage.shortLabel === "Apollo 11"
-      || stage.shortLabel === "Apollo 12";
+      || stage.shortLabel === "Apollo 12"
+      || stage.shortLabel === "Surveyor 3 & Intrepid"
+      || stage.shortLabel === "Apollo 15 Lunar Rover"
+      || stage.shortLabel === "LCROSS & Centaur";
   }
 
   function renderMissionIndex() {
@@ -2486,6 +2490,18 @@
     if (state.transitionLocked || !state.controlsReady) return;
     const currentSlide = getCurrentSlide();
     if (!currentSlide) return;
+    const currentStageSlides = stageSlides[currentSlide.stageIndex];
+    if (currentStageSlides[currentStageSlides.length - 1] === currentSlide) {
+      const nextSlide = storySlides[state.slideIndex + 1];
+      const beforeAdvance = new CustomEvent("moon:before-story-advance", {
+        cancelable: true,
+        detail: {
+          stageLabel: currentSlide.stage.shortLabel,
+          nextStageLabel: nextSlide?.stage.shortLabel || ""
+        }
+      });
+      if (!document.dispatchEvent(beforeAdvance)) return;
+    }
     if (state.slideIndex >= storySlides.length - 1 || currentSlide.isFinalSlide) {
       showFinalCta();
       return;

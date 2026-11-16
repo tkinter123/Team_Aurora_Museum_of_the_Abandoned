@@ -41,48 +41,9 @@
   font-size: 24px;
 }
 
-#moon-innovation-lineage .hint {
-  margin: 4px 0 12px;
-  color: var(--mut);
-  text-align: center;
-  font-size: 14px;
-}
-
-#moon-innovation-lineage .chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin: 0 0 26px;
-}
-
-#moon-innovation-lineage .chips button {
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1.5px solid #3a4676;
-  border-radius: 22px;
-  color: var(--mut);
-  background: transparent;
-  font: inherit;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background .4s, color .4s;
-}
-
-#moon-innovation-lineage .chips button[aria-pressed="true"] {
-  border-color: #8fa4ff;
-  color: #fff;
-  background: #1a2452;
-}
-
 #moon-innovation-lineage-stage {
   display: grid;
   gap: 34px;
-}
-
-#moon-innovation-lineage-stage.two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
 }
 
 #moon-innovation-lineage .mp {
@@ -465,7 +426,6 @@
 
 #moon-innovation-lineage .lineage-navigation button:hover,
 #moon-innovation-lineage .lineage-navigation button:focus-visible,
-#moon-innovation-lineage .chips button:focus-visible,
 #moon-innovation-lineage .btns button:focus-visible,
 #moon-innovation-lineage .replay:focus-visible,
 #moon-innovation-lineage .node:focus-visible,
@@ -550,12 +510,6 @@
   background: none;
   font-size: 26px;
   cursor: pointer;
-}
-
-@media (max-width: 819px) {
-  #moon-innovation-lineage-stage.two {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 480px) {
